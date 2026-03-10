@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mihir Ajmera · Cloud Security Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080C10;
+    --surface: #0D1117;
+    --surface2: #161B22;
+    --border: #21262D;
+    --accent: #00D4FF;
+    --accent2: #00FF88;
+    --danger: #FF4757;
+    --text: #E6EDF3;
+    --muted: #7D8590;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,212,255,0.015) 2px, rgba(0,212,255,0.015) 4px);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(8,12,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-logo span { color: var(--muted); }
+
+  nav ul {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  nav a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--accent); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-left { position: relative; z-index: 2; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--accent2);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  h1 .line2 {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* STATS */
+  .hero-right {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .stat-box {
+    background: var(--surface);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .stat-box:hover::before { opacity: 1; }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h2 {
+    font-family: var(--mono);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    margin-bottom: 0.5rem;
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--surface); }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 1px solid var(--border);
+    margin-left: 1rem;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 3rem 2.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 8px;
+    width: 9px;
+    height: 9px;
+    border: 2px solid var(--accent);
+    background: var(--bg);
+    border-radius: 50%;
+  }
+
+  .timeline-date {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent2);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-role {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-company {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .timeline-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .timeline-bullets li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .timeline-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .timeline-bullets strong {
+    color: var(--text);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--surface);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .project-card:hover {
+    background: var(--surface2);
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .project-card:hover::after { opacity: 0.4; }
+
+  .project-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-name {
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .project-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-impact {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent2);
+    background: rgba(0,255,136,0.08);
+    border: 1px solid rgba(0,255,136,0.2);
+    padding: 0.3rem 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--surface); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-category {
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    background: var(--bg);
+  }
+
+  .skill-cat-title {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-item {
+    font-size: 0.8rem;
+    color: var(--text);
+    background: var(--surface2);
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border);
+  }
+
+  /* CERTIFICATIONS */
+  .certs-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .cert-card {
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--surface);
+  }
+
+  .cert-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .cert-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+
+  .cert-status {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  .cert-status.done { color: var(--accent2); }
+  .cert-status.progress { color: var(--accent); }
+  .cert-status.expected { color: var(--muted); }
+
+  /* CONTACT */
+  #contact {
+    text-align: center;
+    padding: 6rem 4rem;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(0,212,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-inner { position: relative; z-index: 1; }
+
+  .contact-email {
+    font-family: var(--mono);
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-block;
+    margin: 1.5rem 0 2.5rem;
+    transition: color 0.2s;
+  }
+
+  .contact-email:hover { color: var(--accent2); }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.35s; }
+  .delay-4 { animation-delay: 0.5s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1.2rem; }
+    #hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+    .hero-right { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #contact { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MA<span>·</span>SEC</div>
+  <ul>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-left">
+    <div class="hero-tag fade-up">Available for opportunities</div>
+    <h1 class="fade-up delay-1">
+      Mihir Ajmera
+      <span class="line2">Cloud Security<br>Engineer</span>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      Zero Trust architect. AWS cloud security specialist. GRC analyst. I build infrastructure that eliminates attack surfaces — not just policies that describe them.
+    </p>
+    <div class="hero-cta fade-up delay-3">
+      <a href="mailto:majmera1@umbc.edu" class="btn-primary">Get In Touch</a>
+      <a href="https://github.com/Mihirajmera" target="_blank" class="btn-secondary">GitHub →</a>
+    </div>
+  </div>
+
+  <div class="hero-right fade-up delay-4">
+    <div class="stat-box">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">External attack surface eliminated via Zero Trust VPC</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">40%</div>
+      <div class="stat-label">Faster threat remediation with GuardDuty automation</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">25%</div>
+      <div class="stat-label">Compliance gap reduction, NIST CSF 2.0 & MS-ISAC</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">50+</div>
+      <div class="stat-label">Systems hardened with CIS Benchmarks, 30% fewer vulns</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-tag">// 01</span>
+    <h2>Experience</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">JAN 2025 — PRESENT</div>
+      <div class="timeline-role">GRC Engineer & Analyst</div>
+      <div class="timeline-company">Public Service Commission, Maryland State</div>
+      <ul class="timeline-bullets">
+        <li>Reduced compliance gaps by <strong>25%</strong> through comprehensive security control assessments against NIST CSF 2.0 and MS-ISAC NCSR using automated scanning tools</li>
+        <li>Documented risks and mitigation plans from <strong>10+ security assessments</strong> using Nessus and Qualys vulnerability scanners</li>
+        <li>Implemented CIS Benchmarks across <strong>50+ systems</strong>, reducing configuration vulnerabilities by 30%</li>
+        <li>Collaborated with IT teams to remediate critical/high-severity findings within SLA, improving incident response time</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">MAY 2025 — AUG 2025</div>
+      <div class="timeline-role">Cloud Security Engineer</div>
+      <div class="timeline-company">Bucket Labs, San Diego</div>
+      <ul class="timeline-bullets">
+        <li>Architected Zero Trust cloud security infrastructure on AWS — hardened VPC, subnet isolation, strict Security Groups — <strong>eliminating 100% of external attack surfaces</strong></li>
+        <li>Implemented TLS 1.3, WebCrypto E2EE, and AWS KMS envelope encryption achieving <strong>100% encryption coverage</strong> for data at rest and in transit</li>
+        <li>Built automated threat detection integrating AWS GuardDuty with CloudWatch SIEM, <strong>cutting remediation time by 40%</strong></li>
+        <li>Engineered Terraform IaC for reproducible, version-controlled security configurations across all environments</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-tag">// 02</span>
+    <h2>Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+    <a href="https://github.com/Mihirajmera/secure-vpc-architecture" target="_blank" class="project-card">
+      <div class="project-icon">🏗️</div>
+      <div class="project-name">Secure VPC Architecture</div>
+      <div class="project-desc">Enterprise-grade AWS VPC with multi-tier architecture — isolated public/private subnets, NAT gateways, and defense-in-depth security. Built entirely in Terraform IaC for repeatable deployments.</div>
+      <div class="project-impact">↓ 75%+ network attack surface</div>
+      <div class="project-tags">
+        <span class="tag">AWS VPC</span>
+        <span class="tag">Terraform</span>
+        <span class="tag">Security Groups</span>
+        <span class="tag">NACLs</span>
+        <span class="tag">Zero Trust</span>
+      </div>
+    </a>
+
+    <a href="https://github.com/Mihirajmera" target="_blank" class="project-card">
+      <div class="project-icon">🤖</div>
+      <div class="project-name">GuardDuty SIEM Automation</div>
+      <div class="project-desc">Automated security incident response system integrating AWS GuardDuty with CloudWatch SIEM. Lambda workflows auto-quarantine compromised EC2s and revoke malicious IAM sessions in real time.</div>
+      <div class="project-impact">↓ 40% threat remediation time</div>
+      <div class="project-tags">
+        <span class="tag">AWS GuardDuty</span>
+        <span class="tag">Lambda</span>
+        <span class="tag">CloudWatch</span>
+        <span class="tag">Python</span>
+        <span class="tag">SIEM</span>
+      </div>
+    </a>
+
+    <a href="https://github.com/Mihirajmera" target="_blank" class="project-card">
+      <div class="project-icon">🔐</div>
+      <div class="project-name">IAM Zero Trust Security</div>
+      <div class="project-desc">Comprehensive Zero Trust access control model using AWS IAM. Hardware MFA enforcement, automated 90-day credential rotation, and policy-based least-privilege access across all AWS resources.</div>
+      <div class="project-impact">100% elimination of standing privileges</div>
+      <div class="project-tags">
+        <span class="tag">AWS IAM</span>
+        <span class="tag">MFA</span>
+        <span class="tag">PBAC</span>
+        <span class="tag">Zero Trust</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-tag">// 03</span>
+    <h2>Technical Skills</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-category">
+      <div class="skill-cat-title">Cloud & Infrastructure</div>
+      <div class="skill-items">
+        <span class="skill-item">AWS IAM</span>
+        <span class="skill-item">VPC</span>
+        <span class="skill-item">GuardDuty</span>
+        <span class="skill-item">CloudWatch</span>
+        <span class="skill-item">Security Hub</span>
+        <span class="skill-item">Lambda</span>
+        <span class="skill-item">S3</span>
+        <span class="skill-item">Terraform</span>
+        <span class="skill-item">Docker</span>
+        <span class="skill-item">Kubernetes</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <div class="skill-cat-title">Security & Compliance</div>
+      <div class="skill-items">
+        <span class="skill-item">Zero Trust</span>
+        <span class="skill-item">NIST CSF 2.0</span>
+        <span class="skill-item">SOC 2</span>
+        <span class="skill-item">CIS Benchmarks</span>
+        <span class="skill-item">MS-ISAC NCSR</span>
+        <span class="skill-item">Risk Assessment</span>
+        <span class="skill-item">Incident Response</span>
+        <span class="skill-item">Vuln Management</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <div class="skill-cat-title">Tools & SIEM</div>
+      <div class="skill-items">
+        <span class="skill-item">Splunk</span>
+        <span class="skill-item">Nessus</span>
+        <span class="skill-item">Qualys</span>
+        <span class="skill-item">Burp Suite</span>
+        <span class="skill-item">Metasploit</span>
+        <span class="skill-item">Snort</span>
+        <span class="skill-item">Wireshark</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <div class="skill-cat-title">Encryption & Crypto</div>
+      <div class="skill-items">
+        <span class="skill-item">TLS 1.3</span>
+        <span class="skill-item">E2EE</span>
+        <span class="skill-item">AWS KMS</span>
+        <span class="skill-item">Envelope Encryption</span>
+        <span class="skill-item">WebCrypto API</span>
+        <span class="skill-item">Key Management</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <div class="skill-cat-title">Languages</div>
+      <div class="skill-items">
+        <span class="skill-item">Python</span>
+        <span class="skill-item">Bash</span>
+        <span class="skill-item">PowerShell</span>
+        <span class="skill-item">HCL</span>
+        <span class="skill-item">SQL</span>
+        <span class="skill-item">JavaScript</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <div class="skill-cat-title">Certifications</div>
+      <div class="skill-items" style="flex-direction: column; gap: 0.7rem;">
+        <div>
+          <span class="skill-item" style="border-color: rgba(0,255,136,0.4); color: #00FF88;">✓ Google Cybersecurity Professional</span>
+        </div>
+        <div>
+          <span class="skill-item" style="border-color: rgba(0,212,255,0.4); color: #00D4FF;">⟳ CompTIA Security+ SY0-701</span>
+        </div>
+        <div>
+          <span class="skill-item" style="border-color: rgba(125,133,144,0.4);">◷ AWS Solutions Architect – Assoc.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-tag" style="display:inline-block; margin-bottom: 1rem;">// 04</div>
+    <h2>Let's Work Together</h2>
+    <p style="color: var(--muted); margin-top: 0.75rem; font-size: 1rem;">
+      Open to Cloud Security, GRC Analyst, and Security Architect roles.
+    </p>
+    <a href="mailto:majmera1@umbc.edu" class="contact-email">majmera1@umbc.edu</a>
+    <div class="social-links">
+      <a href="https://linkedin.com/in/mihirajmera-" target="_blank" class="social-link">LinkedIn ↗</a>
+      <a href="https://github.com/Mihirajmera" target="_blank" class="social-link">GitHub ↗</a>
+      <a href="tel:+14103657736" class="social-link">+1 (410) 365-7736</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 MIHIR AJMERA · CLOUD SECURITY ENGINEER · BUILT WITH PURPOSE
+</footer>
+
+</body>
+</html>
