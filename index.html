@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mihir Ajmera · GRC Engineer</title>
+<meta name="description" content="Mihir Ajmera, GRC Engineer at Cisco (ex-KPMG). AI governance, AI compliance and AI security; compliance-as-code with NIST, SOC 2, ISO 27001 and OSCAL.">
+<meta property="og:title" content="Mihir Ajmera · GRC Engineer">
+<meta property="og:description" content="GRC Engineer focused on AI governance, AI security and compliance-as-code. Open-source tools for AI agent access reviews and LLM red-team evidence.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mihirajmera.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080C10;
+    --surface: #0D1117;
+    --surface2: #161B22;
+    --border: #21262D;
+    --accent: #00D4FF;
+    --accent2: #00FF88;
+    --text: #E6EDF3;
+    --muted: #8B949E;
+    --mono: 'Space Mono', ui-monospace, monospace;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --max: 1100px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(8,12,16,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+  .logo { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); letter-spacing: 0.08em; }
+  .logo span { color: var(--muted); }
+  nav ul { display: flex; gap: 1.75rem; list-style: none; }
+  nav ul a { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  nav ul a:hover { color: var(--accent); text-decoration: none; }
+
+  /* HERO */
+  header.hero { position: relative; padding: 5.5rem 0 4rem; overflow: hidden; }
+  .grid-bg { position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(0,212,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.045) 1px, transparent 1px);
+    background-size: 56px 56px; mask-image: radial-gradient(ellipse at 40% 40%, black 15%, transparent 75%); }
+  .hero .wrap { position: relative; }
+  .tag { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
+    color: var(--accent2); border: 1px solid rgba(0,255,136,0.35); background: rgba(0,255,136,0.06); padding: 0.35rem 0.8rem; border-radius: 999px; }
+  .tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); }
+  h1 { font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.05; margin: 1.2rem 0 0.6rem; letter-spacing: -0.02em; }
+  .role { font-family: var(--mono); color: var(--accent); font-size: clamp(0.85rem, 2vw, 1rem); }
+  .lede { max-width: 640px; color: #C9D1D9; font-size: 1.12rem; margin: 1.4rem 0 2rem; }
+  .lede strong { color: var(--text); }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .btn { display: inline-block; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.05em; padding: 0.7rem 1.2rem; border-radius: 6px;
+    border: 1px solid var(--border); color: var(--text); background: var(--surface2); }
+  .btn.primary { background: var(--accent); color: #031018; border-color: var(--accent); font-weight: 700; }
+  .btn:hover { text-decoration: none; border-color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 4rem 0; border-top: 1px solid var(--border); }
+  .eyebrow { font-family: var(--mono); color: var(--accent); font-size: 0.75rem; letter-spacing: 0.12em; }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin: 0.3rem 0 1.8rem; letter-spacing: -0.01em; }
+  h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.3rem; }
+  .stat b { display: block; font-family: var(--mono); font-size: 1.9rem; color: var(--accent2); }
+  .stat span { color: var(--muted); font-size: 0.92rem; }
+
+  .flagship { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; display: flex; flex-direction: column; min-width: 0; }
+  .card:hover { border-color: rgba(0,212,255,0.45); }
+  .card .kicker { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+  .card p { color: #C9D1D9; margin-bottom: 0.9rem; }
+  .card ul { margin: 0 0 1rem 1.1rem; color: #C9D1D9; }
+  .card li { margin-bottom: 0.35rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0 1.1rem; }
+  .chip { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); padding: 0.2rem 0.55rem; border-radius: 4px; }
+  pre { font-family: var(--mono); font-size: 0.74rem; background: #05080B; border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem 0.9rem; overflow-x: auto; color: var(--accent2); margin-bottom: 1rem; }
+  .links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 1rem; font-family: var(--mono); font-size: 0.78rem; }
+
+  .more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.4rem; }
+  .mini { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+  .mini h3 { font-size: 1rem; }
+  .mini p { color: var(--muted); font-size: 0.92rem; }
+
+  .job { display: grid; grid-template-columns: 220px 1fr; gap: 1.5rem; padding: 1.4rem 0; border-bottom: 1px dashed var(--border); }
+  .job:last-child { border-bottom: none; }
+  .when { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+  .job ul { margin-left: 1.1rem; color: #C9D1D9; }
+  .job li { margin-bottom: 0.4rem; }
+
+  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .skill { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+  .skill h3 { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .skill p { color: #C9D1D9; font-size: 0.95rem; }
+
+  .edu { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .certs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
+
+  footer { border-top: 1px solid var(--border); padding: 3rem 0 4rem; text-align: center; }
+  footer p { color: var(--muted); margin-bottom: 1.4rem; }
+  footer .actions { justify-content: center; }
+
+  @media (max-width: 860px) {
+    nav ul { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .flagship, .more, .skills, .edu { grid-template-columns: minmax(0, 1fr); }
+    .job { grid-template-columns: 1fr; gap: 0.4rem; }
+    header.hero { padding-top: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <span class="logo">mihir<span>@</span>grc:~$</span>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="tag">Open to GRC, security compliance &amp; AI governance roles</span>
+    <h1>Mihir Ajmera</h1>
+    <p class="role">GRC Engineer · AI GRC &amp; AI Security · Compliance-as-Code</p>
+    <p class="lede">I'm a <strong>GRC Engineer at Cisco</strong> (previously <strong>GRC Analyst at KPMG</strong>) with 3+ years in technology risk and compliance, now focused on <strong>AI governance, AI compliance and AI security</strong>. I build controls that are tested by code, continuously, and produce evidence an auditor can re-perform.</p>
+    <div class="actions">
+      <a class="btn primary" href="#projects">See my work</a>
+      <a class="btn" href="https://github.com/Mihirajmera">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/mihirajmera1/">LinkedIn</a>
+      <a class="btn" href="mailto:ajmeramihir10@gmail.com">Email</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section aria-labelledby="impact-h">
+    <div class="wrap">
+      <p class="eyebrow">// 01</p>
+      <h2 id="impact-h">Impact at work</h2>
+      <div class="stats">
+        <div class="stat"><b>~30%</b><span>less manual evidence collection through Python continuous-controls automation</span></div>
+        <div class="stat"><b>40+</b><span>AWS and Azure cloud controls assessed against NIST CSF, CIS and ISO 27001</span></div>
+        <div class="stat"><b>25+</b><span>control gaps and exceptions driven to closure through risk registers</span></div>
+        <div class="stat"><b>20%</b><span>fewer overdue SOX/ITGC control actions across annual audit cycles</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-h">
+    <div class="wrap">
+      <p class="eyebrow">// 02</p>
+      <h2 id="projects-h">Open-source AI GRC tools</h2>
+      <div class="flagship">
+        <article class="card">
+          <p class="kicker">AGENTIC AI · ACCESS GOVERNANCE</p>
+          <h3>agent-access-review</h3>
+          <p>User access reviews for AI agents. It reads MCP configs (Claude Desktop, Cursor, VS Code) and agent manifests, inventories what each agent can read, write, execute and send, and tests it against 12 controls.</p>
+          <ul>
+            <li>Flags unowned agents, stale approvals, over-broad scopes, plaintext secrets and dormant access, like an ITGC access review.</li>
+            <li>Detects exfiltration paths: agents that read sensitive data, ingest attacker-controlled content and can send data out.</li>
+          </ul>
+          <div class="chips"><span class="chip">NIST 800-53</span><span class="chip">SOC 2</span><span class="chip">NIST AI RMF</span><span class="chip">OWASP LLM Top 10</span><span class="chip">OSCAL</span></div>
+          <pre>pip install "git+https://github.com/Mihirajmera/agent-access-review@v0.2.0"
+agent-access-review demo</pre>
+          <div class="links">
+            <a href="https://github.com/Mihirajmera/agent-access-review">Repository →</a>
+            <a href="https://github.com/Mihirajmera/agent-access-review/blob/main/sample-output/access-review.md">Sample review packet →</a>
+          </div>
+        </article>
+        <article class="card">
+          <p class="kicker">AI SECURITY · AI ASSURANCE</p>
+          <h3>llm-redteam-evidence</h3>
+          <p>Turns LLM red-team results from garak and promptfoo into audit evidence. Every attack maps to a control with a documented risk tolerance and a 95% confidence bound.</p>
+          <ul>
+            <li>Release gate: blocks a new model version that's measurably easier to attack than the approved one.</li>
+            <li>Hashed evidence tied to the raw tool output, plus OSCAL results for GRC platforms.</li>
+          </ul>
+          <div class="chips"><span class="chip">OWASP LLM Top 10</span><span class="chip">MITRE ATLAS</span><span class="chip">NIST AI 600-1</span><span class="chip">NIST AI RMF</span><span class="chip">OSCAL</span></div>
+          <pre>pip install "git+https://github.com/Mihirajmera/llm-redteam-evidence@v0.2.0"
+redteam-evidence demo</pre>
+          <div class="links">
+            <a href="https://github.com/Mihirajmera/llm-redteam-evidence">Repository →</a>
+            <a href="https://github.com/Mihirajmera/llm-redteam-evidence/blob/main/sample-output/v2/report.md">Sample assessment →</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="more">
+        <div class="mini"><h3><a href="https://github.com/Mihirajmera/aws-compliance-as-code">aws-compliance-as-code</a></h3><p>Read-only AWS checks mapped once to NIST 800-53, SOC 2, ISO 27001 and CIS, with hashed evidence and OSCAL output.</p></div>
+        <div class="mini"><h3><a href="https://github.com/Mihirajmera/itgc-evidence-automation">itgc-evidence-automation</a></h3><p>SOX ITGC evidence for access, change and configuration controls, with an audit bundle and Corrective Action Plan register.</p></div>
+        <div class="mini"><h3><a href="https://github.com/Mihirajmera/control-gap-analyzer">control-gap-analyzer</a></h3><p>Risk-scores control gaps against the NIST CSF 2.0 catalog into a prioritized remediation backlog.</p></div>
+        <div class="mini"><h3><a href="https://github.com/Mihirajmera/grc-risk-dashboard">grc-risk-dashboard</a></h3><p>Interactive risk register with KRI/KPI views, remediation aging and executive reporting.</p></div>
+        <div class="mini"><h3><a href="https://github.com/Mihirajmera/guardduty-siem-automation">guardduty-siem-automation</a></h3><p>GuardDuty detection wired to automated quarantine, with a React findings dashboard (<a href="https://mihirajmera.github.io/guardduty-siem-automation/">live demo</a>, sample data).</p></div>
+        <div class="mini"><h3><a href="https://www.posturanet.com">PosturaNet</a></h3><p>My AWS security remediation platform: formally verified fixes delivered as Terraform pull requests, mapped to SOC 2, CIS and NIST 800-53.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" aria-labelledby="exp-h">
+    <div class="wrap">
+      <p class="eyebrow">// 03</p>
+      <h2 id="exp-h">Experience</h2>
+      <div class="job">
+        <div><h3>GRC Engineer</h3><p class="when">CISCO · JUN 2025 – PRESENT</p></div>
+        <ul>
+          <li>AI risk and impact assessments under the NIST AI RMF in ServiceNow GRC, covering security, privacy, accountability, transparency and reliability.</li>
+          <li>Assessed 40+ AWS and Azure controls (AWS Config, CloudTrail, Security Hub, IAM) against NIST CSF, CIS and ISO 27001 and drove remediation.</li>
+          <li>Built Python evidence collection for continuous controls monitoring, cutting manual effort by ~30%; embedded compliance checks in Terraform and GitHub Actions.</li>
+          <li>SOC 2 evidence and exceptions, vendor assessments in OneTrust, and risk registers in Jira and Power BI that closed 25+ control gaps.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div><h3>GRC Analyst</h3><p class="when">KPMG · JAN 2022 – JUL 2024</p></div>
+        <ul>
+          <li>Technology risk assessments in ServiceNow GRC across 15+ business applications.</li>
+          <li>Tested design and operating effectiveness of ~50 controls per cycle in RSA Archer.</li>
+          <li>Control mapping to NIST CSF, NIST 800-53, COBIT and PCI DSS; ISO 27001 policy reviews.</li>
+          <li>SOX/ITGC audit readiness, reducing overdue control actions by 20%; identity and vulnerability reviews with SailPoint and Qualys.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-h">
+    <div class="wrap">
+      <p class="eyebrow">// 04</p>
+      <h2 id="skills-h">Skills</h2>
+      <div class="skills">
+        <div class="skill"><h3>Frameworks</h3><p>NIST CSF · NIST 800-53 · NIST AI RMF · NIST AI 600-1 · ISO 27001 · SOC 2 · PCI DSS · SOX/ITGC · CIS · COBIT · OWASP LLM Top 10 · MITRE ATLAS</p></div>
+        <div class="skill"><h3>GRC platforms</h3><p>ServiceNow GRC · RSA Archer · OneTrust · SailPoint · Qualys · Jira · Confluence</p></div>
+        <div class="skill"><h3>Cloud security</h3><p>AWS Config · CloudTrail · Security Hub · GuardDuty · IAM · Azure · Terraform</p></div>
+        <div class="skill"><h3>Automation &amp; analytics</h3><p>Python · GitHub Actions · Policy-as-Code · OSCAL · SQL · Power BI · KRI/KPI reporting</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="edu-h">
+    <div class="wrap">
+      <p class="eyebrow">// 05</p>
+      <h2 id="edu-h">Education &amp; certifications</h2>
+      <div class="edu">
+        <div class="skill"><h3>MS, Cybersecurity</h3><p>University of Maryland, Baltimore County (UMBC)<br><span class="when">AUG 2024 – MAY 2026</span></p></div>
+        <div class="skill"><h3>Bachelor's, Computer Engineering</h3><p>Honors in Cybersecurity · University of Mumbai<br><span class="when">AUG 2020 – MAY 2024</span></p></div>
+      </div>
+      <div class="certs">
+        <span class="chip">AWS Certified Solutions Architect – Associate</span>
+        <span class="chip">CompTIA Security+ (SY0-701)</span>
+        <span class="chip">ISACA CMMI Certified Practitioner</span>
+        <span class="chip">Google Cybersecurity Professional</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk</h2>
+    <p>Hiring for GRC engineering, security compliance, cloud governance or AI governance? I'd like to hear about it.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:ajmeramihir10@gmail.com">ajmeramihir10@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/mihirajmera1/">LinkedIn</a>
+      <a class="btn" href="https://github.com/Mihirajmera">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
