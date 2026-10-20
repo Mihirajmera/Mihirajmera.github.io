@@ -1,0 +1,20 @@
+---
+layout: default
+title: Writing
+description: Essays and case studies on AI governance, AI security and compliance-as-code by Mihir Ajmera.
+---
+<main class="page">
+  <div class="wrap narrow">
+    <p class="eyebrow">// WRITING</p>
+    <h1 class="page-title">Writing</h1>
+    <p class="lede">Findings from running real tools against real systems, written for the people who have to sign off on AI. Subscribe via <a href="{{ '/feed.xml' | relative_url }}">RSS</a>{% for p in site.data.profiles %}{% if p.name == "Substack" and p.url != "" %} or <a href="{{ p.url }}">Substack</a>{% endif %}{% endfor %}.</p>
+    <div class="rows">
+      {% for post in site.posts %}
+      <a class="row" href="{{ post.url | relative_url }}">
+        <span class="when">{{ post.date | date: '%b %-d, %Y' | upcase }}</span>
+        <span><strong>{{ post.title }}</strong><br><span class="muted">{{ post.description }}</span></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</main>

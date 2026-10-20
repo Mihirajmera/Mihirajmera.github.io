@@ -1,0 +1,84 @@
+# Single source for the home page and the /projects/ directory.
+# flagship: shown as large cards on the home page.
+- name: agent-access-review
+  category: AI assurance
+  flagship: true
+  kicker: AGENTIC AI · ACCESS GOVERNANCE
+  summary: >-
+    User access reviews for AI agents. Reads MCP configs (Claude Desktop, Cursor, VS Code) and
+    agent manifests, inventories what each agent can read, write, execute and send, and tests it
+    against 12 controls.
+  bullets:
+    - Flags unowned agents, stale approvals, over-broad scopes, plaintext secrets and dormant access, like an ITGC access review.
+    - Detects exfiltration paths, where one agent reads sensitive data, ingests attacker-controlled content and can send data out.
+  tags: [NIST 800-53, SOC 2, NIST AI RMF, OWASP LLM Top 10, OSCAL]
+  install: "pip install agent-access-review\nagent-access-review demo"
+  repo: https://github.com/Mihirajmera/agent-access-review
+  links:
+    - {label: Sample review packet, url: "https://github.com/Mihirajmera/agent-access-review/blob/main/sample-output/access-review.md"}
+
+- name: llm-redteam-evidence
+  category: AI assurance
+  flagship: true
+  kicker: AI SECURITY · AI ASSURANCE
+  summary: >-
+    Turns LLM red-team results from garak and promptfoo into audit evidence. Every attack maps to
+    a control with a documented risk tolerance and a 95% confidence bound.
+  bullets:
+    - Release gate that blocks a new model version that's measurably easier to attack than the approved one.
+    - Hashed evidence traceable to the raw tool output, plus OSCAL results for GRC platforms.
+  tags: [OWASP LLM Top 10, MITRE ATLAS, NIST AI 600-1, NIST AI RMF, OSCAL]
+  install: "pip install llm-redteam-evidence\nredteam-evidence demo"
+  repo: https://github.com/Mihirajmera/llm-redteam-evidence
+  links:
+    - {label: Sample assessment, url: "https://github.com/Mihirajmera/llm-redteam-evidence/blob/main/sample-output/v2/report.md"}
+
+- name: aws-compliance-as-code
+  category: Compliance-as-code
+  summary: Read-only AWS checks mapped once to NIST 800-53, SOC 2, ISO 27001 and CIS, with hashed evidence and OSCAL output.
+  tags: [Python, boto3, OSCAL]
+  repo: https://github.com/Mihirajmera/aws-compliance-as-code
+
+- name: itgc-evidence-automation
+  category: Compliance-as-code
+  summary: SOX ITGC evidence for access, change and configuration controls, packaged as an audit bundle with a Corrective Action Plan register.
+  tags: [SOX, ITGC, AWS IAM, AWS Config]
+  repo: https://github.com/Mihirajmera/itgc-evidence-automation
+
+- name: control-gap-analyzer
+  category: Risk and reporting
+  summary: Risk-scores control gaps against the NIST CSF 2.0 catalog into a prioritized remediation backlog.
+  tags: [NIST CSF 2.0, Python]
+  repo: https://github.com/Mihirajmera/control-gap-analyzer
+
+- name: grc-risk-dashboard
+  category: Risk and reporting
+  summary: Interactive risk register with KRI/KPI views, remediation aging and executive reporting.
+  tags: [SQL, Streamlit, KRI/KPI]
+  repo: https://github.com/Mihirajmera/grc-risk-dashboard
+
+- name: guardduty-siem-automation
+  category: Cloud security
+  summary: GuardDuty detection wired to automated quarantine, with a React findings dashboard.
+  tags: [Terraform, Lambda, React]
+  repo: https://github.com/Mihirajmera/guardduty-siem-automation
+  links:
+    - {label: Live demo, url: "https://mihirajmera.github.io/guardduty-siem-automation/"}
+
+- name: iam-zero-trust-security
+  category: Cloud security
+  summary: Least-privilege IAM baseline as code, with automated compliance monitoring and remediation.
+  tags: [AWS IAM, Terraform, Zero Trust]
+  repo: https://github.com/Mihirajmera/iam-zero-trust-security
+
+- name: secure-vpc-architecture
+  category: Cloud security
+  summary: Segmented, logged AWS network baseline as code.
+  tags: [AWS VPC, Flow logs, Terraform]
+  repo: https://github.com/Mihirajmera/secure-vpc-architecture
+
+- name: PosturaNet
+  category: Product
+  summary: AWS security remediation platform. Findings are scored against NIST CSF 2.0 and MITRE ATT&CK and fixed through Terraform pull requests a human approves.
+  tags: [AWS, Terraform, NIST CSF 2.0]
+  repo: https://www.posturanet.com

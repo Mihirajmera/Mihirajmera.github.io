@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<main>
+  <article class="post wrap narrow">
+    <header class="post-head">
+      <p class="eyebrow"><a href="{{ '/blog/' | relative_url }}">← Writing</a></p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="post-dek">{{ page.description }}</p>{% endif %}
+      <p class="when">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%B %-d, %Y' | upcase }}</time>
+        · {{ content | number_of_words | divided_by: 220 | plus: 1 }} MIN READ
+      </p>
+      {% if page.tags.size > 0 %}<div class="chips">{% for t in page.tags %}<span class="chip">{{ t }}</span>{% endfor %}</div>{% endif %}
+    </header>
+    <div class="prose">
+      {{ content }}
+    </div>
+    <aside class="post-foot">
+      <p>Written by <strong>Mihir Ajmera</strong>, a GRC engineer building open-source tools for AI assurance.
+      Follow along on <a href="https://www.linkedin.com/in/mihirajmera1/">LinkedIn</a> or subscribe via <a href="{{ '/feed.xml' | relative_url }}">RSS</a>.</p>
+    </aside>
+  </article>
+</main>

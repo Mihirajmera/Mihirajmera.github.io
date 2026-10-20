@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% seo %}
+{% feed_meta %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+</head>
+<body>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="{{ '/' | relative_url }}">mihir<span>@</span>grc:~$</a>
+    <ul>
+      <li><a href="{{ '/projects/' | relative_url }}"{% if page.url contains '/projects/' %} aria-current="page"{% endif %}>Work</a></li>
+      <li><a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} aria-current="page"{% endif %}>Writing</a></li>
+      <li><a href="{{ '/#about' | relative_url }}">About</a></li>
+      <li><a href="{{ '/links/' | relative_url }}"{% if page.url contains '/links/' %} aria-current="page"{% endif %}>Links</a></li>
+    </ul>
+  </div>
+</nav>
+
+{{ content }}
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk</h2>
+    <p>Building AI governance, AI security or GRC engineering? I'd like to hear about it.</p>
+    <div class="actions">
+      {% for p in site.data.profiles %}{% if p.url != "" %}
+      <a class="btn{% if forloop.first %} primary{% endif %}" href="{{ p.url | relative_url }}">{{ p.name }}</a>
+      {% endif %}{% endfor %}
+    </div>
+    <p class="fine">© {{ site.time | date: '%Y' }} Mihir Ajmera · Views are my own.</p>
+  </div>
+</footer>
+
+</body>
+</html>

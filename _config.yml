@@ -1,0 +1,40 @@
+title: Mihir Ajmera
+tagline: GRC Engineer · AI Assurance · Compliance-as-Code
+description: >-
+  GRC engineer proving that AI systems can be governed with the same rigor as financial
+  controls. Open-source tools and writing on AI agent access, LLM red-team evidence and
+  compliance-as-code.
+url: https://mihirajmera.github.io
+baseurl: ""
+lang: en
+timezone: America/New_York
+
+author:
+  name: Mihir Ajmera
+  url: https://mihirajmera.github.io
+
+# Used by jekyll-seo-tag for structured data (links shown in search results).
+social:
+  name: Mihir Ajmera
+  links:
+    - https://www.linkedin.com/in/mihirajmera1/
+    - https://github.com/Mihirajmera
+
+defaults:
+  - scope: {path: "", type: posts}
+    values:
+      layout: post
+      image: /assets/img/posts/default.png
+
+permalink: /blog/:title/
+
+feed:
+  path: feed.xml
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - README.md

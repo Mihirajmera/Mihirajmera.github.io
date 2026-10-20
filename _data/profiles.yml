@@ -1,0 +1,20 @@
+# Where to find me. Leave url empty to hide an entry; fill it in and it appears in the
+# nav footer, the /links/ page and the contact section automatically.
+- name: LinkedIn
+  url: https://www.linkedin.com/in/mihirajmera1/
+  note: Posts on AI governance and AI security
+- name: GitHub
+  url: https://github.com/Mihirajmera
+  note: Open-source AI GRC tools
+- name: Substack
+  url: ""
+  note: Newsletter
+- name: Medium
+  url: ""
+  note: Cross-posted essays
+- name: Email
+  url: mailto:ajmeramihir10@gmail.com
+  note: ajmeramihir10@gmail.com
+- name: RSS
+  url: /feed.xml
+  note: Every post, in any reader
