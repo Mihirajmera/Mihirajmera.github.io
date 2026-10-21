@@ -461,3 +461,14 @@ dialog.verify[open] { animation: slide-in 260ms cubic-bezier(.3,.7,.2,1); }
 .mage-canvas { position: absolute; inset: 0; width: 100%; height: 100%; -webkit-mask: linear-gradient(#000 0 0) top / 100% 50% no-repeat, radial-gradient(circle var(--r) at 50% calc(100% - var(--r)), #000 99.5%, transparent 100%); mask: linear-gradient(#000 0 0) top / 100% 50% no-repeat, radial-gradient(circle var(--r) at 50% calc(100% - var(--r)), #000 99.5%, transparent 100%); }
 .mage-hero.is-3d .mage-img { visibility: hidden; }
 @media (max-width: 860px) { .mage-hero { --r: 120px; } }
+
+/* Mage poses: crossfade over the 3D model while chatting; pose avatar beside each answer */
+.mage-hero.is-3d.posing .mage-img { visibility: visible; }
+.mage-hero .mage-canvas { transition: opacity 260ms ease; }
+.mage-hero.posing .mage-canvas { opacity: 0; }
+.mage-hero.posing .mage-img { animation: mage-pop 320ms cubic-bezier(.2,.8,.2,1.2), mage-bob 5s ease-in-out 320ms infinite; }
+@keyframes mage-pop { from { opacity: .2; scale: .94; } }
+.mage-msg.mage { display: flex; gap: 8px; align-items: flex-start; max-width: 100%; }
+.mage-pose { width: 44px; height: 44px; flex: none; object-fit: contain; margin-top: 2px; image-rendering: auto; }
+.mage-body { min-width: 0; flex: 1; }
+@media (prefers-reduced-motion: reduce) { .mage-hero.posing .mage-img { animation: none; } .mage-hero .mage-canvas { transition: none; } }

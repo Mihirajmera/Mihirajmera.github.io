@@ -6,8 +6,13 @@
 # `pose:` on an answer to show it while Mage answers.
 poses:
   wave: /assets/img/mage/wave.webp
+  idea: /assets/img/mage/idea.webp
+  wink: /assets/img/mage/wink.webp
   head: /assets/img/mage/head-96.webp
   head2x: /assets/img/mage/head-192.webp
+# Pose while Mage types, and for questions it has no answer to (used once those poses exist).
+typing_pose: thinking
+fallback_pose: shrug
 bubble:
   - Hi, I'm Mage.
   - I know who Mihir is.
@@ -24,6 +29,7 @@ start: [who, build, roles, proof, contact]
 answers:
   - id: who
     label: Who is Mihir?
+    pose: wave
     keys: [who, mihir, about, yourself, introduce, summary, background, tell me]
     text: >-
       Mihir Ajmera is a GRC engineer with 3+ years in technology risk and compliance: SOX and ITGC
@@ -34,6 +40,7 @@ answers:
 
   - id: build
     label: What does he build?
+    pose: laptop
     keys: [build, tools, projects, work, open source, github, agent-access-review, llm-redteam-evidence, code]
     text: >-
       Two open-source tools on PyPI. agent-access-review runs a user access review on AI agents and MCP
@@ -47,6 +54,7 @@ answers:
 
   - id: roles
     label: What roles is he looking for?
+    pose: fingers
     keys: [role, roles, hiring, hire, job, looking, open to, available, opportunity, position, recruit, recruiter, wants]
     text: >-
       He's open to GRC engineering, AI governance, AI risk and AI security assurance roles: work where
@@ -59,6 +67,7 @@ answers:
 
   - id: why
     label: Why should we hire him?
+    pose: thumbsup
     keys: [why, hire him, value, different, stand out, unique, strengths, good at]
     text: >-
       He works in both languages. He can read a control framework like an auditor and ship tested,
@@ -70,6 +79,7 @@ answers:
 
   - id: proof
     label: Show me proof
+    pose: shocked
     keys: [proof, evidence, numbers, results, impact, metrics, verify, show me]
     text: >-
       Every number on the home page links to its evidence, and each one has a Verify drawer with the hash
@@ -82,6 +92,7 @@ answers:
 
   - id: research
     label: What has he found?
+    pose: idea
     keys: [research, found, findings, study, studies, case study, mcp, readme, red team, red-team, llama, garak]
     text: >-
       Two studies so far. Instructions hidden inside a document hijacked Llama 3.2 3B 44% of the time,
@@ -125,6 +136,7 @@ answers:
 
   - id: principles
     label: How does he think about GRC?
+    pose: idea
     keys: [principles, philosophy, approach, believe, think, beliefs, method, how does he work]
     text: >-
       Four principles. Compliance should compile: controls are code, tested continuously. If it can't be
@@ -156,6 +168,7 @@ answers:
 
   - id: now
     label: What's he working on now?
+    pose: idea
     keys: [now, currently, working on, these days, next, plans, roadmap]
     text: >-
       Writing a note most weekdays, reviewing the first community contributions to his tools, and running
@@ -166,6 +179,7 @@ answers:
 
   - id: contact
     label: How do I reach him?
+    pose: wave
     keys: [contact, reach, email, message, talk, call, connect, linkedin, get in touch, phone]
     text: >-
       Email is fastest: ajmeramihir10@gmail.com. He's also on LinkedIn, and his code is on GitHub.
@@ -177,6 +191,7 @@ answers:
 
   - id: mage
     label: Are you an AI?
+    pose: wink
     keys: [mage, are you an ai, are you a bot, are you real, who are you, chatbot, how do you work, gpt, llm, language model]
     text: >-
       Not the kind you're thinking of. I'm a scripted assistant: every answer I give was written in

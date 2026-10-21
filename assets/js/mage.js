@@ -80,14 +80,22 @@
     scroll();
   }
 
-  function mageSays(text, links = [], next = []) {
+  function mageSays(text, links = [], next = [], poseName = 'wave') {
     const msg = el('div', 'mage-msg mage');
     const p = el('p');
-    msg.append(p);
+    const face = el('img', 'mage-pose');
+    face.src = poseUrl(poseName); face.alt = ''; face.decoding = 'async';
+    const body = el('div', 'mage-body');
+    body.append(p);
+    msg.append(face, body);
     log.append(msg);
+    const typing = poses[kb.typing_pose];
+    if (typing && !reduced) { face.src = asset(typing); pose(kb.typing_pose); }
     if (speak) { speechSynthesis.cancel(); speechSynthesis.speak(new SpeechSynthesisUtterance(text)); }
     const finish = () => {
       p.textContent = text;
+      face.src = poseUrl(poseName);
+      pose(poseName);
       if (links.length) {
         const row = el('div', 'mage-links');
         links.forEach((l) => {
@@ -98,7 +106,7 @@
           if (href.startsWith('https:') && !href.startsWith(location.origin)) { a.target = '_blank'; a.rel = 'noopener'; }
           row.append(a);
         });
-        msg.append(row);
+        body.append(row);
       }
       if (next.length) {
         const chips = el('div', 'mage-chips');
@@ -110,7 +118,7 @@
           b.addEventListener('click', () => ask(a.label, a));
           chips.append(b);
         });
-        msg.append(chips);
+        body.append(chips);
       }
       busy = false;
       scroll();
@@ -141,19 +149,27 @@
     return best;
   }
 
+  // Poses: shown in the chat beside each answer and, while the chat is open, in the hero
+  // (crossfading over the 3D model). Unknown poses fall back to waving.
+  const heroBtn = document.querySelector('.mage-hero');
   const heroImg = document.querySelector('.mage-img');
+  function poseUrl(name) { return asset(poses[name] || poses.wave); }
   function pose(name) {
     if (!heroImg) return;
-    const src = asset(poses[name] || poses.wave);
+    const src = poseUrl(name);
     if (heroImg.getAttribute('src') !== src) heroImg.src = src;
+    heroBtn.classList.add('posing');
+  }
+  function preloadPoses() {
+    Object.entries(poses).forEach(([k, u]) => { if (!k.startsWith('head')) { const i = new Image(); i.src = asset(u); } });
   }
 
   function ask(text, answer) {
     if (busy) { setTimeout(() => ask(text, answer), 120); return; }
     userSays(text);
     const a = answer || match(text);
-    if (a) { pose(a.pose); mageSays(a.text, a.links || [], a.next || []); }
-    else mageSays(kb.fallback, [{ label: 'Email Mihir', url: 'mailto:ajmeramihir10@gmail.com' }], kb.start);
+    if (a) mageSays(a.text, a.links || [], a.next || [], a.pose);
+    else mageSays(kb.fallback, [{ label: 'Email Mihir', url: 'mailto:ajmeramihir10@gmail.com' }], kb.start, kb.fallback_pose);
   }
 
   let greeted = false;
@@ -161,7 +177,8 @@
     panel.hidden = false;
     launcher.setAttribute('aria-expanded', 'true');
     launcher.classList.add('is-open');
-    if (!greeted) { greeted = true; mageSays(kb.greeting, [], kb.start); }
+    preloadPoses();
+    if (!greeted) { greeted = true; mageSays(kb.greeting, [], kb.start, 'wave'); }
     if (question && byId[question]) setTimeout(() => ask(byId[question].label, byId[question]), reduced ? 0 : 400);
     input.focus({ preventScroll: true });
   }
@@ -170,6 +187,7 @@
     launcher.setAttribute('aria-expanded', 'false');
     launcher.classList.remove('is-open');
     if (canSpeak) speechSynthesis.cancel();
+    if (heroBtn) { heroBtn.classList.remove('posing'); if (heroImg) heroImg.src = poseUrl('wave'); }
     launcher.focus();
   }
 
