@@ -2,13 +2,14 @@
 
 Portfolio and writing of Mihir Ajmera: https://mihirajmera.github.io/
 
-Built with Jekyll on GitHub Pages; no build step to run locally.
+Jekyll on GitHub Pages; there's no build step to run locally. See [WRITING.md](WRITING.md) for the publishing workflow and topic backlog.
 
 | To... | Edit |
 |---|---|
-| Add a blog post | `_posts/YYYY-MM-DD-slug.md` with `title`, `description`, `tags` (and optional `image`, `canonical_url`) |
-| Add or change a project | `_data/projects.yml` (`flagship: true` puts it on the home page) |
-| Add a case study | `_data/case_studies.yml` |
-| Connect Substack, Medium, etc. | fill in the `url` in `_data/profiles.yml`; it appears in the footer and on `/links/` |
+| Publish a note or essay | write `_drafts/<slug>.md`, then `python tools/publish.py _drafts/<slug>.md` |
+| Add a headline number to the proof wall | `_data/proof.yml` (every number needs a source link) |
+| Log research, releases or fixes | `_data/ledger.yml` (blog posts appear in the ledger automatically) |
+| Add or change a project | `_data/projects.yml` (`flagship: true` adds it to the live status card) |
+| Connect Substack, Medium, etc. | fill in the `url` in `_data/profiles.yml` |
 
-Cross-posting: Medium's "Import a story" takes a post URL and sets the canonical link back here; Substack's importer can pull posts from this site. `/feed.xml` (RSS) works in any reader, and every page carries Open Graph tags for LinkedIn previews. `portfolio.html` redirects to the home page so older links keep working.
+The home page's status card reads live data from the public GitHub, PyPI and OpenSSF Scorecard APIs in the browser. Every page has Open Graph tags, `/feed.xml` is the RSS feed, and the light/dark switch remembers each visitor's choice. `portfolio.html` and `/projects/` redirect so older links keep working.

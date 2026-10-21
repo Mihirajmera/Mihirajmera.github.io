@@ -1,0 +1,6 @@
+<li class="entry" data-kind="{{ include.kind }}" data-date="{{ include.date | date: '%Y-%m-%d' }}">
+  <time datetime="{{ include.date | date: '%Y-%m-%d' }}">{{ include.date | date: '%Y-%m-%d' }}</time>
+  <div><h3><a href="{{ include.url | relative_url }}">{{ include.title }}</a></h3><p>{{ include.summary }}</p></div>
+  <span class="tag {{ include.status }}">{{ include.status | upcase }}</span>
+  {% if include.hash %}<a class="hash" href="{{ include.hash_url | default: include.url | relative_url }}">{{ include.hash }}</a>{% else %}<span class="hash"></span>{% endif %}
+</li>

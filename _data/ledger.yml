@@ -1,0 +1,50 @@
+# Ledger entries that aren't blog posts (posts are added automatically).
+# status: block | review | fixed | release | note. kind (for filters): research | release | fix | writing.
+- date: 2026-10-19
+  title: Published both tools to PyPI
+  summary: Trusted publishing, no stored tokens; every artifact carries signed provenance.
+  url: https://pypi.org/project/llm-redteam-evidence/
+  status: release
+  kind: release
+  hash: "0409310"
+  hash_url: https://github.com/Mihirajmera/llm-redteam-evidence/commit/0409310
+- date: 2026-10-17
+  title: Fuzzing found a memory exhaustion bug in my own parser
+  summary: A crafted result file could request billions of attempts. Capped, with a regression test.
+  url: https://github.com/Mihirajmera/llm-redteam-evidence/pull/3
+  status: fixed
+  kind: fix
+  hash: d36dec5
+  hash_url: https://github.com/Mihirajmera/llm-redteam-evidence/commit/d36dec5
+- date: 2026-10-17
+  title: Out-of-range maturity scores were hiding control gaps
+  summary: Validated inputs and neutralised CSV injection in exported reports.
+  url: https://github.com/Mihirajmera/control-gap-analyzer/pull/7
+  status: fixed
+  kind: fix
+  hash: 9ecd20e
+  hash_url: https://github.com/Mihirajmera/control-gap-analyzer/commit/9ecd20e
+- date: 2026-10-17
+  title: Signed releases with SLSA Level 3 provenance
+  summary: Rolled out across 9 repositories, with backfilled provenance for earlier releases.
+  url: https://github.com/Mihirajmera/llm-redteam-evidence/pull/2
+  status: release
+  kind: release
+  hash: 7b7ff10
+  hash_url: https://github.com/Mihirajmera/llm-redteam-evidence/commit/7b7ff10
+- date: 2026-10-16
+  title: Shipped llm-redteam-evidence
+  summary: Red-team results from garak and promptfoo become audit evidence and a release gate.
+  url: https://github.com/Mihirajmera/llm-redteam-evidence
+  status: release
+  kind: release
+  hash: 3b72d35
+  hash_url: https://github.com/Mihirajmera/llm-redteam-evidence/commit/3b72d35
+- date: 2026-10-12
+  title: Shipped agent-access-review
+  summary: User access reviews for AI agents and MCP servers, mapped to 12 controls.
+  url: https://github.com/Mihirajmera/agent-access-review
+  status: release
+  kind: release
+  hash: 7ae0218
+  hash_url: https://github.com/Mihirajmera/agent-access-review/commit/7ae0218

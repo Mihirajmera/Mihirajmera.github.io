@@ -1,128 +1,74 @@
 ---
 layout: default
-description: GRC engineer proving that AI systems can be governed with the same rigor as financial controls. Open-source tools for AI agent access reviews and LLM red-team evidence.
-image: /assets/img/posts/default.png
+description: GRC engineer proving that AI systems can be governed with the same rigor as financial controls. Open-source tools, research and writing on AI assurance.
 ---
-<header class="hero">
-  <div class="grid-bg" aria-hidden="true"></div>
-  <div class="wrap">
-    <span class="tag">Open to GRC engineering &amp; AI governance roles</span>
-    <h1>Mihir Ajmera</h1>
-    <p class="role">GRC Engineer · AI Assurance · Compliance-as-Code</p>
-    <p class="lede">I'm working to prove one thing: <strong>AI systems can be governed with the same rigor as financial controls.</strong> Every agent's access reviewed, every model release gated, every claim backed by evidence an auditor can re-perform.</p>
-    <div class="actions">
-      <a class="btn primary" href="{{ '/projects/' | relative_url }}">See the work</a>
-      <a class="btn" href="{{ '/blog/' | relative_url }}">Read the writing</a>
-      <a class="btn" href="https://github.com/Mihirajmera">GitHub</a>
-      <a class="btn" href="https://www.linkedin.com/in/mihirajmera1/">LinkedIn</a>
-    </div>
-  </div>
-</header>
-
 <main>
-  <section aria-labelledby="principles-h">
-    <div class="wrap">
-      <p class="eyebrow">// 01 · OPERATING PRINCIPLES</p>
-      <h2 id="principles-h">What I believe about assurance</h2>
-      <div class="principles">
-        <div class="principle"><span class="n">01</span><h3>Compliance should compile.</h3><p>Controls are code: versioned, tested and run continuously, not screenshotted once a quarter.</p></div>
-        <div class="principle"><span class="n">02</span><h3>If it can't be re-performed, it isn't evidence.</h3><p>Hashed, timestamped, traceable to the raw output and exportable as OSCAL.</p></div>
-        <div class="principle"><span class="n">03</span><h3>A score is an opinion until someone checks it.</h3><p>Scanners and red-team detectors are evidence sources, not verdicts. Keep the trail so a reviewer can verify.</p></div>
-        <div class="principle"><span class="n">04</span><h3>AI agents are identities.</h3><p>They hold tokens, shells and databases. Review their access like any privileged user's.</p></div>
+  <section class="wrap hero">
+    <div>
+      <p class="kicker">GRC engineer · AI assurance · compliance-as-code</p>
+      <h1>AI systems can be governed with the same rigor as financial controls.</h1>
+      <p class="lede">I build open-source tools that turn AI risk into evidence an auditor can re-perform. Every claim on this page links to its proof.</p>
+      <div class="cta">
+        <a class="btn primary" href="{{ '/work/' | relative_url }}">See the work</a>
+        {% assign latest = site.posts.first %}{% if latest %}<a class="btn" href="{{ latest.url | relative_url }}">Read the latest</a>{% endif %}
+        <a class="btn" href="https://www.linkedin.com/in/mihirajmera1/">LinkedIn</a>
       </div>
     </div>
-  </section>
 
-  <section id="projects" aria-labelledby="projects-h">
-    <div class="wrap">
-      <p class="eyebrow">// 02 · OPEN SOURCE</p>
-      <h2 id="projects-h">AI assurance tools</h2>
-      <div class="flagship">
-        {% for p in site.data.projects %}{% if p.flagship %}
-        <article class="card">
-          <p class="kicker">{{ p.kicker }}</p>
-          <h3><a href="{{ p.repo }}">{{ p.name }}</a></h3>
-          <p>{{ p.summary }}</p>
-          <ul>{% for b in p.bullets %}<li>{{ b }}</li>{% endfor %}</ul>
-          <div class="chips">{% for t in p.tags %}<span class="chip">{{ t }}</span>{% endfor %}</div>
-          <pre>{{ p.install }}</pre>
-          <div class="links">
-            <a href="{{ p.repo }}">Repository →</a>
-            {% for l in p.links %}<a href="{{ l.url }}">{{ l.label }} →</a>{% endfor %}
-          </div>
-        </article>
-        {% endif %}{% endfor %}
+    <aside class="status" aria-label="Live project status">
+      <div class="status-head"><span class="dot" aria-hidden="true"></span><span>Checking live status…</span></div>
+      {% for p in site.data.projects %}{% if p.flagship %}
+      <div class="svc" data-repo="{{ p.name }}">
+        <div class="svc-top"><span>{{ p.name }}</span><span class="ver">PyPI</span></div>
+        <div class="runs" title="Last 10 CI runs on main"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       </div>
-      <p class="more-link"><a href="{{ '/projects/' | relative_url }}">All projects and case studies →</a></p>
-    </div>
+      {% endif %}{% endfor %}
+      <div class="facts">
+        <span><b data-score="agent-access-review">–</b> / <b data-score="llm-redteam-evidence">–</b> Scorecard</span>
+        <span><b>98</b> tests</span>
+        <span><b>SLSA L3</b> provenance</span>
+        <span><b>PyPI</b> trusted publishing</span>
+      </div>
+      <div class="status-foot">connecting…</div>
+    </aside>
   </section>
 
-  <section aria-labelledby="writing-h">
+  <section class="proof" aria-labelledby="proof-h">
     <div class="wrap">
-      <p class="eyebrow">// 03 · RESEARCH &amp; WRITING</p>
-      <h2 id="writing-h">Findings, not opinions</h2>
-      <div class="rows">
-        {% for c in site.data.case_studies %}
-        <a class="row" href="{{ c.url | relative_url }}">
-          <span class="when">{{ c.date | date: '%b %Y' | upcase }}</span>
-          <span><strong>{{ c.title }}</strong><br><span class="muted">{{ c.summary }}</span></span>
-        </a>
+      <div class="label"><span id="proof-h">PROOF, NOT ADJECTIVES</span><span>Every number links to the evidence behind it</span></div>
+      <div class="proof-grid">
+        {% for f in site.data.proof %}
+        <div class="fact span-{{ f.span | default: 4 }} {{ f.tone }}">
+          <span class="n">{{ f.n }}{% if f.unit %}<small>{{ f.unit }}</small>{% endif %}</span>
+          <span class="what">{{ f.what }}</span>
+          <a class="src" href="{{ f.url | relative_url }}">{{ f.src }} →</a>
+        </div>
         {% endfor %}
       </div>
-      <p class="more-link"><a href="{{ '/blog/' | relative_url }}">All writing →</a> · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
+      <div class="ticker" aria-hidden="true"><span>{{ site.ticker }}</span><span>{{ site.ticker }}</span></div>
     </div>
   </section>
 
-  <section id="about" aria-labelledby="about-h">
-    <div class="wrap">
-      <p class="eyebrow">// 04 · TRACK RECORD</p>
-      <h2 id="about-h">3+ years between auditors and engineers</h2>
-      <div class="stats">
-        <div class="stat"><b>~30%</b><span>less manual evidence collection through Python continuous-controls automation</span></div>
-        <div class="stat"><b>40+</b><span>AWS and Azure cloud controls assessed against NIST CSF, CIS and ISO 27001</span></div>
-        <div class="stat"><b>25+</b><span>control gaps and exceptions driven to closure through risk registers</span></div>
-        <div class="stat"><b>20%</b><span>fewer overdue SOX/ITGC control actions across annual audit cycles</span></div>
-      </div>
-      <div class="job">
-        <div><h3>GRC Engineer</h3><p class="when">JUN 2025 – PRESENT</p></div>
-        <ul>
-          <li>AI risk and impact assessments under the NIST AI RMF, covering security, privacy, accountability, transparency and reliability.</li>
-          <li>Assessed 40+ AWS and Azure controls (AWS Config, CloudTrail, Security Hub, IAM) against NIST CSF, CIS and ISO 27001 and drove remediation.</li>
-          <li>Python evidence collection for continuous controls monitoring; compliance checks embedded in Terraform and GitHub Actions.</li>
-          <li>SOC 2 evidence and exceptions, vendor risk assessments, and risk registers that closed 25+ control gaps.</li>
-        </ul>
-      </div>
-      <div class="job">
-        <div><h3>GRC Analyst</h3><p class="when">JAN 2022 – JUL 2024</p></div>
-        <ul>
-          <li>Technology risk assessments across 15+ business applications; ~50 controls tested per cycle for design and operating effectiveness.</li>
-          <li>Control mapping to NIST CSF, NIST 800-53, COBIT and PCI DSS; ISO 27001 policy reviews.</li>
-          <li>SOX/ITGC audit readiness, reducing overdue control actions by 20%; identity and vulnerability control reviews.</li>
-        </ul>
+  <section class="wrap" data-filter-scope>
+    <div class="ledger-head">
+      <h2>LEDGER · APPEND-ONLY</h2>
+      <div class="filters" role="group" aria-label="Filter ledger">
+        <button data-filter="all" aria-pressed="true">All</button>
+        <button data-filter="writing" aria-pressed="false">Writing</button>
+        <button data-filter="research" aria-pressed="false">Research</button>
+        <button data-filter="release" aria-pressed="false">Releases</button>
+        <button data-filter="fix" aria-pressed="false">Fixes</button>
       </div>
     </div>
-  </section>
-
-  <section id="skills" aria-labelledby="skills-h">
-    <div class="wrap">
-      <p class="eyebrow">// 05 · TOOLKIT</p>
-      <h2 id="skills-h">Skills</h2>
-      <div class="skills">
-        <div class="skill"><h3>Frameworks</h3><p>NIST CSF · NIST 800-53 · NIST AI RMF · NIST AI 600-1 · ISO 27001 · SOC 2 · PCI DSS · SOX/ITGC · CIS · COBIT · OWASP LLM Top 10 · MITRE ATLAS</p></div>
-        <div class="skill"><h3>GRC platforms</h3><p>ServiceNow GRC · RSA Archer · OneTrust · SailPoint · Qualys · Jira · Confluence</p></div>
-        <div class="skill"><h3>Cloud security</h3><p>AWS Config · CloudTrail · Security Hub · GuardDuty · IAM · Azure · Terraform</p></div>
-        <div class="skill"><h3>AI security &amp; automation</h3><p>garak · promptfoo · MCP · Python · GitHub Actions · Policy-as-Code · OSCAL · SQL · Power BI</p></div>
-      </div>
-      <div class="edu">
-        <div class="skill"><h3>MS, Cybersecurity</h3><p>University of Maryland, Baltimore County (UMBC)<br><span class="when">AUG 2024 – MAY 2026</span></p></div>
-        <div class="skill"><h3>Bachelor's, Computer Engineering</h3><p>Honors in Cybersecurity · University of Mumbai<br><span class="when">AUG 2020 – MAY 2024</span></p></div>
-      </div>
-      <div class="certs">
-        <span class="chip">AWS Certified Solutions Architect – Associate</span>
-        <span class="chip">CompTIA Security+ (SY0-701)</span>
-        <span class="chip">ISACA CMMI Certified Practitioner</span>
-        <span class="chip">Google Cybersecurity Professional</span>
-      </div>
-    </div>
+    <ol class="ledger" data-sort="date">
+      {% for post in site.posts %}
+        {% assign k = 'writing' %}{% if post.research %}{% assign k = 'writing research' %}{% endif %}
+        {% assign st = post.status %}{% unless st %}{% assign st = post.kind %}{% endunless %}
+        {% include ledger-entry.html date=post.date url=post.url title=post.title summary=post.description status=st kind=k hash=post.evidence.hash hash_url=post.evidence.url %}
+      {% endfor %}
+      {% for e in site.data.ledger %}
+        {% include ledger-entry.html date=e.date url=e.url title=e.title summary=e.summary status=e.status kind=e.kind hash=e.hash hash_url=e.hash_url %}
+      {% endfor %}
+    </ol>
   </section>
 </main>

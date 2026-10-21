@@ -3,19 +3,18 @@ layout: default
 title: Links
 description: Everywhere to find Mihir Ajmera, GRC engineer working on AI assurance.
 ---
-<main class="page">
-  <div class="wrap narrow links-page">
-    <p class="eyebrow">// LINKS</p>
-    <h1 class="page-title">Mihir Ajmera</h1>
-    <p class="lede">GRC engineer proving AI systems can be governed with the same rigor as financial controls.</p>
-    <div class="link-list">
-      {% if site.posts.size > 0 %}{% assign latest = site.posts.first %}
-      <a class="link-item featured" href="{{ latest.url | relative_url }}"><span>Latest: {{ latest.title }}</span><span class="muted">Read →</span></a>
-      {% endif %}
-      <a class="link-item" href="{{ '/projects/' | relative_url }}"><span>Work</span><span class="muted">Tools, case studies and products</span></a>
-      {% for p in site.data.profiles %}{% if p.url != "" %}
-      <a class="link-item" href="{{ p.url | relative_url }}"><span>{{ p.name }}</span><span class="muted">{{ p.note }}</span></a>
-      {% endif %}{% endfor %}
-    </div>
+<main class="links-page">
+  <p class="kicker">LINKS</p>
+  <h1>Mihir Ajmera</h1>
+  <p>GRC engineer proving AI systems can be governed with the same rigor as financial controls.</p>
+  <div class="link-list">
+    {% assign latest = site.posts.first %}{% if latest %}
+    <a class="link-item featured" href="{{ latest.url | relative_url }}"><span>{{ latest.title }}</span><span>Latest {{ latest.kind }}</span></a>
+    {% endif %}
+    <a class="link-item" href="{{ '/work/' | relative_url }}"><span>Work</span><span>Tools and research</span></a>
+    <a class="link-item" href="{{ '/blog/' | relative_url }}"><span>Writing</span><span>Essays and daily notes</span></a>
+    {% for p in site.data.profiles %}{% if p.url != "" %}
+    <a class="link-item" href="{{ p.url | relative_url }}"><span>{{ p.name }}</span><span>{{ p.note }}</span></a>
+    {% endif %}{% endfor %}
   </div>
 </main>

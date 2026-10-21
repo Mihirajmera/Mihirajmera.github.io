@@ -1,37 +1,9 @@
 ---
-layout: default
-title: Work
-description: Open-source AI assurance, compliance-as-code and cloud security projects by Mihir Ajmera, plus research case studies.
+layout: null
+permalink: /projects/
+sitemap: false
 ---
-<main class="page">
-  <div class="wrap">
-    <p class="eyebrow">// DIRECTORY</p>
-    <h1 class="page-title">Work</h1>
-    <p class="lede">Open-source tools, research and the product I'm building. Every tool here produces evidence an auditor can re-perform.</p>
-
-    <h2 class="group">Case studies</h2>
-    <div class="rows">
-      {% for c in site.data.case_studies %}
-      <a class="row" href="{{ c.url | relative_url }}">
-        <span class="when">{{ c.date | date: '%b %Y' | upcase }}</span>
-        <span><strong>{{ c.title }}</strong><br><span class="muted">{{ c.summary }}</span></span>
-      </a>
-      {% endfor %}
-    </div>
-
-    {% assign groups = site.data.projects | group_by: "category" %}
-    {% for g in groups %}
-    <h2 class="group">{{ g.name }}</h2>
-    <div class="more">
-      {% for p in g.items %}
-      <div class="mini">
-        <h3><a href="{{ p.repo }}">{{ p.name }}</a></h3>
-        <p>{{ p.summary }}</p>
-        <div class="chips">{% for t in p.tags %}<span class="chip">{{ t }}</span>{% endfor %}</div>
-        {% if p.links %}<div class="links">{% for l in p.links %}<a href="{{ l.url }}">{{ l.label }} →</a>{% endfor %}</div>{% endif %}
-      </div>
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </div>
-</main>
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Work · Mihir Ajmera</title>
+<meta http-equiv="refresh" content="0; url={{ '/work/' | relative_url }}"><link rel="canonical" href="{{ '/work/' | absolute_url }}"></head>
+<body><p>This page moved to <a href="{{ '/work/' | relative_url }}">Work</a>.</p></body></html>

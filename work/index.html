@@ -1,0 +1,65 @@
+---
+layout: default
+title: Work
+description: Open-source AI assurance tools, compliance-as-code and cloud security projects by Mihir Ajmera, and where each fits in an AI system.
+---
+<main>
+  <section class="wrap page-head">
+    <p class="kicker">WORK · SHEET 1 OF 1</p>
+    <h1>Where each tool sits in an AI system</h1>
+    <p>An AI agent is an identity with tokens, a model it trusts and servers it calls. Each tool governs one part of that system and produces evidence for it. Select a label to open the tool.</p>
+  </section>
+
+  <section class="wrap">
+    <figure class="drawing">
+      <svg viewBox="0 0 1000 380" role="img" aria-labelledby="dt dd">
+        <title id="dt">Threat model of an AI agent system</title>
+        <desc id="dd">An AI agent connects to MCP servers and a model inside a trust boundary of third-party code and content. agent-access-review governs the agent-to-server link; llm-redteam-evidence governs the model.</desc>
+        <rect class="tb" x="390" y="30" width="580" height="290" rx="4"/>
+        <text class="tm" x="406" y="54">trust boundary: third-party code and content</text>
+        <rect class="bx" x="40" y="150" width="220" height="80" rx="4"/>
+        <text class="t" x="150" y="186" text-anchor="middle">AI agent</text>
+        <text class="ts" x="150" y="208" text-anchor="middle">identity, tokens, approvals</text>
+        <rect class="bx" x="440" y="80" width="230" height="70" rx="4"/>
+        <text class="t" x="555" y="111" text-anchor="middle">MCP servers</text>
+        <text class="ts" x="555" y="132" text-anchor="middle">filesystem, GitHub, Slack, shell</text>
+        <rect class="bx" x="440" y="230" width="230" height="70" rx="4"/>
+        <text class="t" x="555" y="261" text-anchor="middle">Model</text>
+        <text class="ts" x="555" y="282" text-anchor="middle">prompts, retrieved documents</text>
+        <rect class="bx" x="750" y="150" width="190" height="80" rx="4"/>
+        <text class="t" x="845" y="186" text-anchor="middle">Data and egress</text>
+        <text class="ts" x="845" y="208" text-anchor="middle">databases, web, email</text>
+        <path class="ln" d="M260 175 L440 115"/><path class="ln" d="M260 205 L440 265"/><path class="ln" d="M670 115 L750 175"/><path class="ln" d="M670 265 L750 205"/>
+        <a href="https://github.com/Mihirajmera/agent-access-review"><g class="chip"><rect x="262" y="104" width="170" height="28" rx="4"/><text x="347" y="123" text-anchor="middle">agent-access-review</text></g></a>
+        <a href="https://github.com/Mihirajmera/llm-redteam-evidence"><g class="chip"><rect x="262" y="250" width="178" height="28" rx="4"/><text x="351" y="269" text-anchor="middle">llm-redteam-evidence</text></g></a>
+        <text class="tm" x="680" y="146">AAR-09 exfiltration path</text>
+        <text class="tm" x="680" y="252">RT-02 indirect injection</text>
+      </svg>
+      <figcaption class="drawing-legend"><span>— data flow   - - - trust boundary   ■ governing tool</span><span>REV 2026.10 · M. AJMERA</span></figcaption>
+    </figure>
+    <ol class="stack-list">
+      <li><strong>AI agent → MCP servers</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/agent-access-review">agent-access-review</a>: who owns the agent, what it can reach, and whether that's approved.</span></li>
+      <li><strong>AI agent → Model</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/llm-redteam-evidence">llm-redteam-evidence</a>: can the model be hijacked, and is this release worse than the last?</span></li>
+      <li><strong>Data and egress</strong><br><span class="muted">Where both meet: an agent that reads sensitive data and can send it out is flagged as an exfiltration path.</span></li>
+    </ol>
+
+    <h2 class="section-title">TOOLS</h2>
+    <div class="tools">
+      {% for p in site.data.projects %}{% if p.flagship %}
+      <article class="tool">
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.summary }}</p>
+        <code>{{ p.install }}</code>
+        <div class="links"><a href="{{ p.repo }}">Repository</a>{% for l in p.links %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}</div>
+      </article>
+      {% endif %}{% endfor %}
+    </div>
+
+    <h2 class="section-title">COMPLIANCE-AS-CODE, CLOUD AND PRODUCT</h2>
+    <ul class="index">
+      {% for p in site.data.projects %}{% unless p.flagship %}
+      <li><a href="{{ p.repo }}">{{ p.name }}</a><span class="muted">{{ p.summary }}</span><span>{{ p.tags | join: ' · ' }}</span></li>
+      {% endunless %}{% endfor %}
+    </ul>
+  </section>
+</main>

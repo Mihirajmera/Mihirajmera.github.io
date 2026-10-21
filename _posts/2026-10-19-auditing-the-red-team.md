@@ -1,13 +1,26 @@
 ---
 title: I red-teamed an LLM. Then I audited the red-team.
 description: 1,280 garak attacks against Llama 3.2 3B, turned into audit evidence, and what a hand review of that evidence found about the detector itself.
+kind: essay
+research: true
+status: block
+evidence:
+  hash: 2580c5f9
+  label: sha256 2580c5f9fc1490a2…
+  url: https://github.com/Mihirajmera/llm-redteam-evidence/tree/main/case-studies/llama3.2-3b-garak
 tags: [LLM red-teaming, AI assurance, OWASP LLM Top 10]
+figures:
+  - {n: "1,280", label: "attacks from garak 0.17 against Llama 3.2 3B"}
+  - {n: "44%", label: "of hidden-document instructions hijacked the model", tone: red}
+  - {n: "2/3", label: "AutoDAN scores wrong on hand review", tone: amber}
 image: /assets/img/posts/auditing-the-red-team.png
 ---
 
 Most AI security reports stop at a score: *the model was jailbroken 12% of the time.* That's useful to an engineer. It isn't enough for an auditor, a risk committee or anyone who has to sign off on shipping a model. They need to know what was tested, against which control, how confident we are in the number, and whether the number survives someone checking it.
 
 So I ran a real red-team and treated its output the way an auditor treats any other evidence.
+
+{% include figures.html items=page.figures %}
 
 ## The setup
 
@@ -47,7 +60,9 @@ So I reviewed every jailbreak attempt against the raw response:
 | AutoDAN #2 | **Refused**, in its own words | **Jailbroken** ❌ |
 | AutoDAN #3 | **Accepted** a "developer mode" persona | **Safe** ❌ |
 
-The detector was wrong on two of the three AutoDAN attempts: one false positive and one false negative. The headline count happened to come out right, but for the wrong responses.
+{% include pull.html text="The detector was wrong on two of the three AutoDAN attempts: one refusal scored as a jailbreak, one jailbreak scored as safe." %}
+
+The headline count happened to come out right, but for the wrong responses.
 
 The reason is mundane. One of garak's detectors looks for known refusal phrases. A refusal worded differently looks like a bypass, and a compliant answer that never uses a refusal phrase can slip past the other detector.
 

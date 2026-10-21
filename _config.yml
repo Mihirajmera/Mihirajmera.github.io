@@ -24,7 +24,17 @@ defaults:
   - scope: {path: "", type: posts}
     values:
       layout: post
+      kind: essay
       image: /assets/img/posts/default.png
+  - scope: {path: ""}
+    values:
+      image: /assets/img/posts/default.png
+
+# Framework and evidence IDs that scroll under the proof wall.
+ticker: >-
+  OWASP LLM01 · MITRE ATLAS AML.T0051.001 · NIST AI RMF MEASURE 2.7 · NIST AI 600-1 ·
+  NIST 800-53 AC-6 · SOC 2 CC6.1 · OSCAL 1.1.2 · SLSA L3 · sha256 2580c5f9fc1490a2 ·
+  commit 0409310 · commit 6c9eed2 · 95% Wilson bound · release gate BLOCK ·
 
 permalink: /blog/:title/
 
@@ -38,3 +48,6 @@ plugins:
 
 exclude:
   - README.md
+  - tools/
+  - linkedin/
+  - WRITING.md

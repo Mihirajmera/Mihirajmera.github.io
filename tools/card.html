@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:{w}px;height:{h}px;background:#F4F3EF;color:#141414;font-family:"IBM Plex Sans",sans-serif}
+body{padding:{pad}px;display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;font:500 {ks}px "IBM Plex Mono",monospace;color:#5C5A55;letter-spacing:.04em;border-bottom:2px solid #141414;padding-bottom:{gap}px}
+.tag{background:{tagbg};color:{tagtx};padding:4px 10px;border-radius:4px}
+h1{font-family:"Source Serif 4",serif;font-weight:600;font-size:{ts}px;line-height:1.08;letter-spacing:-.015em;margin-top:{gap2}px;max-width:95%}
+.stat{margin-top:auto;display:flex;align-items:flex-end;gap:{gap}px;padding-bottom:{gap}px}
+.stat b{font-weight:700;font-size:{ss}px;line-height:.85;letter-spacing:-.05em;color:{statc}}
+.stat span{font-size:{ls}px;line-height:1.3;color:#3D3B37;max-width:{lw}px;padding-bottom:6px}
+.more{display:flex;border-top:2px solid #141414}.more div{flex:1;padding:{gap}px {gap}px {gap}px 0}.more div+div{padding-left:{gap}px;border-left:1px solid #CFCCC4}.more b{display:block;font-size:96px;line-height:.9;font-weight:700;letter-spacing:-.04em}.more span{display:block;font-size:24px;line-height:1.3;color:#3D3B37;margin-top:10px}
+.foot{display:flex;justify-content:space-between;margin-top:{gap}px;padding-top:{gap}px;border-top:1px solid #CFCCC4;font:500 {ks}px "IBM Plex Mono",monospace;color:#5C5A55}
+.foot b{color:#141414;font-family:"IBM Plex Sans",sans-serif;font-weight:700;font-size:{ns}px}
+</style></head><body>
+<div class="top"><span>{kicker}</span><span class="tag">{status}</span></div>
+<h1>{title}</h1>
+<div class="stat"><b>{stat}</b><span>{statlabel}</span></div>
+{more}<div class="foot"><b>Mihir Ajmera</b><span>mihirajmera.github.io</span></div>
+</body></html>
