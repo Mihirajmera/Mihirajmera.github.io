@@ -21,7 +21,9 @@ linkedin: |
 
   That's why my red-team evidence tool reports small clean samples as INCONCLUSIVE instead of PASS. In my Llama 3.2 run, the model resisted all 12 markdown-exfiltration attempts, and the honest verdict was still "not enough evidence."
 
-  Auditors have known this forever: sample size is part of the conclusion. AI assurance reports should say it too.
+  Auditors have known this forever: sample size is part of the conclusion. To support a 5% tolerable failure rate at 95% confidence, an auditor tests 59 items with zero exceptions. The same math applies to red-teaming, and almost nobody uses it.
+
+  I wrote up the full version: sample-size tables by tolerance, how audit sampling maps to AI testing, and what three controls from a real Llama run looked like. Link in the first comment 👇
 
   #AIGovernance #AISecurity #GRC #RedTeaming
 image: /assets/img/posts/twelve-clean-results-is-not-a-pass.png
