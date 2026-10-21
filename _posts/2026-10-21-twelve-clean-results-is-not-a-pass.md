@@ -20,6 +20,7 @@ linkedin: |
   Auditors have known this forever: sample size is part of the conclusion. AI assurance reports should say it too.
 
   #AIGovernance #AISecurity #GRC #RedTeaming
+image: /assets/img/posts/twelve-clean-results-is-not-a-pass.png
 ---
 
 In my red-team of Llama 3.2 3B, the model resisted all 12 markdown-image exfiltration attempts. A dashboard would show that as green. My tool reported it as **inconclusive**, and that's the honest answer.
