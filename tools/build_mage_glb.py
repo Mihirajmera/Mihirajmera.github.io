@@ -17,7 +17,7 @@ import numpy as np
 from PIL import Image
 
 SRC, DEPTH, OUT = sys.argv[1:4]
-STEP = 3                      # pixels per grid cell
+STEP = 2                      # pixels per grid cell
 CROP = (76, 62, 436, 450)     # same crop as the 2D image
 
 img = Image.open(SRC).convert('RGBA').crop(CROP)
