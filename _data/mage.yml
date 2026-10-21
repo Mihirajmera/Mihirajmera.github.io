@@ -8,6 +8,7 @@ poses:
   wave: /assets/img/mage/wave.webp
   idea: /assets/img/mage/idea.webp
   wink: /assets/img/mage/wink.webp
+  shocked: /assets/img/mage/shocked.webp
   head: /assets/img/mage/head-96.webp
   head2x: /assets/img/mage/head-192.webp
 # Pose while Mage types, and for questions it has no answer to (used once those poses exist).
