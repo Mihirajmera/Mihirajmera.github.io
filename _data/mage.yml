@@ -101,12 +101,13 @@ answers:
     pose: idea
     keys: [research, found, findings, study, studies, case study, mcp, readme, red team, red-team, llama, garak]
     text: >-
-      Two studies so far. Instructions hidden inside a document hijacked Llama 3.2 3B 44% of the time,
-      and a hand review showed garak's detector mis-scored 2 of 3 AutoDAN attempts. Separately, the
-      configuration examples in 9 official MCP READMEs, pasted into one agent, form an exfiltration path.
+      Three studies so far. Instructions hidden in a document hijacked Llama 3.2 3B 44% of the time, and
+      hand-checking the evidence caught the red-team tool's detector, and his own release gate, getting
+      results wrong. The official MCP README examples, pasted into one agent, form an exfiltration path.
+      And holding his own Terraform to a compliance gate found two security Lambdas that couldn't do their job.
     links:
-      - {label: The red-team review, url: /blog/auditing-the-red-team/}
-      - {label: The MCP study, url: /blog/what-mcp-readmes-teach-you-to-copy/}
+      - {label: All case studies, url: /case-studies/}
+      - {label: The red-team study, url: /case-studies/llm-red-team/}
     next: [writing, build]
 
   - id: experience

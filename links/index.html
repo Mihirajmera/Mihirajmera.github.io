@@ -12,6 +12,7 @@ description: Everywhere to find Mihir Ajmera, GRC engineer working on AI assuran
     <a class="link-item featured" href="{{ latest.url | relative_url }}"><span>{{ latest.title }}</span><span>Latest {{ latest.kind }}</span></a>
     {% endif %}
     <a class="link-item" href="{{ '/work/' | relative_url }}"><span>Work</span><span>Tools and research</span></a>
+    <a class="link-item" href="{{ '/case-studies/' | relative_url }}"><span>Case studies</span><span>Research with the evidence attached</span></a>
     <a class="link-item" href="{{ '/blog/' | relative_url }}"><span>Writing</span><span>Essays and daily notes</span></a>
     {% for p in site.data.profiles %}{% if p.url != "" %}
     <a class="link-item" href="{{ p.url | relative_url }}"><span>{{ p.name }}</span><span>{{ p.note }}</span></a>

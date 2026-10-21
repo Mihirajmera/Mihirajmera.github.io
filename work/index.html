@@ -44,6 +44,13 @@ description: Open-source AI assurance tools, compliance-as-code and cloud securi
       <li><strong>Data and egress</strong><br><span class="muted">Where both meet: an agent that reads sensitive data and can send it out is flagged as an exfiltration path.</span></li>
     </ol>
 
+    <h2 class="section-title">CASE STUDIES</h2>
+    <ul class="index">
+      {% assign studies = site.case_studies | sort: 'date' | reverse %}
+      {% for c in studies %}<li><a href="{{ c.url | relative_url }}">{{ c.title }}</a><span class="muted">{{ c.description }}</span><span>{{ c.date | date: '%b %Y' }}</span></li>
+      {% endfor %}
+    </ul>
+
     <section id="try" class="playground" aria-labelledby="try-h">
       <h2 class="section-title" id="try-h">TRY IT · RUNS IN YOUR BROWSER</h2>
       <div id="playground" data-sample="{{ '/assets/samples/claude_desktop_config.json' | relative_url }}">

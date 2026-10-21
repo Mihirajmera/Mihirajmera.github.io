@@ -1,5 +1,19 @@
 # Ledger entries that aren't blog posts (posts are added automatically).
 # status: block | review | fixed | release | note. kind (for filters): research | release | fix | writing.
+- date: 2026-10-21
+  title: What policy-as-code found in my own Terraform
+  summary: A compliance gate on three repos found two security Lambdas missing the one permission they needed.
+  url: /case-studies/policy-as-code-my-own-terraform/
+  status: fixed
+  kind: research fix
+  hash: compliance/
+  hash_url: https://github.com/Mihirajmera/guardduty-siem-automation/blob/master/compliance/report.md
+- date: 2026-10-21
+  title: GRC risk dashboard runs live in the browser
+  summary: The Streamlit app now runs client-side with stlite on GitHub Pages; no server to host or secure.
+  url: https://mihirajmera.github.io/grc-risk-dashboard/
+  status: release
+  kind: release
 - date: 2026-10-19
   title: Published both tools to PyPI
   summary: Trusted publishing, no stored tokens; every artifact carries signed provenance.

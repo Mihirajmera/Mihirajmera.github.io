@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<main>
+<article class="case">
+  <header class="wrap case-head">
+    <p class="kicker"><a href="{{ '/case-studies/' | relative_url }}">CASE STUDY</a> · {{ page.date | date: '%B %Y' | upcase }}</p>
+    <h1>{{ page.title }}</h1>
+    <p class="case-dek">{{ page.description }}</p>
+  </header>
+
+  <section class="wrap case-grid">
+    <dl class="factsheet">
+      <div><dt>Question</dt><dd>{{ page.question }}</dd></div>
+      <div><dt>Method</dt><dd>{{ page.method }}</dd></div>
+      <div><dt>Tools</dt><dd>{% for t in page.tools %}<span class="chip-plain">{{ t }}</span>{% endfor %}</dd></div>
+      <div><dt>Frameworks</dt><dd>{% for f in page.frameworks %}<span class="chip-plain">{{ f }}</span>{% endfor %}</dd></div>
+      <div><dt>Evidence</dt><dd>{% for e in page.evidence %}<a class="mono" href="{{ e.url }}">{{ e.label }} →</a>{% endfor %}</dd></div>
+    </dl>
+    <div class="case-numbers">
+      {% for n in page.numbers %}
+      <div class="{{ n.tone }}"><b>{{ n.n }}</b><span>{{ n.label }}</span></div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <div class="post prose case-body">
+{{ content }}
+  </div>
+  <p class="byline">More case studies: <a href="{{ '/case-studies/' | relative_url }}">all research</a> · Questions? <a href="#" data-mage-open="research">Ask Mage</a> or <a href="mailto:ajmeramihir10@gmail.com">email me</a>.</p>
+</article>
+</main>

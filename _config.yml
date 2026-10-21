@@ -26,6 +26,9 @@ defaults:
       layout: post
       kind: essay
       image: /assets/img/posts/default.png
+  - scope: {path: "", type: case_studies}
+    values:
+      layout: case-study
   - scope: {path: ""}
     values:
       image: /assets/img/posts/default.png
@@ -37,6 +40,11 @@ ticker: >-
   commit 0409310 · commit 6c9eed2 · 95% Wilson bound · release gate BLOCK ·
 
 permalink: /blog/:title/
+
+collections:
+  case_studies:
+    output: true
+    permalink: /case-studies/:name/
 
 feed:
   path: feed.xml

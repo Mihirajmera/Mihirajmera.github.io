@@ -1,0 +1,27 @@
+---
+layout: default
+title: Case studies
+description: Original research on AI assurance and compliance-as-code, with published evidence for every number.
+---
+<main>
+  <section class="wrap page-head">
+    <p class="kicker">CASE STUDIES</p>
+    <h1>Research with the evidence attached</h1>
+    <p>Each study asks one question, answers it with real tools against real systems, and publishes the evidence so you can check the work, including what my own tools got wrong.</p>
+  </section>
+  <section class="wrap">
+    <ol class="case-list">
+      {% assign studies = site.case_studies | sort: 'date' | reverse %}
+      {% for c in studies %}
+      <li>
+        <a href="{{ c.url | relative_url }}">
+          <span class="when">{{ c.date | date: '%b %Y' | upcase }}</span>
+          <span class="case-list-title">{{ c.title }}</span>
+          <span class="muted">{{ c.description }}</span>
+          <span class="case-list-nums">{% for n in c.numbers limit: 3 %}<b class="{{ n.tone }}">{{ n.n }}</b>{% endfor %}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+</main>
