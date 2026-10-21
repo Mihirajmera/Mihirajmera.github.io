@@ -12,6 +12,14 @@
 
   const SIGIL = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5 27.7 9.25v13.5L16 29.5 4.3 22.75V9.25Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8.5 18 14l5.5 2-5.5 2-2 5.5-2-5.5-5.5-2 5.5-2Z" fill="currentColor"/><circle cx="23.5" cy="8.5" r="2.4" fill="var(--red)"/></svg>';
 
+  const poses = kb.poses || {};
+  const asset = (u) => (u ? base + u : '');
+  const headImg = () => {
+    const i = document.createElement('img');
+    i.src = asset(poses.head); i.srcset = `${asset(poses.head)} 1x, ${asset(poses.head2x)} 2x`;
+    i.alt = ''; i.width = 40; i.height = 40; i.decoding = 'async';
+    return i;
+  };
   const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
   const safeUrl = (u) => (/^(https:|mailto:)/.test(u) ? u : u.startsWith('/') ? base + u : null);
 
@@ -20,7 +28,7 @@
   launcher.type = 'button';
   launcher.setAttribute('aria-expanded', 'false');
   launcher.setAttribute('aria-controls', 'mage-panel');
-  launcher.innerHTML = SIGIL;
+  if (poses.head) launcher.append(headImg()); else launcher.innerHTML = SIGIL;
   launcher.append(el('span', null, 'Ask Mage'));
 
   const panel = el('section', 'mage-panel');
@@ -30,7 +38,8 @@
   panel.hidden = true;
 
   const head = el('header', 'mage-head');
-  const avatar = el('span', 'mage-avatar'); avatar.innerHTML = SIGIL;
+  const avatar = el('span', 'mage-avatar');
+  if (poses.head) avatar.append(headImg()); else avatar.innerHTML = SIGIL;
   const title = el('div', 'mage-title');
   title.append(el('b', null, 'Mage'), el('span', null, 'Mihir’s assistant · scripted · runs in your browser'));
   const voice = el('button', 'mage-icon');
@@ -132,11 +141,18 @@
     return best;
   }
 
+  const heroImg = document.querySelector('.mage-img');
+  function pose(name) {
+    if (!heroImg) return;
+    const src = asset(poses[name] || poses.wave);
+    if (heroImg.getAttribute('src') !== src) heroImg.src = src;
+  }
+
   function ask(text, answer) {
     if (busy) { setTimeout(() => ask(text, answer), 120); return; }
     userSays(text);
     const a = answer || match(text);
-    if (a) mageSays(a.text, a.links || [], a.next || []);
+    if (a) { pose(a.pose); mageSays(a.text, a.links || [], a.next || []); }
     else mageSays(kb.fallback, [{ label: 'Email Mihir', url: 'mailto:ajmeramihir10@gmail.com' }], kb.start);
   }
 
@@ -176,4 +192,37 @@
     e.preventDefault();
     open(b.dataset.mageOpen);
   }));
+})();
+
+// Hero: Mage tilts toward the cursor, and the speech bubble cycles through short lines.
+(function () {
+  const stage = document.querySelector('.mage-stage');
+  if (!stage) return;
+  const hero = stage.querySelector('.mage-hero');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const kb = JSON.parse(document.getElementById('mage-kb').textContent);
+  if (!reduced && window.matchMedia('(pointer: fine)').matches) {
+    let raf = null;
+    window.addEventListener('pointermove', (e) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const r = hero.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) / window.innerWidth;
+        const dy = (e.clientY - (r.top + r.height / 2)) / window.innerHeight;
+        hero.style.setProperty('--ry', (dx * 22).toFixed(2) + 'deg');
+        hero.style.setProperty('--rx', (-dy * 14).toFixed(2) + 'deg');
+      });
+    }, { passive: true });
+  }
+  const lines = kb.bubble || [];
+  const text = stage.querySelector('.mage-bubble-text');
+  if (!text || lines.length < 2 || reduced) return;
+  let i = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    i = (i + 1) % lines.length;
+    text.classList.add('swap');
+    setTimeout(() => { text.textContent = lines[i]; text.classList.remove('swap'); }, 220);
+  }, 3200);
 })();
