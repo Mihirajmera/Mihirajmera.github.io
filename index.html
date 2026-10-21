@@ -17,7 +17,7 @@ description: GRC engineer proving that AI systems can be governed with the same 
 
     <figure class="mage-stage" aria-label="Mage, Mihir's assistant">
       <div class="mage-bubble" aria-live="polite"><span class="mage-bubble-text">Hi, I'm Mage.</span><button type="button" data-mage-open="who">Ask me about Mihir →</button></div>
-      <button class="mage-hero" type="button" data-mage-open="who" aria-label="Open Mage, Mihir's assistant">
+      <button class="mage-hero" type="button" data-mage-open="who" data-model="{{ '/assets/models/mage.glb' | relative_url }}" aria-label="Open Mage, Mihir's assistant">
         <span class="mage-disc" aria-hidden="true"></span>
         <img class="mage-img" src="{{ site.data.mage.poses.wave | relative_url }}" alt="Mage, a Memoji of Mihir waving" width="360" height="388" fetchpriority="high">
       </button>
