@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Work
+playground: true
 description: Open-source AI assurance tools, compliance-as-code and cloud security projects by Mihir Ajmera, and where each fits in an AI system.
 ---
 <main>
@@ -42,6 +43,25 @@ description: Open-source AI assurance tools, compliance-as-code and cloud securi
       <li><strong>AI agent → Model</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/llm-redteam-evidence">llm-redteam-evidence</a>: can the model be hijacked, and is this release worse than the last?</span></li>
       <li><strong>Data and egress</strong><br><span class="muted">Where both meet: an agent that reads sensitive data and can send it out is flagged as an exfiltration path.</span></li>
     </ol>
+
+    <section id="try" class="playground" aria-labelledby="try-h">
+      <h2 class="section-title" id="try-h">TRY IT · RUNS IN YOUR BROWSER</h2>
+      <div id="playground" data-sample="{{ '/assets/samples/claude_desktop_config.json' | relative_url }}">
+        <div class="pg-intro">
+          <h3>Run an access review on an AI agent, right here.</h3>
+          <p>Paste a <code>claude_desktop_config.json</code>, a VS Code <code>mcp.json</code> or an <code>agents.yaml</code>. The real <a href="https://pypi.org/project/agent-access-review/">agent-access-review</a> package runs in your browser with Pyodide. Your config is never uploaded, and secrets are redacted by the parser, but use a test config anyway.</p>
+        </div>
+        <label class="pg-label" for="pg-input">Config</label>
+        <textarea id="pg-input" spellcheck="false" placeholder='{"mcpServers": { ... }}'></textarea>
+        <div class="pg-actions">
+          <button id="pg-run" class="btn primary" type="button">Run review</button>
+          <button id="pg-example" class="btn" type="button">Load the 9-README example</button>
+          <button id="pg-clear" class="btn" type="button">Clear</button>
+          <span id="pg-status" class="pg-status" role="status"></span>
+        </div>
+        <div id="pg-out"></div>
+      </div>
+    </section>
 
     <h2 class="section-title">TOOLS</h2>
     <div class="tools">

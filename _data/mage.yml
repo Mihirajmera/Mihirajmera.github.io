@@ -1,0 +1,174 @@
+# Mage: the site's assistant. It answers only from this file, matching questions by keywords.
+# It is not a language model and nothing typed into it leaves the browser.
+# id: unique. keys: words or phrases that point to this answer. text: the answer (plain text, short).
+# links: optional buttons. next: suggested follow-up ids.
+greeting: >-
+  I'm Mage, Mihir's assistant. I can tell you who he is, what he builds and what he's looking for.
+  Pick a question or type your own.
+fallback: >-
+  I don't have a written answer for that, and I don't make things up. Mihir can answer it directly,
+  or try one of these.
+start: [who, build, roles, proof, contact]
+
+answers:
+  - id: who
+    label: Who is Mihir?
+    keys: [who, mihir, about, yourself, introduce, summary, background, tell me]
+    text: >-
+      Mihir Ajmera is a GRC engineer with 3+ years in technology risk and compliance: SOX and ITGC
+      testing, cloud controls, SOC 2 and AI risk assessments. He's working to prove that AI systems
+      can be governed with the same rigor as financial controls, and he builds the open-source tools
+      to do it.
+    next: [build, roles, principles]
+
+  - id: build
+    label: What does he build?
+    keys: [build, tools, projects, work, open source, github, agent-access-review, llm-redteam-evidence, code]
+    text: >-
+      Two open-source tools on PyPI. agent-access-review runs a user access review on AI agents and MCP
+      servers: who owns them, what they can reach, and whether that was approved. llm-redteam-evidence
+      turns red-team results from garak and promptfoo into audit evidence with risk tolerances,
+      confidence bounds and a release gate. Both produce hashed evidence and OSCAL.
+    links:
+      - {label: See the work, url: /work/}
+      - {label: Try it in the browser, url: /work/#try}
+    next: [proof, research, roles]
+
+  - id: roles
+    label: What roles is he looking for?
+    keys: [role, roles, hiring, hire, job, looking, open to, available, opportunity, position, recruit, recruiter, wants]
+    text: >-
+      He's open to GRC engineering, AI governance, AI risk and AI security assurance roles: work where
+      controls are tested by code and evidence has to stand up to an auditor. Security compliance and
+      cloud compliance roles with an automation focus are a good fit too.
+    links:
+      - {label: Email Mihir, url: "mailto:ajmeramihir10@gmail.com"}
+      - {label: LinkedIn, url: "https://www.linkedin.com/in/mihirajmera1/"}
+    next: [why, skills, contact]
+
+  - id: why
+    label: Why should we hire him?
+    keys: [why, hire him, value, different, stand out, unique, strengths, good at]
+    text: >-
+      He works in both languages. He can read a control framework like an auditor and ship tested,
+      signed, fuzzed software like an engineer. And he checks his own evidence: when he re-performed his
+      red-team results by hand, he found the scanner's detector was wrong on 2 of 3 AutoDAN jailbreaks.
+    links:
+      - {label: Read that review, url: /blog/auditing-the-red-team/}
+    next: [proof, experience, contact]
+
+  - id: proof
+    label: Show me proof
+    keys: [proof, evidence, numbers, results, impact, metrics, verify, show me]
+    text: >-
+      Every number on the home page links to its evidence, and each one has a Verify drawer with the hash
+      and the command to check it yourself. Highlights: 1,280 attacks run against Llama 3.2 3B, 8 of 9
+      official MCP README configs found unpinned, 98 automated tests, and signed SLSA Level 3 provenance
+      on 9 repositories.
+    links:
+      - {label: Go to the proof wall, url: "/#proof"}
+    next: [research, build]
+
+  - id: research
+    label: What has he found?
+    keys: [research, found, findings, study, studies, case study, mcp, readme, red team, red-team, llama, garak]
+    text: >-
+      Two studies so far. Instructions hidden inside a document hijacked Llama 3.2 3B 44% of the time,
+      and a hand review showed garak's detector mis-scored 2 of 3 AutoDAN attempts. Separately, the
+      configuration examples in 9 official MCP READMEs, pasted into one agent, form an exfiltration path.
+    links:
+      - {label: The red-team review, url: /blog/auditing-the-red-team/}
+      - {label: The MCP study, url: /blog/what-mcp-readmes-teach-you-to-copy/}
+    next: [writing, build]
+
+  - id: experience
+    label: What's his experience?
+    keys: [experience, career, worked, employer, company, companies, history, years, resume, cv]
+    text: >-
+      He's been a GRC engineer since June 2025, running AI risk and impact assessments under the NIST AI
+      RMF, assessing 40+ cloud controls and automating evidence collection (about 30% less manual work).
+      Before that, he spent 2.5 years as a GRC analyst on technology risk, control testing and SOX/ITGC
+      audit readiness. Employer names and references are available on request.
+    links:
+      - {label: Request a resume, url: "mailto:ajmeramihir10@gmail.com?subject=Resume%20request"}
+    next: [skills, education]
+
+  - id: skills
+    label: What are his skills?
+    keys: [skills, frameworks, stack, tools he uses, nist, iso, soc 2, soc2, owasp, python, terraform, aws, servicenow]
+    text: >-
+      Frameworks: NIST CSF, NIST 800-53, NIST AI RMF and AI 600-1, ISO 27001, SOC 2, SOX/ITGC, PCI DSS,
+      CIS, OWASP LLM Top 10 and MITRE ATLAS. Engineering: Python, Terraform, GitHub Actions, OSCAL and
+      AWS security services. Platforms: ServiceNow GRC, RSA Archer, OneTrust, SailPoint and Qualys.
+    next: [education, build]
+
+  - id: education
+    label: Education and certifications?
+    keys: [education, degree, university, umbc, masters, master, school, certifications, certs, certified, security+, aws certified]
+    text: >-
+      MS in Cybersecurity from the University of Maryland, Baltimore County (UMBC), and a bachelor's in
+      Computer Engineering with honors in cybersecurity from the University of Mumbai. Certifications: AWS
+      Solutions Architect Associate, CompTIA Security+, ISACA CMMI Certified Practitioner and the Google
+      Cybersecurity Professional certificate.
+    next: [experience, roles]
+
+  - id: principles
+    label: How does he think about GRC?
+    keys: [principles, philosophy, approach, believe, think, beliefs, method, how does he work]
+    text: >-
+      Four principles. Compliance should compile: controls are code, tested continuously. If it can't be
+      re-performed, it isn't evidence. A score is an opinion until someone checks it. And AI agents are
+      identities, so review their access like any privileged user's.
+    next: [why, writing]
+
+  - id: writing
+    label: Where does he write?
+    keys: [writing, blog, posts, articles, read, newsletter, linkedin posts, notes, essays]
+    text: >-
+      He publishes short notes most weekdays and a longer essay with original research about once a week,
+      on this site and on LinkedIn. There's an RSS feed if you'd rather not miss one.
+    links:
+      - {label: Read the writing, url: /blog/}
+      - {label: RSS, url: /feed.xml}
+    next: [research, contact]
+
+  - id: posturanet
+    label: What is PosturaNet?
+    keys: [posturanet, product, startup, company he runs, side project, venture]
+    text: >-
+      PosturaNet is his AWS security remediation platform. It scores findings from Security Hub and
+      GuardDuty against NIST CSF 2.0 and MITRE ATT&CK and proposes fixes as Terraform pull requests that a
+      human approves.
+    links:
+      - {label: posturanet.com, url: "https://www.posturanet.com"}
+    next: [build, roles]
+
+  - id: now
+    label: What's he working on now?
+    keys: [now, currently, working on, these days, next, plans, roadmap]
+    text: >-
+      Writing a note most weekdays, reviewing the first community contributions to his tools, and running
+      a before-and-after red-team to show the release gate catching a regression.
+    links:
+      - {label: The Now page, url: /now/}
+    next: [writing, build]
+
+  - id: contact
+    label: How do I reach him?
+    keys: [contact, reach, email, message, talk, call, connect, linkedin, get in touch, phone]
+    text: >-
+      Email is fastest: ajmeramihir10@gmail.com. He's also on LinkedIn, and his code is on GitHub.
+    links:
+      - {label: Email, url: "mailto:ajmeramihir10@gmail.com"}
+      - {label: LinkedIn, url: "https://www.linkedin.com/in/mihirajmera1/"}
+      - {label: GitHub, url: "https://github.com/Mihirajmera"}
+    next: [roles, who]
+
+  - id: mage
+    label: Are you an AI?
+    keys: [mage, are you an ai, are you a bot, are you real, who are you, chatbot, how do you work, gpt, llm, language model]
+    text: >-
+      Not the kind you're thinking of. I'm a scripted assistant: every answer I give was written in
+      advance and lives in this site's source code, and I match your question to one by keywords. I don't call a language model, I can't make
+      things up, and nothing you type leaves your browser. Fitting, for someone who audits AI.
+    next: [who, principles]

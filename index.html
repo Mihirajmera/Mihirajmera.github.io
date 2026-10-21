@@ -11,7 +11,7 @@ description: GRC engineer proving that AI systems can be governed with the same 
       <div class="cta">
         <a class="btn primary" href="{{ '/work/' | relative_url }}">See the work</a>
         {% assign latest = site.posts.first %}{% if latest %}<a class="btn" href="{{ latest.url | relative_url }}">Read the latest</a>{% endif %}
-        <a class="btn" href="https://www.linkedin.com/in/mihirajmera1/">LinkedIn</a>
+        <button class="btn btn-mage" type="button" data-mage-open="who"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5 27.7 9.25v13.5L16 29.5 4.3 22.75V9.25Z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16 8.5 18 14l5.5 2-5.5 2-2 5.5-2-5.5-5.5-2 5.5-2Z" fill="currentColor"/></svg>Ask Mage who I am</button>
       </div>
     </div>
 
@@ -33,19 +33,46 @@ description: GRC engineer proving that AI systems can be governed with the same 
     </aside>
   </section>
 
-  <section class="proof" aria-labelledby="proof-h">
+  <section class="proof" id="proof" aria-labelledby="proof-h">
     <div class="wrap">
-      <div class="label"><span id="proof-h">PROOF, NOT ADJECTIVES</span><span>Every number links to the evidence behind it</span></div>
+      <div class="label"><span id="proof-h">PROOF, NOT ADJECTIVES</span><span>Every number opens its evidence and the command to check it</span></div>
       <div class="proof-grid">
         {% for f in site.data.proof %}
+        {% assign plain = f.n | remove: ',' %}
         <div class="fact span-{{ f.span | default: 4 }} {{ f.tone }}">
-          <span class="n">{{ f.n }}{% if f.unit %}<small>{{ f.unit }}</small>{% endif %}</span>
+          <button class="n" type="button" data-verify="verify-{{ forloop.index }}" aria-label="Verify: {{ f.n }}{{ f.unit }} {{ f.what }}"><span data-count="{{ plain }}">{{ f.n }}</span>{% if f.unit %}<small>{{ f.unit }}</small>{% endif %}</button>
           <span class="what">{{ f.what }}</span>
-          <a class="src" href="{{ f.url | relative_url }}">{{ f.src }} →</a>
+          <span class="fact-actions"><button class="verify-btn" type="button" data-verify="verify-{{ forloop.index }}">Verify this</button><a class="src" href="{{ f.url | relative_url }}">{{ f.src }} →</a></span>
         </div>
         {% endfor %}
       </div>
       <div class="ticker" aria-hidden="true"><span>{{ site.ticker }}</span><span>{{ site.ticker }}</span></div>
+    </div>
+  </section>
+
+  {% for f in site.data.proof %}
+  <dialog class="verify" id="verify-{{ forloop.index }}" aria-labelledby="verify-{{ forloop.index }}-h">
+    <form method="dialog" class="verify-close"><button aria-label="Close">Close ✕</button></form>
+    <p class="kicker">VERIFY THIS CLAIM</p>
+    <p class="verify-n {{ f.tone }}">{{ f.n }}{% if f.unit %}<small>{{ f.unit }}</small>{% endif %}</p>
+    <h2 id="verify-{{ forloop.index }}-h">{{ f.what }}</h2>
+    {% if f.verify.hash %}<p class="verify-label">{{ f.verify.hash_label }}</p><code class="verify-hash">{{ f.verify.hash }}</code>{% endif %}
+    {% if f.verify.note %}<p class="verify-note">{{ f.verify.note }}</p>{% endif %}
+    {% if f.verify.how %}
+    <div class="verify-how-head"><p class="verify-label">Check it yourself</p><button type="button" class="copy" data-copy="verify-{{ forloop.index }}-how">Copy</button></div>
+    <pre id="verify-{{ forloop.index }}-how">{{ f.verify.how | strip | escape }}</pre>
+    {% endif %}
+    <a class="btn primary" href="{{ f.url | relative_url }}">Open the source →</a>
+  </dialog>
+  {% endfor %}
+
+  <section class="wrap traction" data-repos="agent-access-review,llm-redteam-evidence" aria-labelledby="traction-h">
+    <h2 id="traction-h" class="section-title">TRACTION · LIVE</h2>
+    <div class="traction-grid">
+      <a href="https://pypistats.org/packages/llm-redteam-evidence"><b data-live="downloads">–</b><span>PyPI downloads this week, both tools</span></a>
+      <a href="https://github.com/Mihirajmera?tab=repositories&q=&type=source"><b data-live="stars">–</b><span>GitHub stars on the two tools</span></a>
+      <a href="https://github.com/Mihirajmera/llm-redteam-evidence/pulls?q=is%3Apr+-author%3AMihirajmera+-author%3Aapp%2Fdependabot"><b data-live="contributors">–</b><span>outside contributors with pull requests</span></a>
+      <a href="https://github.com/pulls?q=is%3Apr+author%3AMihirajmera+awesome"><b>7</b><span>curated security lists reviewing a submission</span></a>
     </div>
   </section>
 

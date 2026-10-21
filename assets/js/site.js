@@ -84,3 +84,69 @@ document.querySelectorAll('[data-filter-scope]').forEach((scope) => {
   card.querySelector('.status-foot').textContent = 'live from GitHub, PyPI, Scorecard · ' +
     new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 })();
+
+// Verify drawers: each proof number opens a <dialog> with its hash and reproduction steps.
+document.querySelectorAll('[data-verify]').forEach((btn) => {
+  const dlg = document.getElementById(btn.dataset.verify);
+  if (!dlg) return;
+  btn.addEventListener('click', () => dlg.showModal());
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+});
+document.querySelectorAll('[data-copy]').forEach((btn) => {
+  btn.addEventListener('click', async () => {
+    const src = document.getElementById(btn.dataset.copy);
+    try { await navigator.clipboard.writeText(src.textContent.trim()); btn.textContent = 'Copied'; }
+    catch (e) { btn.textContent = 'Select and copy'; }
+    setTimeout(() => { btn.textContent = 'Copy'; }, 1600);
+  });
+});
+
+// Proof numbers count up once when they scroll into view (skipped for reduced motion).
+(function () {
+  const nums = document.querySelectorAll('[data-count]');
+  if (!nums.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const fmt = new Intl.NumberFormat('en-US');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      io.unobserve(entry.target);
+      const node = entry.target.firstChild;
+      const target = Number(entry.target.dataset.count);
+      const start = performance.now(), dur = 1100;
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / dur);
+        node.textContent = fmt.format(Math.round(target * (1 - Math.pow(1 - t, 3))));
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.4 });
+  nums.forEach((n) => io.observe(n));
+})();
+
+// Traction: live PyPI downloads, GitHub stars and outside contributors for the flagship tools.
+(async function () {
+  const box = document.querySelector('.traction');
+  if (!box) return;
+  const repos = box.dataset.repos.split(',');
+  const getJSON = (u) => fetch(u).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
+  const set = (key, value) => { const n = box.querySelector(`[data-live="${key}"]`); if (n) n.textContent = value; };
+  try {
+    const dl = await Promise.all(repos.map((r) => getJSON(`https://img.shields.io/pypi/dw/${r}.json`)));
+    const per = dl.map((d) => parseInt(String(d.value).replace(/[^0-9]/g, ''), 10) || 0);
+    set('downloads', per.reduce((a, b) => a + b, 0).toLocaleString('en-US'));
+  } catch (e) {}
+  try {
+    const info = await Promise.all(repos.map((r) => getJSON(`https://api.github.com/repos/Mihirajmera/${r}`)));
+    set('stars', info.reduce((a, d) => a + d.stargazers_count, 0).toLocaleString('en-US'));
+  } catch (e) {}
+  try {
+    const pulls = await Promise.all(repos.map((r) => getJSON(`https://api.github.com/repos/Mihirajmera/${r}/pulls?state=all&per_page=100`)));
+    const people = new Set();
+    pulls.flat().forEach((p) => {
+      if (p.user && p.user.type === 'User' && p.user.login.toLowerCase() !== 'mihirajmera') people.add(p.user.login);
+    });
+    set('contributors', String(people.size));
+  } catch (e) {}
+})();

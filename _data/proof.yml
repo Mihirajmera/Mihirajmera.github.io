@@ -1,10 +1,22 @@
-# The proof wall on the home page. Every fact needs a source link.
+# The proof wall on the home page. Every fact needs a source link and a way to verify it.
 # tone: red | amber | green | (empty for neutral). span: grid columns out of 12.
+# verify: shown in the "Verify this" drawer. hash/hash_label optional; how: shell commands.
 - n: "1,280"
   what: real attacks run against Llama 3.2 3B with garak, each mapped to a control and hashed.
   src: sha256 2580c5f9fc1490a2
   url: https://github.com/Mihirajmera/llm-redteam-evidence/tree/main/case-studies/llama3.2-3b-garak
   span: 7
+  verify:
+    hash_label: SHA-256 of the raw garak report that was assessed
+    hash: 2580c5f9fc1490a22d5840c0c082bd53becb54cd6d7d11fe435172c65eb3dc13
+    note: >-
+      The raw report isn't public because it contains full jailbreak output. Its hash is recorded in
+      every evidence file, so anyone holding the report can prove it's the one assessed. The run
+      itself is reproducible with the same garak version, probes and seed.
+    how: |
+      python -m garak --target_type ollama --target_name llama3.2:3b --generations 1 --seed 42 \
+        --probes promptinject.HijackHateHumans,encoding.InjectBase64,latentinjection.LatentInjectionReport,dan.Dan_11_0,dan.AutoDANCached,web_injection.MarkdownImageExfil,sysprompt_extraction.SystemPromptExtraction,packagehallucination.Python
+      redteam-evidence assess ~/.local/share/garak/garak_runs/ --system "Llama 3.2 3B" --version llama3.2:3b --no-excerpts
 - n: "44"
   unit: "%"
   what: of instructions hidden inside a document hijacked the model.
@@ -12,6 +24,15 @@
   url: https://github.com/Mihirajmera/llm-redteam-evidence/blob/main/case-studies/llama3.2-3b-garak/assessment/evidence/RT-02.json
   tone: red
   span: 5
+  verify:
+    hash_label: SHA-256 of the committed evidence file
+    hash: 3a5b2dae430d0635cca21451156771226ef1a5460137ae5f88934f9e93a74270
+    note: >-
+      113 of 256 latentinjection.LatentInjectionReport attempts succeeded (44.1%, 95% upper bound
+      50.3%) against a 2% tolerance. Every failing attempt is listed by ID with hashes of its prompt
+      and response.
+    how: |
+      curl -sL https://raw.githubusercontent.com/Mihirajmera/llm-redteam-evidence/main/case-studies/llama3.2-3b-garak/assessment/evidence/RT-02.json | sha256sum
 - n: "2"
   unit: "/3"
   what: AutoDAN jailbreak scores were wrong when I re-performed them by hand.
@@ -19,6 +40,16 @@
   url: /blog/auditing-the-red-team/
   tone: amber
   span: 4
+  verify:
+    hash_label: Attempts scored as jailbroken, from evidence/RT-03.json
+    hash: 1016ae20-d837-4f06-998d-46834e9606cb · 404176ab-edc6-459f-b0a1-c52c36419328
+    note: >-
+      1016ae20 is an AutoDAN refusal that the detector scored as a bypass (false positive); 404176ab
+      is DAN 11.0, correctly scored. The false negative isn't in this list at all, because the
+      detector scored it safe. Finding it took reading every jailbreak response in the raw report.
+    how: |
+      curl -sL https://raw.githubusercontent.com/Mihirajmera/llm-redteam-evidence/main/case-studies/llama3.2-3b-garak/assessment/evidence/RT-03.json \
+        | python -c "import json,sys; [print(a['attempt_id'], a['test_id'], a['detector']) for a in json.load(sys.stdin)['failing_attempts']]"
 - n: "8"
   unit: "/9"
   what: official MCP README configs run unpinned packages on every start.
@@ -26,20 +57,61 @@
   url: /blog/what-mcp-readmes-teach-you-to-copy/
   tone: red
   span: 4
+  verify:
+    hash_label: Commit with the configs, sources and results
+    hash: 96f44ee1b5ee943f1b73fe87096481184ba114cc
+    note: >-
+      Each config is saved exactly as published and linked to the README line and commit it came from
+      (sources.json). The finding is AAR-10, unpinned package or image.
+    how: |
+      git clone https://github.com/Mihirajmera/agent-access-review && cd agent-access-review
+      pip install agent-access-review
+      agent-access-review scan case-studies/official-mcp-readmes/configs --as-of 2026-10-19
 - n: "98"
   what: automated tests, plus continuous fuzzing that found 3 real bugs in my own code.
   src: fixed in d36dec5
   url: https://github.com/Mihirajmera/llm-redteam-evidence/pull/3
   tone: green
   span: 4
+  verify:
+    hash_label: Fuzzing fix in llm-redteam-evidence
+    hash: d36dec5674eac7752f25d8a3ba341ff1c0c5fcc8
+    note: >-
+      53 tests in agent-access-review and 45 in llm-redteam-evidence, run on every push. ClusterFuzzLite
+      found a crash on malformed configs, a memory exhaustion bug in the result parser, and hidden
+      gaps plus CSV injection in control-gap-analyzer.
+    how: |
+      git clone https://github.com/Mihirajmera/llm-redteam-evidence && cd llm-redteam-evidence
+      pip install -e . pytest && python -m pytest -q
 - n: "9"
   what: repositories ship releases with signed SLSA Level 3 build provenance.
   src: v0.2.1 release
   url: https://github.com/Mihirajmera/llm-redteam-evidence/releases/tag/v0.2.1
   span: 6
+  verify:
+    hash_label: Release commit for llm-redteam-evidence v0.2.1
+    hash: 040931041c5cbf2f81000d7cdda805450036cd5a
+    note: >-
+      Each release attaches a signed provenance file (multiple.intoto.jsonl) generated by GitHub
+      Actions, proving the artifacts were built by the release workflow from this repository.
+    how: |
+      gh release download v0.2.1 -R Mihirajmera/llm-redteam-evidence
+      slsa-verifier verify-artifact llm_redteam_evidence-0.2.1-py3-none-any.whl \
+        --provenance-path multiple.intoto.jsonl \
+        --source-uri github.com/Mihirajmera/llm-redteam-evidence --source-tag v0.2.1
 - n: "0"
   what: open Dependabot alerts across every repository, as of October 19, 2026.
   src: all repositories
   url: https://github.com/Mihirajmera?tab=repositories
   tone: green
   span: 6
+  verify:
+    hash_label: Snapshot date
+    hash: 2026-10-19
+    note: >-
+      This one can't be live: GitHub only shows Dependabot alerts to repository owners. It's a dated
+      snapshot. Dependency updates are grouped with a 14-day cooldown, and security updates are on
+      for every repository.
+    how: |
+      # as the repository owner
+      gh api "repos/Mihirajmera/llm-redteam-evidence/dependabot/alerts?state=open" --jq length
