@@ -397,3 +397,12 @@ dialog.verify[open] { animation: slide-in 260ms cubic-bezier(.3,.7,.2,1); }
   .mage-launcher { padding: 0 11px; right: 14px; bottom: 14px; }
   .mage-panel { right: 12px; bottom: 70px; }
 }
+
+/* phone nav: name and switch on top, links below */
+@media (max-width: 560px) {
+  .nav .wrap { height: auto; flex-wrap: wrap; padding-top: 12px; padding-bottom: 10px; row-gap: 8px; }
+  .nav .name { white-space: nowrap; }
+  .nav-right { display: contents; }
+  .nav-right ul { order: 3; flex-basis: 100%; gap: 20px; }
+  .theme-switch { order: 2; }
+}

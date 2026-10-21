@@ -138,15 +138,13 @@ document.querySelectorAll('[data-copy]').forEach((btn) => {
     set('downloads', per.reduce((a, b) => a + b, 0).toLocaleString('en-US'));
   } catch (e) {}
   try {
-    const info = await Promise.all(repos.map((r) => getJSON(`https://api.github.com/repos/Mihirajmera/${r}`)));
-    set('stars', info.reduce((a, d) => a + d.stargazers_count, 0).toLocaleString('en-US'));
-  } catch (e) {}
-  try {
     const pulls = await Promise.all(repos.map((r) => getJSON(`https://api.github.com/repos/Mihirajmera/${r}/pulls?state=all&per_page=100`)));
     const people = new Set();
+    let prs = 0;
     pulls.flat().forEach((p) => {
-      if (p.user && p.user.type === 'User' && p.user.login.toLowerCase() !== 'mihirajmera') people.add(p.user.login);
+      if (p.user && p.user.type === 'User' && p.user.login.toLowerCase() !== 'mihirajmera') { people.add(p.user.login); prs += 1; }
     });
     set('contributors', String(people.size));
+    set('prs', String(prs));
   } catch (e) {}
 })();
