@@ -1,6 +1,12 @@
 # Ledger entries that aren't blog posts (posts are added automatically).
 # status: block | review | fixed | release | note. kind (for filters): research | release | fix | writing.
 - date: 2026-10-21
+  title: Published aws-compliance-as-code 1.1.0 to PyPI
+  summary: Read-only AWS checks with hashed evidence and OSCAL, plus a demo against a misconfigured fake account.
+  url: https://pypi.org/project/aws-compliance-as-code/
+  status: release
+  kind: release
+- date: 2026-10-21
   title: What policy-as-code found in my own Terraform
   summary: A compliance gate on three repos found two security Lambdas missing the one permission they needed.
   url: /case-studies/policy-as-code-my-own-terraform/
