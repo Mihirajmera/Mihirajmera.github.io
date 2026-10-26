@@ -6,7 +6,7 @@ description: Open-source AI assurance tools, compliance-as-code and cloud securi
 ---
 <main>
   <section class="wrap page-head">
-    <p class="kicker">WORK · SHEET 1 OF 1</p>
+    <p class="kicker">WORK · 4 SHEETS</p>
     <h1>Where each tool sits in an AI system</h1>
     <p>An AI agent is an identity with tokens, a gateway that holds its model keys, a model it trusts and servers it calls. Each tool governs one part of that system and leaves evidence an auditor can re-perform. Select a label to open the tool.</p>
   </section>
@@ -44,7 +44,7 @@ description: Open-source AI assurance tools, compliance-as-code and cloud securi
         <text class="tm" x="788" y="156">AAR-09 exfiltration path</text>
         <text class="tm" x="788" y="290">RT-02 indirect injection</text>
       </svg>
-      <figcaption class="drawing-legend"><span>— data flow   - - - trust boundary   ■ governing tool</span><span>REV 2026.10 · M. AJMERA</span></figcaption>
+      <figcaption class="drawing-legend"><span>— data flow   - - - trust boundary   ■ governing tool</span><span>SHEET 1 OF 4 · REV 2026.10 · M. AJMERA</span></figcaption>
     </figure>
     <ol class="stack-list">
       <li><strong>AI agent → MCP servers, before it runs</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/agent-access-review">agent-access-review</a>: who owns the agent, what it can reach, and whether that's approved.</span></li>
@@ -52,6 +52,149 @@ description: Open-source AI assurance tools, compliance-as-code and cloud securi
       <li><strong>AI agent → AI gateway</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/ai-gateway-audit">ai-gateway-audit</a>: the gateway holds every provider key and often every prompt, so it's audited like a tier-0 system.</span></li>
       <li><strong>Gateway → Model</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/llm-redteam-evidence">llm-redteam-evidence</a>: can the model be hijacked, and is this release worse than the last?</span></li>
       <li><strong>Data and egress</strong><br><span class="muted">Where everything meets: an agent that reads sensitive data and can send it out is flagged as an exfiltration path.</span></li>
+    </ol>
+
+    <h2 class="section-title">SHEET 2 · WHEN EACH TOOL RUNS IN AN AI RELEASE</h2>
+    <figure class="drawing">
+      <svg viewBox="0 0 1000 290" role="img" aria-labelledby="d2t d2d">
+        <title id="d2t">AI release lifecycle</title>
+        <desc id="d2d">Five stages: approve the agent, configure the gateway, release the model, run the agent, audit the evidence, then recertify every 90 days. agent-access-review runs at approval, ai-gateway-audit at configuration, llm-redteam-evidence at release, agent-flight-recorder at runtime, and every tool's hashed evidence and OSCAL feed the audit.</desc>
+        <path class="ln dash" d="M895 110 L895 64 L115 64 L115 110"/>
+        <text class="tm" x="505" y="56" text-anchor="middle">recertify every 90 days · AAR-02</text>
+        <rect class="bx" x="30" y="110" width="170" height="70" rx="4"/>
+        <text class="t" x="115" y="140" text-anchor="middle">1 · Approve</text>
+        <text class="ts" x="115" y="161" text-anchor="middle">owner, scope, purpose</text>
+        <rect class="bx" x="225" y="110" width="170" height="70" rx="4"/>
+        <text class="t" x="310" y="140" text-anchor="middle">2 · Configure</text>
+        <text class="ts" x="310" y="161" text-anchor="middle">gateway, keys, logging</text>
+        <rect class="bx" x="420" y="110" width="170" height="70" rx="4"/>
+        <text class="t" x="505" y="140" text-anchor="middle">3 · Release</text>
+        <text class="ts" x="505" y="161" text-anchor="middle">red-team the model</text>
+        <rect class="bx" x="615" y="110" width="170" height="70" rx="4"/>
+        <text class="t" x="700" y="140" text-anchor="middle">4 · Run</text>
+        <text class="ts" x="700" y="161" text-anchor="middle">every tool call</text>
+        <rect class="bx" x="810" y="110" width="170" height="70" rx="4"/>
+        <text class="t" x="895" y="140" text-anchor="middle">5 · Audit</text>
+        <text class="ts" x="895" y="161" text-anchor="middle">re-perform the evidence</text>
+        <path class="ln" d="M200 145 L225 145"/><path class="ln" d="M395 145 L420 145"/><path class="ln" d="M590 145 L615 145"/><path class="ln" d="M785 145 L810 145"/>
+        <a href="https://github.com/Mihirajmera/agent-access-review"><g class="chip"><rect x="30" y="196" width="170" height="28" rx="4"/><text x="115" y="215" text-anchor="middle">agent-access-review</text></g></a>
+        <a href="https://github.com/Mihirajmera/ai-gateway-audit"><g class="chip"><rect x="235" y="196" width="150" height="28" rx="4"/><text x="310" y="215" text-anchor="middle">ai-gateway-audit</text></g></a>
+        <a href="https://github.com/Mihirajmera/llm-redteam-evidence"><g class="chip"><rect x="416" y="196" width="178" height="28" rx="4"/><text x="505" y="215" text-anchor="middle">llm-redteam-evidence</text></g></a>
+        <a href="https://github.com/Mihirajmera/agent-flight-recorder"><g class="chip"><rect x="610" y="196" width="180" height="28" rx="4"/><text x="700" y="215" text-anchor="middle">agent-flight-recorder</text></g></a>
+        <text class="tm" x="115" y="246" text-anchor="middle">AAR-03 human gate</text>
+        <text class="tm" x="310" y="246" text-anchor="middle">GWA-07 pinned image</text>
+        <text class="tm" x="505" y="246" text-anchor="middle">gate: no regressed model</text>
+        <text class="tm" x="700" y="246" text-anchor="middle">AFR-03 single-use approval</text>
+        <text class="tm" x="895" y="210" text-anchor="middle">hashed evidence</text>
+        <text class="tm" x="895" y="228" text-anchor="middle">+ OSCAL from</text>
+        <text class="tm" x="895" y="246" text-anchor="middle">every stage</text>
+      </svg>
+      <figcaption class="drawing-legend"><span>— sequence   - - - recurring review   ■ governing tool</span><span>SHEET 2 OF 4 · REV 2026.10</span></figcaption>
+    </figure>
+    <ol class="stack-list">
+      <li><strong>1 · Approve the agent</strong><br><span class="muted"><a href="https://github.com/Mihirajmera/agent-access-review">agent-access-review</a>: an owner, an approved scope, and a human gate on anything that writes, sends or deletes.</span></li>
+      <li><strong>2 · Configure the gateway</strong><br><span class="muted"><a href="https://github.com/Mihirajmera/ai-gateway-audit">ai-gateway-audit</a>: keys out of plain text, prompts out of logs, budgets set and the image pinned by digest.</span></li>
+      <li><strong>3 · Release the model</strong><br><span class="muted"><a href="https://github.com/Mihirajmera/llm-redteam-evidence">llm-redteam-evidence</a>: a release gate that blocks a model measurably easier to attack than the approved one.</span></li>
+      <li><strong>4 · Run</strong><br><span class="muted"><a href="https://github.com/Mihirajmera/agent-flight-recorder">agent-flight-recorder</a>: policy on every tool call and a signed record of each one.</span></li>
+      <li><strong>5 · Audit, then recertify every 90 days</strong><br><span class="muted">Every stage leaves hashed evidence and OSCAL an auditor can re-perform.</span></li>
+    </ol>
+
+    <h2 class="section-title">SHEET 3 · HOW EVIDENCE REACHES AN AUDITOR</h2>
+    <figure class="drawing">
+      <svg viewBox="0 0 1000 310" role="img" aria-labelledby="d3t d3d">
+        <title id="d3t">Evidence pipeline</title>
+        <desc id="d3d">AI agents, the AI gateway, models and AWS accounts are checked by the tools, which write SHA-256 hashed evidence and OSCAL assessment results. Those feed a GRC platform and risk register, and an auditor who re-performs the checks. Exceptions expire and reopen findings.</desc>
+        <rect class="bx" x="30" y="30" width="170" height="44" rx="4"/><text class="t" x="115" y="57" text-anchor="middle">AI agents</text>
+        <rect class="bx" x="30" y="90" width="170" height="44" rx="4"/><text class="t" x="115" y="117" text-anchor="middle">AI gateway</text>
+        <rect class="bx" x="30" y="150" width="170" height="44" rx="4"/><text class="t" x="115" y="177" text-anchor="middle">Models</text>
+        <rect class="bx" x="30" y="210" width="170" height="44" rx="4"/><text class="t" x="115" y="237" text-anchor="middle">AWS accounts</text>
+        <rect class="bx" x="270" y="100" width="180" height="84" rx="4"/>
+        <text class="t" x="360" y="134" text-anchor="middle">Checks</text>
+        <text class="ts" x="360" y="156" text-anchor="middle">in CI, at runtime, on a schedule</text>
+        <rect class="bx" x="520" y="50" width="200" height="70" rx="4"/>
+        <text class="t" x="620" y="81" text-anchor="middle">Hashed evidence</text>
+        <text class="ts" x="620" y="102" text-anchor="middle">SHA-256 over canonical JSON</text>
+        <rect class="bx" x="520" y="164" width="200" height="70" rx="4"/>
+        <text class="t" x="620" y="195" text-anchor="middle">OSCAL 1.1.2</text>
+        <text class="ts" x="620" y="216" text-anchor="middle">assessment results</text>
+        <rect class="bx" x="780" y="50" width="190" height="70" rx="4"/>
+        <text class="t" x="875" y="81" text-anchor="middle">GRC platform</text>
+        <text class="ts" x="875" y="102" text-anchor="middle">risk register, KRIs</text>
+        <rect class="bx" x="780" y="164" width="190" height="70" rx="4"/>
+        <text class="t" x="875" y="195" text-anchor="middle">Auditor</text>
+        <text class="ts" x="875" y="216" text-anchor="middle">re-performs, signs off</text>
+        <path class="ln" d="M200 52 L270 125"/><path class="ln" d="M200 112 L270 135"/><path class="ln" d="M200 172 L270 150"/><path class="ln" d="M200 232 L270 160"/>
+        <path class="ln" d="M450 130 L520 85"/><path class="ln" d="M450 155 L520 199"/>
+        <path class="ln" d="M720 85 L780 85"/><path class="ln" d="M720 199 L780 199"/><path class="ln" d="M720 95 L780 189"/><path class="ln" d="M720 189 L780 95"/>
+        <path class="ln dash" d="M875 234 L875 280 L360 280 L360 184"/>
+        <text class="tm" x="618" y="272" text-anchor="middle">exception expired → finding reopens</text>
+        <text class="tm" x="270" y="92">NOT ASSESSED ≠ PASS</text>
+        <a href="https://github.com/Mihirajmera/grc-risk-dashboard"><g class="chip"><rect x="800" y="14" width="150" height="28" rx="4"/><text x="875" y="33" text-anchor="middle">grc-risk-dashboard</text></g></a>
+        <a href="https://github.com/Mihirajmera/control-gap-analyzer"><g class="chip"><rect x="535" y="14" width="170" height="28" rx="4"/><text x="620" y="33" text-anchor="middle">control-gap-analyzer</text></g></a>
+      </svg>
+      <figcaption class="drawing-legend"><span>— evidence flow   - - - exception loop   ■ tool</span><span>SHEET 3 OF 4 · REV 2026.10</span></figcaption>
+    </figure>
+    <ol class="stack-list">
+      <li><strong>Sources</strong><br><span class="muted">AI agents, the AI gateway, models and AWS accounts.</span></li>
+      <li><strong>Checks</strong><br><span class="muted">Run in CI, at runtime or on a schedule. Anything a check can't see is NOT ASSESSED, never PASS.</span></li>
+      <li><strong>Evidence</strong><br><span class="muted">SHA-256 hashed JSON and OSCAL 1.1.2 assessment results, prioritised by <a href="https://github.com/Mihirajmera/control-gap-analyzer">control-gap-analyzer</a>.</span></li>
+      <li><strong>GRC platform and auditor</strong><br><span class="muted">A risk register with KRIs (<a href="https://github.com/Mihirajmera/grc-risk-dashboard">grc-risk-dashboard</a>) and an auditor who re-performs the checks. Expired exceptions reopen findings.</span></li>
+    </ol>
+
+    <h2 class="section-title">SHEET 4 · WHERE EACH TOOL SITS IN AN AWS ACCOUNT</h2>
+    <figure class="drawing">
+      <svg viewBox="0 0 1000 410" role="img" aria-labelledby="d4t d4d">
+        <title id="d4t">AWS account security architecture</title>
+        <desc id="d4d">Internet traffic enters a segmented VPC with workloads and IAM. GuardDuty reads flow logs and CloudTrail and triggers automated quarantine and a findings dashboard. AWS Config and CloudTrail feed hashed evidence, which becomes control gaps and a risk register.</desc>
+        <rect class="bx" x="30" y="70" width="150" height="64" rx="4"/>
+        <text class="t" x="105" y="99" text-anchor="middle">Internet</text>
+        <text class="ts" x="105" y="119" text-anchor="middle">users, attackers</text>
+        <rect class="zone" x="230" y="30" width="430" height="212" rx="4"/>
+        <text class="tm" x="246" y="52">VPC: public · private · isolated subnets</text>
+        <rect class="bx" x="260" y="70" width="175" height="70" rx="4"/>
+        <text class="t" x="347" y="101" text-anchor="middle">Workloads</text>
+        <text class="ts" x="347" y="122" text-anchor="middle">EC2, Lambda, RDS</text>
+        <rect class="bx" x="460" y="70" width="175" height="70" rx="4"/>
+        <text class="t" x="547" y="101" text-anchor="middle">IAM</text>
+        <text class="ts" x="547" y="122" text-anchor="middle">roles, policies, MFA</text>
+        <rect class="bx" x="710" y="40" width="260" height="64" rx="4"/>
+        <text class="t" x="840" y="69" text-anchor="middle">GuardDuty</text>
+        <text class="ts" x="840" y="89" text-anchor="middle">threat findings</text>
+        <rect class="bx" x="710" y="150" width="260" height="64" rx="4"/>
+        <text class="t" x="840" y="179" text-anchor="middle">Auto-quarantine + SIEM</text>
+        <text class="ts" x="840" y="199" text-anchor="middle">Lambda, findings dashboard</text>
+        <rect class="bx" x="230" y="290" width="200" height="64" rx="4"/>
+        <text class="t" x="330" y="319" text-anchor="middle">AWS Config + CloudTrail</text>
+        <text class="ts" x="330" y="339" text-anchor="middle">configuration, activity</text>
+        <rect class="bx" x="460" y="290" width="200" height="64" rx="4"/>
+        <text class="t" x="560" y="319" text-anchor="middle">Hashed evidence</text>
+        <text class="ts" x="560" y="339" text-anchor="middle">OSCAL, SOX audit bundle</text>
+        <rect class="bx" x="690" y="290" width="280" height="64" rx="4"/>
+        <text class="t" x="830" y="319" text-anchor="middle">Control gaps → risk register</text>
+        <text class="ts" x="830" y="339" text-anchor="middle">NIST CSF 2.0, KRIs, aging</text>
+        <path class="ln" d="M180 102 L260 105"/>
+        <path class="ln" d="M660 90 L710 72"/>
+        <path class="ln" d="M840 104 L840 150"/>
+        <path class="ln dash" d="M710 182 L435 120"/>
+        <path class="ln" d="M330 242 L330 290"/><path class="ln" d="M430 322 L460 322"/><path class="ln" d="M660 322 L690 322"/>
+        <text class="tm" x="664" y="66">flow logs</text>
+        <text class="tm" x="575" y="176">isolate</text>
+        <a href="https://github.com/Mihirajmera/secure-vpc-architecture"><g class="chip"><rect x="250" y="196" width="196" height="28" rx="4"/><text x="348" y="215" text-anchor="middle">secure-vpc-architecture</text></g></a>
+        <a href="https://github.com/Mihirajmera/iam-zero-trust-security"><g class="chip"><rect x="452" y="196" width="196" height="28" rx="4"/><text x="550" y="215" text-anchor="middle">iam-zero-trust-security</text></g></a>
+        <a href="https://github.com/Mihirajmera/guardduty-siem-automation"><g class="chip"><rect x="735" y="230" width="210" height="28" rx="4"/><text x="840" y="249" text-anchor="middle">guardduty-siem-automation</text></g></a>
+        <a href="https://github.com/Mihirajmera/aws-compliance-as-code"><g class="chip"><rect x="236" y="366" width="188" height="28" rx="4"/><text x="330" y="385" text-anchor="middle">aws-compliance-as-code</text></g></a>
+        <a href="https://github.com/Mihirajmera/itgc-evidence-automation"><g class="chip"><rect x="458" y="366" width="204" height="28" rx="4"/><text x="560" y="385" text-anchor="middle">itgc-evidence-automation</text></g></a>
+        <a href="https://github.com/Mihirajmera/control-gap-analyzer"><g class="chip"><rect x="690" y="366" width="158" height="28" rx="4"/><text x="769" y="385" text-anchor="middle">control-gap-analyzer</text></g></a>
+        <a href="https://github.com/Mihirajmera/grc-risk-dashboard"><g class="chip"><rect x="854" y="366" width="140" height="28" rx="4"/><text x="924" y="385" text-anchor="middle">grc-risk-dashboard</text></g></a>
+      </svg>
+      <figcaption class="drawing-legend"><span>— data flow   - - - response action   ■ governing tool</span><span>SHEET 4 OF 4 · REV 2026.10</span></figcaption>
+    </figure>
+    <ol class="stack-list">
+      <li><strong>Network</strong><br><span class="muted"><a href="https://github.com/Mihirajmera/secure-vpc-architecture">secure-vpc-architecture</a>: segmented subnets with flow logs, as code.</span></li>
+      <li><strong>Identity</strong><br><span class="muted"><a href="https://github.com/Mihirajmera/iam-zero-trust-security">iam-zero-trust-security</a>: a least-privilege IAM baseline with automated monitoring and remediation.</span></li>
+      <li><strong>Detection and response</strong><br><span class="muted"><a href="https://github.com/Mihirajmera/guardduty-siem-automation">guardduty-siem-automation</a>: GuardDuty findings trigger automated quarantine and a findings dashboard.</span></li>
+      <li><strong>Evidence</strong><br><span class="muted"><a href="https://github.com/Mihirajmera/aws-compliance-as-code">aws-compliance-as-code</a> and <a href="https://github.com/Mihirajmera/itgc-evidence-automation">itgc-evidence-automation</a>: read-only checks and SOX ITGC evidence with hashes and OSCAL.</span></li>
+      <li><strong>Risk</strong><br><span class="muted"><a href="https://github.com/Mihirajmera/control-gap-analyzer">control-gap-analyzer</a> and <a href="https://github.com/Mihirajmera/grc-risk-dashboard">grc-risk-dashboard</a>: control gaps scored against NIST CSF 2.0, then tracked in a risk register.</span></li>
     </ol>
 
     <h2 class="section-title">WHAT EACH TOOL ANSWERS</h2>
