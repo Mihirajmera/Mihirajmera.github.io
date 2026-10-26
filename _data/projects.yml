@@ -33,6 +33,33 @@
   links:
     - {label: Sample assessment, url: "https://github.com/Mihirajmera/llm-redteam-evidence/blob/main/sample-output/v2/report.md"}
 
+- name: agent-flight-recorder
+  category: AI assurance
+  tool: true
+  summary: >-
+    A flight recorder for AI agents. Applies policy to every MCP tool call (allow, deny or hold for
+    a named human), records each call in a signed, hash-chained log, and turns the log into audit
+    evidence an auditor can re-perform.
+  tags: [NIST 800-53, SOC 2, ISO 42001, EU AI Act, OSCAL]
+  install: "pip install git+https://github.com/Mihirajmera/agent-flight-recorder
+afr demo"
+  repo: https://github.com/Mihirajmera/agent-flight-recorder
+  links:
+    - {label: Sample flight report, url: "https://github.com/Mihirajmera/agent-flight-recorder/blob/main/sample-output/evidence/flight-report.md"}
+
+- name: ai-gateway-audit
+  category: AI assurance
+  tool: true
+  summary: >-
+    Audits an AI gateway (LiteLLM) like the tier-0 system it is: provider keys, master key, prompts
+    in logs, spend caps and image pinning, checked against ten controls with hashed evidence and OSCAL.
+  tags: [NIST 800-53, SOC 2, OWASP LLM Top 10, OSCAL]
+  install: "pip install git+https://github.com/Mihirajmera/ai-gateway-audit
+ai-gateway-audit demo"
+  repo: https://github.com/Mihirajmera/ai-gateway-audit
+  links:
+    - {label: Sample audit, url: "https://github.com/Mihirajmera/ai-gateway-audit/blob/main/sample-output/gateway-audit.md"}
+
 - name: aws-compliance-as-code
   category: Compliance-as-code
   summary: Read-only AWS checks mapped once to NIST 800-53, SOC 2, ISO 27001 and CIS, with hashed evidence and OSCAL output.

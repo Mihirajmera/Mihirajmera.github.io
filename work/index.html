@@ -8,41 +8,90 @@ description: Open-source AI assurance tools, compliance-as-code and cloud securi
   <section class="wrap page-head">
     <p class="kicker">WORK · SHEET 1 OF 1</p>
     <h1>Where each tool sits in an AI system</h1>
-    <p>An AI agent is an identity with tokens, a model it trusts and servers it calls. Each tool governs one part of that system and produces evidence for it. Select a label to open the tool.</p>
+    <p>An AI agent is an identity with tokens, a gateway that holds its model keys, a model it trusts and servers it calls. Each tool governs one part of that system and leaves evidence an auditor can re-perform. Select a label to open the tool.</p>
   </section>
 
   <section class="wrap">
     <figure class="drawing">
-      <svg viewBox="0 0 1000 380" role="img" aria-labelledby="dt dd">
+      <svg viewBox="0 0 1000 420" role="img" aria-labelledby="dt dd">
         <title id="dt">Threat model of an AI agent system</title>
-        <desc id="dd">An AI agent connects to MCP servers and a model inside a trust boundary of third-party code and content. agent-access-review governs the agent-to-server link; llm-redteam-evidence governs the model.</desc>
-        <rect class="tb" x="390" y="30" width="580" height="290" rx="4"/>
-        <text class="tm" x="406" y="54">trust boundary: third-party code and content</text>
-        <rect class="bx" x="40" y="150" width="220" height="80" rx="4"/>
-        <text class="t" x="150" y="186" text-anchor="middle">AI agent</text>
-        <text class="ts" x="150" y="208" text-anchor="middle">identity, tokens, approvals</text>
-        <rect class="bx" x="440" y="80" width="230" height="70" rx="4"/>
-        <text class="t" x="555" y="111" text-anchor="middle">MCP servers</text>
-        <text class="ts" x="555" y="132" text-anchor="middle">filesystem, GitHub, Slack, shell</text>
-        <rect class="bx" x="440" y="230" width="230" height="70" rx="4"/>
-        <text class="t" x="555" y="261" text-anchor="middle">Model</text>
-        <text class="ts" x="555" y="282" text-anchor="middle">prompts, retrieved documents</text>
-        <rect class="bx" x="750" y="150" width="190" height="80" rx="4"/>
-        <text class="t" x="845" y="186" text-anchor="middle">Data and egress</text>
-        <text class="ts" x="845" y="208" text-anchor="middle">databases, web, email</text>
-        <path class="ln" d="M260 175 L440 115"/><path class="ln" d="M260 205 L440 265"/><path class="ln" d="M670 115 L750 175"/><path class="ln" d="M670 265 L750 205"/>
-        <a href="https://github.com/Mihirajmera/agent-access-review"><g class="chip"><rect x="262" y="104" width="170" height="28" rx="4"/><text x="347" y="123" text-anchor="middle">agent-access-review</text></g></a>
-        <a href="https://github.com/Mihirajmera/llm-redteam-evidence"><g class="chip"><rect x="262" y="250" width="178" height="28" rx="4"/><text x="351" y="269" text-anchor="middle">llm-redteam-evidence</text></g></a>
-        <text class="tm" x="680" y="146">AAR-09 exfiltration path</text>
-        <text class="tm" x="680" y="252">RT-02 indirect injection</text>
+        <desc id="dd">An AI agent calls MCP servers and, through an AI gateway, a hosted model; both sit inside a trust boundary of third-party code and content. agent-access-review governs what the agent can reach, agent-flight-recorder records what it did, ai-gateway-audit governs the gateway, and llm-redteam-evidence governs the model.</desc>
+        <rect class="tb" x="500" y="24" width="480" height="384" rx="4"/>
+        <text class="tm" x="516" y="46">trust boundary: third-party code and content</text>
+        <rect class="bx" x="30" y="170" width="200" height="84" rx="4"/>
+        <text class="t" x="130" y="205" text-anchor="middle">AI agent</text>
+        <text class="ts" x="130" y="228" text-anchor="middle">identity, tokens, approvals</text>
+        <rect class="bx" x="540" y="70" width="210" height="70" rx="4"/>
+        <text class="t" x="645" y="101" text-anchor="middle">MCP servers</text>
+        <text class="ts" x="645" y="122" text-anchor="middle">filesystem, GitHub, Slack, shell</text>
+        <rect class="bx" x="300" y="290" width="150" height="70" rx="4"/>
+        <text class="t" x="375" y="321" text-anchor="middle">AI gateway</text>
+        <text class="ts" x="375" y="342" text-anchor="middle">provider keys, logs, spend</text>
+        <rect class="bx" x="540" y="290" width="210" height="70" rx="4"/>
+        <text class="t" x="645" y="321" text-anchor="middle">Model</text>
+        <text class="ts" x="645" y="342" text-anchor="middle">prompts, retrieved documents</text>
+        <rect class="bx" x="800" y="172" width="160" height="84" rx="4"/>
+        <text class="t" x="880" y="207" text-anchor="middle">Data and egress</text>
+        <text class="ts" x="880" y="230" text-anchor="middle">databases, web, email</text>
+        <path class="ln" d="M230 190 L540 105"/><path class="ln" d="M230 235 L300 325"/><path class="ln" d="M450 325 L540 325"/><path class="ln" d="M750 105 L800 195"/><path class="ln" d="M750 325 L800 235"/>
+        <a href="https://github.com/Mihirajmera/agent-access-review"><g class="chip"><rect x="268" y="86" width="170" height="28" rx="4"/><text x="353" y="105" text-anchor="middle">agent-access-review</text></g></a>
+        <a href="https://github.com/Mihirajmera/agent-flight-recorder"><g class="chip"><rect x="290" y="186" width="180" height="28" rx="4"/><text x="380" y="205" text-anchor="middle">agent-flight-recorder</text></g></a>
+        <a href="https://github.com/Mihirajmera/ai-gateway-audit"><g class="chip"><rect x="300" y="370" width="150" height="28" rx="4"/><text x="375" y="389" text-anchor="middle">ai-gateway-audit</text></g></a>
+        <a href="https://github.com/Mihirajmera/llm-redteam-evidence"><g class="chip"><rect x="556" y="370" width="178" height="28" rx="4"/><text x="645" y="389" text-anchor="middle">llm-redteam-evidence</text></g></a>
+        <text class="tm" x="268" y="76">what can it do?</text>
+        <text class="tm" x="290" y="232">what did it do, who let it?</text>
+        <text class="tm" x="300" y="280">GWA-03 prompts in logs</text>
+        <text class="tm" x="760" y="160">AAR-09 exfiltration path</text>
+        <text class="tm" x="760" y="285">RT-02 indirect injection</text>
       </svg>
       <figcaption class="drawing-legend"><span>— data flow   - - - trust boundary   ■ governing tool</span><span>REV 2026.10 · M. AJMERA</span></figcaption>
     </figure>
     <ol class="stack-list">
-      <li><strong>AI agent → MCP servers</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/agent-access-review">agent-access-review</a>: who owns the agent, what it can reach, and whether that's approved.</span></li>
-      <li><strong>AI agent → Model</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/llm-redteam-evidence">llm-redteam-evidence</a>: can the model be hijacked, and is this release worse than the last?</span></li>
-      <li><strong>Data and egress</strong><br><span class="muted">Where both meet: an agent that reads sensitive data and can send it out is flagged as an exfiltration path.</span></li>
+      <li><strong>AI agent → MCP servers, before it runs</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/agent-access-review">agent-access-review</a>: who owns the agent, what it can reach, and whether that's approved.</span></li>
+      <li><strong>AI agent → MCP servers, while it runs</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/agent-flight-recorder">agent-flight-recorder</a>: policy on every tool call, a human approval for risky ones, and a signed record of what it actually did.</span></li>
+      <li><strong>AI agent → AI gateway</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/ai-gateway-audit">ai-gateway-audit</a>: the gateway holds every provider key and often every prompt, so it's audited like a tier-0 system.</span></li>
+      <li><strong>Gateway → Model</strong><br><span class="muted">Governed by <a href="https://github.com/Mihirajmera/llm-redteam-evidence">llm-redteam-evidence</a>: can the model be hijacked, and is this release worse than the last?</span></li>
+      <li><strong>Data and egress</strong><br><span class="muted">Where everything meets: an agent that reads sensitive data and can send it out is flagged as an exfiltration path.</span></li>
     </ol>
+
+    <h2 class="section-title">WHAT EACH TOOL ANSWERS</h2>
+    <div class="table-wrap">
+      <table class="matrix">
+        <thead><tr><th>The question an auditor asks</th><th>Tool</th><th>When it runs</th><th>Evidence it leaves</th></tr></thead>
+        <tbody>
+          <tr><td>What can this agent reach, and who approved it?</td><td><a href="https://github.com/Mihirajmera/agent-access-review">agent-access-review</a></td><td>Before deployment, then every quarter</td><td>Access review packet, exceptions with an expiry date, OSCAL</td></tr>
+          <tr><td>What did the agent actually do, and who let it?</td><td><a href="https://github.com/Mihirajmera/agent-flight-recorder">agent-flight-recorder</a></td><td>At runtime, on every tool call</td><td>Signed hash-chained log, re-performed approvals, OSCAL</td></tr>
+          <tr><td>Is the gateway that holds every provider key configured like a tier-0 system?</td><td><a href="https://github.com/Mihirajmera/ai-gateway-audit">ai-gateway-audit</a></td><td>In CI, on every config change</td><td>Findings sheet, hashed evidence, OSCAL</td></tr>
+          <tr><td>Can the model be hijacked, and is this release worse than the last?</td><td><a href="https://github.com/Mihirajmera/llm-redteam-evidence">llm-redteam-evidence</a></td><td>Before each model release</td><td>Results with 95% confidence bounds, release gate, OSCAL</td></tr>
+          <tr><td>Is the cloud account underneath configured to baseline?</td><td><a href="https://github.com/Mihirajmera/aws-compliance-as-code">aws-compliance-as-code</a></td><td>On a schedule, read-only</td><td>Hashed evidence, OSCAL</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title">FRAMEWORK COVERAGE</h2>
+    <div class="table-wrap">
+      <table class="matrix coverage">
+        <thead><tr><th>Tool</th><th>NIST 800-53</th><th>SOC 2</th><th>ISO 27001</th><th>ISO 42001</th><th>EU AI Act</th><th>NIST AI RMF</th><th>OWASP LLM</th><th>MITRE ATLAS</th></tr></thead>
+        <tbody>
+          <tr><td>agent-access-review</td><td>●</td><td>●</td><td></td><td></td><td></td><td>●</td><td>●</td><td></td></tr>
+          <tr><td>agent-flight-recorder</td><td>●</td><td>●</td><td></td><td>●</td><td>●</td><td></td><td></td><td></td></tr>
+          <tr><td>ai-gateway-audit</td><td>●</td><td>●</td><td></td><td></td><td></td><td></td><td>●</td><td></td></tr>
+          <tr><td>llm-redteam-evidence</td><td></td><td></td><td></td><td></td><td></td><td>●</td><td>●</td><td>●</td></tr>
+          <tr><td>aws-compliance-as-code</td><td>●</td><td>●</td><td>●</td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted small-note">Each mapping lives in the tool's control catalog. They're my judgment, not an official crosswalk, and an EU AI Act mapping means the evidence is relevant to that article, not that a system complies with it.</p>
+
+    <h2 class="section-title">THE SAME EVIDENCE CONTRACT IN EVERY TOOL</h2>
+    <ul class="contract">
+      <li><strong>Re-performable</strong><span>Every result can be recomputed from its inputs, and every evidence file carries a SHA-256 hash.</span></li>
+      <li><strong>No false passes</strong><span>Anything a tool can't see is reported as not assessed or needing outside evidence, never as passed.</span></li>
+      <li><strong>Risk acceptance expires</strong><span>Where a tool accepts an exception, it needs an owner, a reason and an expiry date. Expired exceptions reopen the finding.</span></li>
+      <li><strong>Machine-readable</strong><span>OSCAL assessment results for GRC platforms, and a <code>--fail-on</code> gate for CI.</span></li>
+      <li><strong>Reproducible</strong><span>Same input, same bytes. CI fails if the committed sample output drifts from what the code produces.</span></li>
+      <li><strong>Secured like production</strong><span>Hash-pinned dependencies, SHA-pinned Actions, CodeQL, OpenSSF Scorecard, fuzzing and SLSA level 3 release provenance.</span></li>
+    </ul>
 
     <h2 class="section-title">CASE STUDIES</h2>
     <ul class="index">
@@ -72,7 +121,7 @@ description: Open-source AI assurance tools, compliance-as-code and cloud securi
 
     <h2 class="section-title">TOOLS</h2>
     <div class="tools">
-      {% for p in site.data.projects %}{% if p.flagship %}
+      {% for p in site.data.projects %}{% if p.flagship or p.tool %}
       <article class="tool">
         <h3>{{ p.name }}</h3>
         <p>{{ p.summary }}</p>
@@ -84,7 +133,7 @@ description: Open-source AI assurance tools, compliance-as-code and cloud securi
 
     <h2 class="section-title">COMPLIANCE-AS-CODE, CLOUD AND PRODUCT</h2>
     <ul class="index">
-      {% for p in site.data.projects %}{% unless p.flagship %}
+      {% for p in site.data.projects %}{% unless p.flagship or p.tool %}
       <li><a href="{{ p.repo }}">{{ p.name }}</a><span class="muted">{{ p.summary }}</span><span>{{ p.tags | join: ' · ' }}</span></li>
       {% endunless %}{% endfor %}
     </ul>

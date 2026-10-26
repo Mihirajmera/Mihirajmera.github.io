@@ -505,3 +505,19 @@ dialog.verify[open] { animation: slide-in 260ms cubic-bezier(.3,.7,.2,1); }
   .case-list a { grid-template-columns: minmax(0, 1fr); grid-template-areas: "when" "title" "desc" "nums"; }
   .factsheet > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
 }
+
+/* work page: question table, coverage matrix, evidence contract */
+.matrix { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.45; margin-bottom: 20px; }
+.matrix th { text-align: left; font: 500 11.5px var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border-bottom: 1.5px solid var(--rule-strong); padding: 8px 12px 8px 0; vertical-align: bottom; }
+.matrix td { border-bottom: 1px solid var(--rule); padding: 10px 12px 10px 0; vertical-align: top; color: var(--ink-2); }
+.matrix td a { font-family: var(--mono); font-size: 13px; white-space: nowrap; }
+.matrix.coverage th:not(:first-child), .matrix.coverage td:not(:first-child) { text-align: center; padding-left: 6px; padding-right: 6px; }
+.matrix.coverage td:first-child { font-family: var(--mono); font-size: 13px; color: var(--ink); white-space: nowrap; }
+.matrix.coverage td:not(:first-child) { color: var(--red); }
+.small-note { font-size: 13px; margin: 0 0 56px; max-width: 760px; }
+.contract { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 28px; border-top: 1.5px solid var(--rule-strong); margin: 0 0 72px; padding: 0; }
+.contract li { padding: 14px 0; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 4px; }
+.contract strong { font-weight: 600; }
+.contract span { color: var(--ink-2); font-size: 14px; }
+.contract code { font-family: var(--mono); font-size: 12.5px; }
+@media (max-width: 860px) { .contract { grid-template-columns: minmax(0, 1fr); } }

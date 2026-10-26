@@ -1,5 +1,21 @@
 # Ledger entries that aren't blog posts (posts are added automatically).
 # status: block | review | fixed | release | note. kind (for filters): research | release | fix | writing.
+- date: 2026-10-26
+  title: Shipped agent-flight-recorder
+  summary: Policy on every MCP tool call, a signed hash-chained log, and evidence that re-checks every approval. Its own fuzz pass found crashes on malformed logs; fixed before release.
+  url: https://github.com/Mihirajmera/agent-flight-recorder
+  status: release
+  kind: release
+  hash: caa6ab3
+  hash_url: https://github.com/Mihirajmera/agent-flight-recorder/commit/caa6ab3
+- date: 2026-10-26
+  title: Shipped ai-gateway-audit
+  summary: Ten tier-0 checks for LiteLLM gateways, written after the October 21 LiteLLM compromise.
+  url: https://github.com/Mihirajmera/ai-gateway-audit
+  status: release
+  kind: release
+  hash: 16fb483
+  hash_url: https://github.com/Mihirajmera/ai-gateway-audit/commit/16fb483
 - date: 2026-10-21
   title: Published aws-compliance-as-code 1.1.0 to PyPI
   summary: Read-only AWS checks with hashed evidence and OSCAL, plus a demo against a misconfigured fake account.
