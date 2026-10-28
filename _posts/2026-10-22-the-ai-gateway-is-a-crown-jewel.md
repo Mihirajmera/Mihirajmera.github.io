@@ -64,6 +64,8 @@ The source code was never modified; the `v1.107.0` git tag is clean. The attacke
 
 **The payload ran without anyone importing LiteLLM.** A `cook.pth` file in site-packages executes on every Python start, pip included. It ran a credential stealer covering 16 categories, including cloud credentials, SSH and GPG keys, browser passwords, CI secrets, the environment of every readable process, and AI coding tool configs. It also planted an hourly loader designed to fetch and run new code.
 
+> **Update, October 28:** LiteLLM's [attack-chain post](https://docs.litellm.ai/blog/security-incident-oct-21-2026-attack-chain) ruled out the log theory below. The first token came from a master key leaked in May and never revoked. I've written up the corrected root cause in [Deleting the commit didn't revoke the key](/blog/deleting-the-commit-didnt-revoke-the-key/).
+
 **How the attacker got the credentials** is still under investigation. LiteLLM's report describes an unexpected user account on an internet-exposed internal LiteLLM deployment, and says that GitHub CLI tokens could appear in that deployment's logs because response bodies were logged. It hasn't confirmed how the attacker got into the deployment.
 
 This was LiteLLM's second compromise in seven months; in March, according to Chainguard, a stolen PyPI token was used to publish two malicious versions.
