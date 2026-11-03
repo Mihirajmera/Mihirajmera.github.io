@@ -79,7 +79,7 @@ def main(args):
 
     url = f'{SITE}/blog/{slug}/'
     post = (meta.get('linkedin') or meta.get('description', '')).strip()
-    (ROOT / 'linkedin-out' / f'{slug}.txt').write_text(f'{post}\n\n---\nFirst comment:\n{url}\n', encoding='utf-8')
+    (ROOT / 'linkedin-out' / f'{slug}.txt').write_text(f'{post}\n\n---\nFirst comment:\n{url}?utm_source=linkedin\n', encoding='utf-8')
     print(f'post:     {dest.relative_to(ROOT)}\nimage:    linkedin-out/{slug}.png\nlinkedin: linkedin-out/{slug}.txt\nurl:      {url}')
 
 
