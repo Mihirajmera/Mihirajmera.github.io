@@ -43,6 +43,7 @@ linkedin: |
 
   #AIGovernance #AgenticAI #GRC #RiskManagement #CyberSecurity
 image: /assets/img/posts/a-regulator-just-wrote-the-audit-program-for-ai-agents.png
+tools: [agent-access-review, agent-flight-recorder]
 ---
 
 Yesterday the Hong Kong Monetary Authority launched Project SAGE, a program for banks to trial AI agents in payments and treasury, and alongside it published a [discussion paper on agentic AI governance in banking](https://www.hkma.gov.hk/media/eng/doc/key-information/press-release/2026/20261102e3a1.pdf).

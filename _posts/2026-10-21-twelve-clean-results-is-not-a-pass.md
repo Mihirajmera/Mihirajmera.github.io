@@ -27,6 +27,7 @@ linkedin: |
 
   #AIGovernance #AISecurity #GRC #RedTeaming
 image: /assets/img/posts/twelve-clean-results-is-not-a-pass.png
+tools: [llm-redteam-evidence]
 ---
 
 In my red-team of Llama 3.2 3B, the model resisted all 12 markdown-image exfiltration attempts. Not one leaked data. A dashboard would show that control as green.

@@ -20,6 +20,13 @@ layout: default
   </header>
   <div class="post prose" style="padding-top:8px">
 {{ content }}
+  {% for name in page.tools %}{% assign t = site.data.tools[name] %}{% if t %}
+  <aside class="runit">
+    <div class="runit-head"><span class="mono">Run this test yourself</span><a class="mono" href="{{ t.url }}">{{ name }} on GitHub →</a></div>
+    <p>{{ t.pitch }}</p>
+    <pre>{{ t.run | strip }}</pre>
+  </aside>
+  {% endif %}{% endfor %}
   </div>
   <p class="byline">Mihir Ajmera is a GRC engineer building open-source tools for AI assurance. <a href="https://www.linkedin.com/in/mihirajmera1/">Follow on LinkedIn</a> · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
   {% if page.previous or page.next %}

@@ -1,0 +1,25 @@
+# Open-source tools a post can point readers to with `tools: [name]` in its front matter.
+agent-access-review:
+  pitch: Run a user access review on your own AI agents and MCP servers. It flags unowned agents, stale approvals, over-broad scopes, plaintext secrets and exfiltration paths, and writes an auditor-ready packet.
+  run: |
+    pip install agent-access-review
+    agent-access-review demo
+  url: https://github.com/Mihirajmera/agent-access-review
+llm-redteam-evidence:
+  pitch: Turn garak or promptfoo results into audit evidence, with a risk tolerance and confidence bound per control and a release gate that blocks a model easier to attack than the approved one.
+  run: |
+    pip install llm-redteam-evidence
+    redteam-evidence demo
+  url: https://github.com/Mihirajmera/llm-redteam-evidence
+ai-gateway-audit:
+  pitch: Audit a LiteLLM gateway configuration against tier-0 controls, with hashed evidence and OSCAL output.
+  run: |
+    pip install git+https://github.com/Mihirajmera/ai-gateway-audit
+    ai-gateway-audit demo
+  url: https://github.com/Mihirajmera/ai-gateway-audit
+agent-flight-recorder:
+  pitch: Put a policy check on every MCP tool call and keep a signed, hash-chained log of what each agent did, so any action can be traced to its authority.
+  run: |
+    pip install git+https://github.com/Mihirajmera/agent-flight-recorder
+    afr demo
+  url: https://github.com/Mihirajmera/agent-flight-recorder

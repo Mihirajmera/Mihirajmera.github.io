@@ -34,6 +34,7 @@ figures:
   - {n: "7/9", label: "grant write, send, delete or execute", tone: amber}
   - {n: "1", label: "exfiltration path once they're combined", tone: red}
 image: /assets/img/posts/what-mcp-readmes-teach-you-to-copy.png
+tools: [agent-access-review]
 ---
 
 Most companies recertify employee access every quarter. Someone opens a spreadsheet, looks at who can reach what, and signs off. AI agents now hold GitHub tokens, database connections, shells and Slack bots, and almost nobody reviews them at all.

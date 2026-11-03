@@ -14,6 +14,7 @@ figures:
   - {n: "44%", label: "of hidden-document instructions hijacked the model", tone: red}
   - {n: "2/3", label: "AutoDAN scores wrong on hand review", tone: amber}
 image: /assets/img/posts/auditing-the-red-team.png
+tools: [llm-redteam-evidence]
 ---
 
 Most AI security reports stop at a score: *the model was jailbroken 12% of the time.* That's useful to an engineer. It isn't enough for an auditor, a risk committee or anyone who has to sign off on shipping a model. They need to know what was tested, against which control, how confident we are in the number, and whether the number survives someone checking it.

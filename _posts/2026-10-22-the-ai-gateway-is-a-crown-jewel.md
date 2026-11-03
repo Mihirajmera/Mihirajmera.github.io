@@ -34,6 +34,7 @@ linkedin: |
 
   #AISecurity #SupplyChainSecurity #AIGovernance #GRC #CyberSecurity
 image: /assets/img/posts/the-ai-gateway-is-a-crown-jewel.png
+tools: [ai-gateway-audit]
 ---
 
 For roughly two hours on October 21, installing the official release of [LiteLLM](https://github.com/BerriAI/litellm), one of the most widely used AI gateways, gave an attacker your cloud credentials, your SSH keys and, if you ran the proxy, the API keys for every model provider your company uses.

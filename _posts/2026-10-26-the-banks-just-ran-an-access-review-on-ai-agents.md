@@ -32,6 +32,7 @@ linkedin: |
 
   #AIGovernance #AIAgents #IdentitySecurity #GRC #CyberSecurity
 image: /assets/img/posts/the-banks-just-ran-an-access-review-on-ai-agents.png
+tools: [agent-access-review]
 ---
 
 Over the past week, the largest banks in the United States have quietly started turning AI agents away at the door.
