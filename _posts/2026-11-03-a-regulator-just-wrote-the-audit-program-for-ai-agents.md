@@ -13,6 +13,15 @@ figures:
   - {n: "1", label: "named accountable owner per agent deployment, from the business, not IT", tone: amber}
   - {n: "5", label: "agent failures the HKMA asks whether to treat as reportable incidents", tone: red}
   - {n: "Feb 1", label: "2027 deadline for comments on the paper"}
+diagram:
+  type: flow
+  caption: agent control path, as proposed by the HKMA
+  steps:
+    - {id: C-01, label: Business intent, sub: "scope, data, limits — written before production", test: "is it written down?", state: info}
+    - {id: C-02, label: Named owner, sub: "business owner, not the build team", test: "who answers for it?", state: warn}
+    - {id: C-03, label: Harness, sub: "least privilege · deterministic checks · no runtime self-extension", test: "approved = actual access?", state: warn}
+    - {id: C-04, label: Human approval, sub: "sees substance · has time · can reject", test: "reject rate > 0?", state: fail}
+    - {id: C-05, label: Stop + trace, sub: "kill switch rehearsed · one identity per agent", test: "last stop drill?", state: warn}
 linkedin: |
   Yesterday, Hong Kong's banking regulator published a 57-page discussion paper on governing AI agents in banks.
 
