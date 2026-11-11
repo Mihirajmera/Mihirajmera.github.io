@@ -1,6 +1,12 @@
 # Ledger entries that aren't blog posts (posts are added automatically).
 # status: block | review | fixed | release | note. kind (for filters): research | release | fix | writing.
 - date: 2026-11-11
+  title: Shipped ai-assurance-demo
+  summary: Three tools on one agent (configuration, runtime log, model gateway) merged into one OSCAL bundle. The combined view catches what no single layer can, such as an owner approving her own agent's action.
+  url: https://github.com/Mihirajmera/ai-assurance-demo
+  status: release
+  kind: release
+- date: 2026-11-11
   title: Released agent-access-review 0.3.0 with AAR-13
   summary: Flags MCP servers that are archived or deprecated upstream and names the maintained replacement. Found while reviewing 2,830 public configs.
   url: https://github.com/Mihirajmera/agent-access-review/releases/tag/v0.3.0
