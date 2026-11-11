@@ -36,8 +36,8 @@
 - n: "2"
   unit: "/3"
   what: AutoDAN jailbreak scores were wrong when I re-performed them by hand.
-  src: read the review
-  url: /blog/auditing-the-red-team/
+  src: open the evidence
+  url: https://github.com/Mihirajmera/llm-redteam-evidence/blob/main/case-studies/llama3.2-3b-garak/assessment/evidence/RT-03.json
   tone: amber
   span: 4
   verify:
