@@ -1,6 +1,6 @@
 # Ledger entries that aren't blog posts (posts are added automatically).
 # status: block | review | fixed | release | note. kind (for filters): research | release | fix | writing.
-- date: 2026-11-12
+- date: 2026-11-11
   title: Shipped ai-assurance-demo
   summary: Three tools on one agent (configuration, runtime log, model gateway) merged into one OSCAL bundle. The combined view catches what no single layer can, such as an owner approving her own agent's action.
   url: https://github.com/Mihirajmera/ai-assurance-demo
