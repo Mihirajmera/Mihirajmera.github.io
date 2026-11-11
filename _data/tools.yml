@@ -14,12 +14,12 @@ llm-redteam-evidence:
 ai-gateway-audit:
   pitch: Audit a LiteLLM gateway configuration against tier-0 controls, with hashed evidence and OSCAL output.
   run: |
-    pip install git+https://github.com/Mihirajmera/ai-gateway-audit
+    pip install ai-gateway-audit
     ai-gateway-audit demo
   url: https://github.com/Mihirajmera/ai-gateway-audit
 agent-flight-recorder:
   pitch: Put a policy check on every MCP tool call and keep a signed, hash-chained log of what each agent did, so any action can be traced to its authority.
   run: |
-    pip install git+https://github.com/Mihirajmera/agent-flight-recorder
+    pip install multiagent-flight-recorder
     afr demo
   url: https://github.com/Mihirajmera/agent-flight-recorder

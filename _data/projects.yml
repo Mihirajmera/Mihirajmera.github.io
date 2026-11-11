@@ -41,7 +41,7 @@
     a named human), records each call in a signed, hash-chained log, and turns the log into audit
     evidence an auditor can re-perform.
   tags: [NIST 800-53, SOC 2, ISO 42001, EU AI Act, OSCAL]
-  install: "pip install git+https://github.com/Mihirajmera/agent-flight-recorder
+  install: "pip install multiagent-flight-recorder
 afr demo"
   repo: https://github.com/Mihirajmera/agent-flight-recorder
   links:
@@ -52,9 +52,9 @@ afr demo"
   tool: true
   summary: >-
     Audits an AI gateway (LiteLLM) like the tier-0 system it is: provider keys, master key, prompts
-    in logs, spend caps and image pinning, checked against ten controls with hashed evidence and OSCAL.
+    in logs, spend caps and image pinning, checked against eleven controls, including known LiteLLM advisories, with hashed evidence and OSCAL.
   tags: [NIST 800-53, SOC 2, OWASP LLM Top 10, OSCAL]
-  install: "pip install git+https://github.com/Mihirajmera/ai-gateway-audit
+  install: "pip install ai-gateway-audit
 ai-gateway-audit demo"
   repo: https://github.com/Mihirajmera/ai-gateway-audit
   links:
