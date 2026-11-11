@@ -60,6 +60,20 @@ ai-gateway-audit demo"
   links:
     - {label: Sample audit, url: "https://github.com/Mihirajmera/ai-gateway-audit/blob/main/sample-output/gateway-audit.md"}
 
+- name: ai-assurance-demo
+  category: AI assurance
+  tool: true
+  summary: >-
+    One AI agent assessed end to end: its configuration (agent-access-review), its signed runtime
+    log (multiagent-flight-recorder) and its model gateway (ai-gateway-audit), merged into one OSCAL
+    bundle that rolls 31 NIST 800-53 controls up across the three layers.
+  tags: [NIST 800-53, OSCAL, MCP, LiteLLM]
+  install: "pip install -r requirements.txt
+python assure.py"
+  repo: https://github.com/Mihirajmera/ai-assurance-demo
+  links:
+    - {label: Combined report, url: "https://github.com/Mihirajmera/ai-assurance-demo/blob/main/sample-output/assurance-report.md"}
+
 - name: aws-compliance-as-code
   category: Compliance-as-code
   summary: Read-only AWS checks mapped once to NIST 800-53, SOC 2, ISO 27001 and CIS, with hashed evidence and OSCAL output.
