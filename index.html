@@ -35,7 +35,7 @@ description: GRC engineer proving that AI systems can be governed with the same 
       </div>
       {% endif %}{% endfor %}
       <div class="facts">
-        <span><b data-score="agent-access-review">–</b> / <b data-score="llm-redteam-evidence">–</b> Scorecard</span>
+        <span><b data-score="agent-access-review">7.8</b> / <b data-score="llm-redteam-evidence">7.6</b> Scorecard</span>
         <span><b>98</b> tests</span>
         <span><b>SLSA L3</b> provenance</span>
         <span><b>PyPI</b> trusted publishing</span>
@@ -80,10 +80,9 @@ description: GRC engineer proving that AI systems can be governed with the same 
   <section class="wrap traction" data-repos="agent-access-review,llm-redteam-evidence" aria-labelledby="traction-h">
     <h2 id="traction-h" class="section-title">TRACTION · LIVE</h2>
     <div class="traction-grid">
-      <a href="https://pypistats.org/packages/llm-redteam-evidence"><b data-live="downloads">–</b><span>PyPI downloads this week, both tools</span></a>
-      <a href="https://github.com/Mihirajmera/agent-access-review/pulls?q=is%3Apr+-author%3AMihirajmera+-author%3Aapp%2Fdependabot"><b data-live="contributors">–</b><span>outside contributors so far</span></a>
-      <a href="https://github.com/Mihirajmera/llm-redteam-evidence/pulls?q=is%3Apr+-author%3AMihirajmera+-author%3Aapp%2Fdependabot"><b data-live="prs">–</b><span>community pull requests to the tools</span></a>
-      <a href="https://github.com/pulls?q=is%3Apr+author%3AMihirajmera+awesome"><b>7</b><span>curated security lists reviewing a submission</span></a>
+      <a href="https://pypistats.org/packages/llm-redteam-evidence"><b data-live="downloads">60</b><span>PyPI downloads this week, both tools</span></a>
+      <a href="https://pypi.org/user/Mihirajmera/"><b>5</b><span>tools published on PyPI with trusted publishing</span></a>
+      <a href="{{ '/case-studies/public-mcp-configs/' | relative_url }}"><b>2,830</b><span>public MCP configs reviewed with my own tool</span></a>
     </div>
   </section>
 
@@ -99,14 +98,18 @@ description: GRC engineer proving that AI systems can be governed with the same 
       </div>
     </div>
     <ol class="ledger" data-sort="date">
-      {% for post in site.posts %}
+      {%- comment -%} Merge posts and ledger data into one newest-first list at build time, so the order is right without JavaScript. {%- endcomment -%}
+      {%- capture keys -%}{%- for post in site.posts -%}{{ post.date | date: '%Y-%m-%d' }}~p~{{ forloop.index0 | prepend: '0000' | slice: -4, 4 }}^{%- endfor -%}{%- for e in site.data.ledger -%}{{ e.date | date: '%Y-%m-%d' }}~l~{{ forloop.index0 | prepend: '0000' | slice: -4, 4 }}^{%- endfor -%}{%- endcapture -%}
+      {%- assign keys = keys | split: '^' | sort | reverse -%}
+      {% for key in keys %}{% assign parts = key | strip | split: '~' %}{% if parts.size == 3 %}{% assign i = parts[2] | plus: 0 %}
+        {% if parts[1] == 'p' %}{% assign post = site.posts[i] %}
         {% assign k = 'writing' %}{% if post.research %}{% assign k = 'writing research' %}{% endif %}
         {% assign st = post.status %}{% unless st %}{% assign st = post.kind %}{% endunless %}
         {% include ledger-entry.html date=post.date url=post.url title=post.title summary=post.description status=st kind=k hash=post.evidence.hash hash_url=post.evidence.url %}
-      {% endfor %}
-      {% for e in site.data.ledger %}
+        {% else %}{% assign e = site.data.ledger[i] %}
         {% include ledger-entry.html date=e.date url=e.url title=e.title summary=e.summary status=e.status kind=e.kind hash=e.hash hash_url=e.hash_url %}
-      {% endfor %}
+        {% endif %}
+      {% endif %}{% endfor %}
     </ol>
   </section>
 </main>

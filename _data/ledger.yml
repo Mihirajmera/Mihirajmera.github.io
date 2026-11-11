@@ -1,5 +1,17 @@
 # Ledger entries that aren't blog posts (posts are added automatically).
 # status: block | review | fixed | release | note. kind (for filters): research | release | fix | writing.
+- date: 2026-11-11
+  title: Released agent-access-review 0.3.0 with AAR-13
+  summary: Flags MCP servers that are archived or deprecated upstream and names the maintained replacement. Found while reviewing 2,830 public configs.
+  url: https://github.com/Mihirajmera/agent-access-review/releases/tag/v0.3.0
+  status: release
+  kind: release
+- date: 2026-11-11
+  title: Published multiagent-flight-recorder and ai-gateway-audit to PyPI
+  summary: Both install with pip and publish through trusted publishing. The flight recorder now proxies remote (Streamable HTTP) MCP servers too.
+  url: https://pypi.org/project/multiagent-flight-recorder/
+  status: release
+  kind: release
 - date: 2026-10-26
   title: Shipped agent-flight-recorder
   summary: Policy on every MCP tool call, a signed hash-chained log, and evidence that re-checks every approval. Its own fuzz pass found crashes on malformed logs; fixed before release.
