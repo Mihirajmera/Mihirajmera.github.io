@@ -131,9 +131,10 @@ def _terminal(spec, big):
         k = cls.get(ln[:1], '')
         lines.append(f'<span class="{k}">{e(ln)}</span>')
     title = e(str(spec.get('title', 'bash')))
+    n = sum(1 for l in spec.get('lines', []) if str(l)[:1] == '!')
     return (f'<div class="term"><div class="bar"><i></i><i></i><i></i><span style="margin-left:8px">{title}</span></div>'
             f'<pre>{"".join(lines)}</pre>'
-            f'<div class="st"><span>{e(str(spec.get("note", "")))}</span><b>{sum(1 for l in spec.get("lines", []) if str(l)[:1] == "!")} findings</b></div></div>')
+            f'<div class="st"><span>{e(str(spec.get("note", "")))}</span><b>{n} finding{"" if n == 1 else "s"}</b></div></div>')
 
 
 def _readout(meta, big):
