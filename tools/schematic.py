@@ -148,6 +148,9 @@ def _readout(meta, big):
 
 def page(meta, w, h, date):
     big = w < h
+    if big:  # the LinkedIn feed image uses the rotating print editions; link previews keep the schematic
+        import editions
+        return editions.page(meta, w, h, date, _spec(meta))
     spec = _spec(meta)
     kind = spec.get('type', 'flow')
     n = len(meta['title'])
