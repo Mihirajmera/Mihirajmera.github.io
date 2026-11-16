@@ -19,6 +19,7 @@ layout: default
     {% endif %}
   </header>
   <div class="post prose" style="padding-top:8px">
+{% if page.diagram %}{% include diagram.html d=page.diagram %}{% endif %}
 {{ content }}
   {% for name in page.tools %}{% assign t = site.data.tools[name] %}{% if t %}
   <aside class="runit">
@@ -37,3 +38,4 @@ layout: default
   {% endif %}
 </article>
 </main>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"{{ site.url }}/#person","name":"Mihir Ajmera","url":"{{ site.url }}/","jobTitle":"GRC Engineer","sameAs":{{ site.social.links | jsonify }},"knowsAbout":["AI assurance","AI governance","GRC engineering","Model Context Protocol security","LLM red teaming","OSCAL","Compliance as code"]}</script>
