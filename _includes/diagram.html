@@ -1,0 +1,14 @@
+{%- comment -%} The post's `diagram:` front matter (the same spec that draws the share images), drawn as an animated figure. {%- endcomment -%}
+{%- assign d = include.d -%}
+{%- assign badge = 'ok:Pass,fail:Fail,warn:Open' | split: ',' -%}
+<figure class="dgm dgm-{{ d.type | default: 'flow' }}">
+{%- case d.type -%}
+{%- when 'terminal' %}
+  <div class="dgm-term"><div class="dgm-bar mono">{{ d.title | default: 'terminal' | escape }}</div><pre>{% for l in d.lines %}{% assign c = l | slice: 0 %}<span class="ln{% case c %}{% when '$' %} p{% when '!' %} f{% when '+' %} o{% when '#' %} c{% endcase %}" style="--i:{{ forloop.index0 }}">{{ l | escape }}</span>{% endfor %}</pre></div>
+{%- when 'timeline' %}
+  <ol class="dgm-steps">{% for v in d.events %}<li class="{{ v.state | default: 'info' }}" style="--i:{{ forloop.index0 }}"><span class="dgm-id mono">{{ v.t | escape }}</span><div><b>{{ v.label | escape }}</b>{% if v.gap %}<span class="dgm-gap mono">{{ v.gap | escape }}</span>{% endif %}</div></li>{% endfor %}</ol>
+{%- else %}
+  <ol class="dgm-steps">{% for s in d.steps %}<li class="{{ s.state | default: 'info' }}" style="--i:{{ forloop.index0 }}"><span class="dgm-id mono">{{ s.id | escape }}</span><div><b>{{ s.label | escape }}</b>{% if s.sub %}<span class="dgm-sub">{{ s.sub | escape }}</span>{% endif %}</div>{% if s.test %}<span class="dgm-test">{% for b in badge %}{% assign kv = b | split: ':' %}{% if kv[0] == s.state %}<i>{{ kv[1] }}</i>{% endif %}{% endfor %}{{ s.test | escape }}</span>{% endif %}</li>{% endfor %}</ol>
+{%- endcase %}
+  {% if d.caption or d.note %}<figcaption>{{ d.caption | escape }}{% if d.caption and d.note %} · {% endif %}{{ d.note | escape }}</figcaption>{% endif %}
+</figure>

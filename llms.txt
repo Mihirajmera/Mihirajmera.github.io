@@ -1,0 +1,26 @@
+---
+layout: null
+permalink: /llms.txt
+---
+# Mihir Ajmera
+
+> {{ site.description | strip_newlines | strip }}
+
+Mihir Ajmera is a GRC engineer. He writes about AI assurance: governing AI agents, MCP servers, LLM red-team results and AI gateways with audit-grade evidence, and he maintains open-source tools that produce that evidence (hashed evidence files, OSCAL assessment results, reviewer sign-off packets). Every post links to the data, commit or case study behind its numbers.
+
+- Website: {{ site.url }}/
+- GitHub: https://github.com/Mihirajmera
+- LinkedIn: https://www.linkedin.com/in/mihirajmera1/
+- RSS: {{ site.url }}/feed.xml
+
+## Open-source tools
+{% for t in site.data.tools %}
+- [{{ t[0] }}]({{ t[1].url }}): {{ t[1].pitch }}{% endfor %}
+
+## Case studies
+{% for c in site.case_studies %}
+- [{{ c.title }}]({{ site.url }}{{ c.url }}){% if c.description %}: {{ c.description | strip_newlines }}{% endif %}{% endfor %}
+
+## Writing
+{% for p in site.posts %}
+- [{{ p.title }}]({{ site.url }}{{ p.url }}) ({{ p.date | date: '%Y-%m-%d' }}){% if p.description %}: {{ p.description | strip_newlines }}{% endif %}{% endfor %}

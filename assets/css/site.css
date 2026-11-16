@@ -531,3 +531,26 @@ dialog.verify[open] { animation: slide-in 260ms cubic-bezier(.3,.7,.2,1); }
 .runit p { margin: 10px 0 12px; font-size: 15px; }
 .prose .runit pre { margin: 0; }
 .runit + .runit { margin-top: 16px; }
+
+/* Post diagrams: the `diagram:` front matter drawn in the page, revealed step by step. */
+.dgm { margin: 1.6em 0 2em !important; }
+.dgm figcaption { margin-top: 10px; font-size: 13px; color: var(--muted); font-family: var(--mono); }
+.dgm-steps { list-style: none; margin: 0 !important; padding: 0 !important; border-top: 1.5px solid var(--rule-strong); }
+.dgm-steps li { --c: var(--faint); display: grid; grid-template-columns: 76px minmax(0, 1fr) minmax(0, 220px); gap: 6px 14px; align-items: start; margin: 0 !important; padding: 12px 0 12px 12px; border-bottom: 1px solid var(--rule); border-left: 3px solid var(--c); font-family: var(--sans); animation: dgm-in .45s ease both; animation-delay: calc(var(--i) * 220ms + 150ms); }
+.dgm-steps li.ok { --c: var(--green); } .dgm-steps li.warn { --c: var(--amber); } .dgm-steps li.fail { --c: var(--red); }
+.dgm-id { font-size: 12px; color: var(--muted); padding-top: 3px; }
+.dgm-steps b { display: block; font-size: 16px; line-height: 1.35; }
+.dgm-sub { display: block; font-size: 14px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+.dgm-test { font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+.dgm-test i { display: inline-block; font-style: normal; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--c); border: 1px solid var(--c); border-radius: 3px; padding: 0 5px; margin-right: 6px; }
+.dgm-gap { display: inline-block; margin-top: 6px; font-size: 12px; color: var(--c); border: 1px dashed var(--c); padding: 1px 7px; }
+.dgm-term { border: 1px solid var(--rule-2); border-radius: 8px; overflow: hidden; background: var(--paper-2); }
+.dgm-bar { font-size: 12px; color: var(--muted); padding: 8px 14px; border-bottom: 1px solid var(--rule); }
+.dgm-term pre { margin: 0 !important; border: 0 !important; border-radius: 0 !important; white-space: pre-wrap; overflow-wrap: anywhere; }
+.dgm-term .ln { display: block; animation: dgm-type .5s steps(24, end) both; animation-delay: calc(var(--i) * 380ms + 200ms); clip-path: inset(0 0 0 0); }
+.dgm-term .p { color: var(--ink); font-weight: 500; } .dgm-term .f { color: var(--red); } .dgm-term .o { color: var(--green); } .dgm-term .c { color: var(--faint); }
+@keyframes dgm-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes dgm-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.dgm-timeline .dgm-steps li { grid-template-columns: 76px minmax(0, 1fr); }
+@media (max-width: 640px) { .dgm-steps li { grid-template-columns: 60px minmax(0, 1fr); } .dgm-test { grid-column: 2; } }
+@media (prefers-reduced-motion: reduce) { .dgm-steps li, .dgm-term .ln { animation: none; } }
