@@ -28,6 +28,15 @@ linkedin: |
   #AIGovernance #AISecurity #GRC #RedTeaming
 image: /assets/img/posts/twelve-clean-results-is-not-a-pass.png
 tools: [llm-redteam-evidence]
+diagram:
+  type: timeline
+  events:
+    - {t: "4 clean", label: "Failure rate could still be 49%", state: fail}
+    - {t: "12 clean", label: "Could still be 24%", state: warn}
+    - {t: "20 clean", label: "Could still be 16%", state: warn}
+    - {t: "59 clean", label: "Supports a 5% rate, the size audit tables use", state: ok}
+    - {t: "381 clean", label: "Supports 1.0%", state: ok}
+  caption: "0 failures observed: the 95% upper bound on the real failure rate"
 ---
 
 In my red-team of Llama 3.2 3B, the model resisted all 12 markdown-image exfiltration attempts. Not one leaked data. A dashboard would show that control as green.

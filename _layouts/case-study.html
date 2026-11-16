@@ -25,6 +25,7 @@ layout: default
   </section>
 
   <div class="post prose case-body">
+{% if page.diagram %}{% include diagram.html d=page.diagram %}{% endif %}
 {{ content }}
   </div>
   <p class="byline">More case studies: <a href="{{ '/case-studies/' | relative_url }}">all research</a> · Questions? <a href="#" data-mage-open="research">Ask Mage</a> or <a href="mailto:ajmeramihir10@gmail.com">email me</a>.</p>

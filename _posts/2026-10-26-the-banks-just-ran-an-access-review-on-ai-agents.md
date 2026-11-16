@@ -33,6 +33,16 @@ linkedin: |
   #AIGovernance #AIAgents #IdentitySecurity #GRC #CyberSecurity
 image: /assets/img/posts/the-banks-just-ran-an-access-review-on-ai-agents.png
 tools: [agent-access-review]
+diagram:
+  type: flow
+  steps:
+    - {id: MS, label: Morgan Stanley, sub: blocking third-party agents, state: info, test: blocked}
+    - {id: JPM, label: JPMorgan, sub: limiting access, test: plus detection tools, state: info}
+    - {id: C, label: Citi, sub: read-only via approved open-banking providers, test: scoped, state: info}
+    - {id: BAC, label: Bank of America, sub: restricting agent access to deposits, test: liability protocols, state: info}
+    - {id: WF, label: Wells Fargo, sub: blocking unauthorized agents, test: "new access agreement Nov 24", state: info}
+    - {id: SCHW, label: Schwab, sub: blocking agents that move money, test: blocked, state: info}
+  caption: "Six banks, six access decisions on AI agents"
 ---
 
 Over the past week, the largest banks in the United States have quietly started turning AI agents away at the door.

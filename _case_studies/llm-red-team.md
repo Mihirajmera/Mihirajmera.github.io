@@ -13,6 +13,16 @@ numbers:
   - {n: "1,280", label: attacks per run}
   - {n: "44% → 22%", label: indirect prompt injection after hardening, tone: green}
   - {n: "2/5", label: headline changes that were wrong on review, tone: amber}
+diagram:
+  type: flow
+  steps:
+    - {id: "1", label: Baseline run, sub: "1,280 garak attacks on Llama 3.2 3B as shipped", test: failed 5 of 6 controls, state: fail}
+    - {id: "2", label: Re-perform by hand, sub: jailbreak evidence against the raw responses, test: detector wrong on 2 of 3 AutoDAN, state: warn}
+    - {id: "3", label: Hardened system prompt, sub: "treat documents as data, refuse personas", test: "injection 44% to 22%", state: warn}
+    - {id: "4", label: Release gate, sub: compare the two runs, test: blocked on a misread refusal, state: warn}
+    - {id: "5", label: Fix the tool, sub: a change must be significant before it can block, test: "z-test at 95%", state: ok}
+  caption: "Red-team, then audit the red-team"
+  note: "22% is still eleven times a 2% tolerance"
 ---
 
 ## Why this matters

@@ -34,6 +34,17 @@ linkedin: |
 
   #VulnerabilityManagement #AISecurity #GRC #CyberSecurity #RiskManagement
 image: /assets/img/posts/your-patch-sla-was-written-for-a-slower-attacker.png
+diagram:
+  type: timeline
+  events:
+    - {t: "Aug 19", label: "Wiz finds the flaw", state: info}
+    - {t: "Aug 24", label: "Reported to PHP", state: info}
+    - {t: "Oct 17", label: "Exploitation seen", state: fail, gap: "4 days before disclosure"}
+    - {t: "Oct 21 ~02:00", label: "Details leak, PoCs public", state: fail}
+    - {t: "Oct 21 07:34", label: "Active exploitation reported", state: fail}
+    - {t: "Oct 21 13:52", label: "Fixed releases ship", state: warn, gap: "exploited before the patch existed"}
+    - {t: "Oct 22", label: "PAN-OS still has no fix", state: fail}
+  caption: "A 30-day patch SLA starts after all of this"
 ---
 
 On October 21, PHP shipped emergency fixes for two critical flaws that, between them, affect every PHP release of the last decade. PHP runs about 70% of the world's websites, according to the AP. By the time the fix was published, attackers were already using the flaws. Within hours there were, in Cloudflare CEO Matthew Prince's words, "millions" of attempts. A day later, government websites in Britain, Finland and Japan had been taken partly offline as a precaution.

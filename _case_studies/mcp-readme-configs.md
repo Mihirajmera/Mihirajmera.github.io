@@ -13,6 +13,15 @@ numbers:
   - {n: "8/9", label: configs run an unpinned package or image, tone: red}
   - {n: "7/9", label: grant write, send, delete or execute, tone: amber}
   - {n: "1", label: exfiltration path once combined, tone: red}
+diagram:
+  type: flow
+  steps:
+    - {id: DC, label: Desktop Commander, sub: "read, write, delete, execute", test: unsandboxed shell, state: fail}
+    - {id: FS, label: filesystem, sub: write access, test: unpinned package, state: warn}
+    - {id: SL, label: slack, sub: bot token, test: token pasted into config, state: fail}
+    - {id: GH, label: github remote, sub: "read, write", test: write access, state: warn}
+    - {id: ALL, label: All nine in one config, sub: "reads data, ingests outside content, sends out", test: exfiltration path, state: fail}
+  caption: "9 official README examples, reviewed one by one and combined"
 ---
 
 ## Why this matters

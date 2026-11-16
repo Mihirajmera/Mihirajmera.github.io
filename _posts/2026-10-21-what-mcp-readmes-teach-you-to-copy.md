@@ -35,6 +35,15 @@ figures:
   - {n: "1", label: "exfiltration path once they're combined", tone: red}
 image: /assets/img/posts/what-mcp-readmes-teach-you-to-copy.png
 tools: [agent-access-review]
+diagram:
+  type: flow
+  steps:
+    - {id: DC, label: Desktop Commander, sub: "read, write, delete, execute", test: unsandboxed shell, state: fail}
+    - {id: FS, label: filesystem, sub: write access, test: unpinned package, state: warn}
+    - {id: SL, label: slack, sub: bot token, test: token pasted into config, state: fail}
+    - {id: GH, label: github remote, sub: "read, write", test: write access, state: warn}
+    - {id: ALL, label: All nine in one config, sub: "read files, send messages", test: exfiltration path, state: fail}
+  caption: "9 official README examples, reviewed one by one and combined"
 ---
 
 Most companies recertify employee access every quarter. Someone opens a spreadsheet, looks at who can reach what, and signs off. AI agents now hold GitHub tokens, database connections, shells and Slack bots, and almost nobody reviews them at all.

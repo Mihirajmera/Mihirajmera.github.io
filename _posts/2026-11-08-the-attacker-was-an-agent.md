@@ -18,7 +18,7 @@ diagram:
   caption: the attack as the AEPD describes it, and the control to test at each step
   steps:
     - {id: S-01, label: Searches generic files, sub: looking for vulnerabilities, test: "what's exposed?", state: info}
-    - {id: S-02, label: Logs in successfully, sub: a valid login, not a forced one, test: "would this login look odd?", state: warn}
+    - {id: S-02, label: Logs in successfully, sub: "a valid login, not a forced one", test: "would this login look odd?", state: warn}
     - {id: S-03, label: Probes the application, sub: autonomously finds a flaw, test: app-layer detection, state: warn}
     - {id: S-04, label: Modifies personal data, sub: and opens invoices, test: "which records changed?", state: fail}
     - {id: S-05, label: Breach notified, sub: GDPR Article 33, test: 72 hours, state: info}

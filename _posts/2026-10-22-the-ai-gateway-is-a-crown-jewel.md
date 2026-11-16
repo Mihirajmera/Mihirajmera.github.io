@@ -35,6 +35,17 @@ linkedin: |
   #AISecurity #SupplyChainSecurity #AIGovernance #GRC #CyberSecurity
 image: /assets/img/posts/the-ai-gateway-is-a-crown-jewel.png
 tools: [ai-gateway-audit]
+diagram:
+  type: timeline
+  events:
+    - {t: "10:08", label: "Privileged developer's credential pushes the release workflow change", state: warn}
+    - {t: "11:11", label: "A second credential passes the approval gate", state: fail}
+    - {t: "11:39", label: "Seven litellm 1.107.0 wheels live on PyPI", state: fail}
+    - {t: "11:46", label: "Docker images and latest tags repointed", state: fail}
+    - {t: "12:06", label: "Public report", state: info}
+    - {t: "~13:20", label: "PyPI quarantine", state: ok}
+    - {t: "14:20", label: "Docker tags removed", state: ok}
+  caption: "Oct 21, the litellm release compromise"
 ---
 
 For roughly two hours on October 21, installing the official release of [LiteLLM](https://github.com/BerriAI/litellm), one of the most widely used AI gateways, gave an attacker your cloud credentials, your SSH keys and, if you ran the proxy, the API keys for every model provider your company uses.

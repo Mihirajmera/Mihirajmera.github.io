@@ -32,6 +32,20 @@ linkedin: |
 
   #AISecurity #ThirdPartyRisk #SecretsManagement #GRC #CyberSecurity
 image: /assets/img/posts/nine-platforms-one-target-your-ai-keys.png
+diagram:
+  type: timeline
+  events:
+    - {t: "Oct 6", label: "Fireworks AI", state: fail}
+    - {t: "Oct 9", label: "Andromeda", state: fail}
+    - {t: "Oct 14", label: "Zeabur", state: fail}
+    - {t: "Oct 15", label: "Lightning AI", state: fail}
+    - {t: "Oct 16-17", label: "OpenCode", state: fail}
+    - {t: "Oct 20", label: "Railway", state: fail}
+    - {t: "Oct 23", label: "Warp", state: fail}
+    - {t: "Oct 28", label: "CommandCode", state: fail}
+    - {t: "Oct 30", label: "Northflank", state: fail}
+  caption: "Nine AI developer platforms breached in October"
+  note: "know who holds your keys, limit them, detect use, practise rotation"
 ---
 
 On Friday, Northflank's status page told customers to "assume all environment variables have been decrypted" and to rotate every key, after Wiz alerted it to an attack that morning. Within hours, customers were reporting that their AI API keys were being used by someone else.
