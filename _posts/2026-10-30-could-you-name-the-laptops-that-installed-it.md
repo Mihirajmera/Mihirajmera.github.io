@@ -34,6 +34,14 @@ linkedin: |
 
   #AISecurity #SupplyChainSecurity #DevSecOps #GRC #CyberSecurity
 image: /assets/img/posts/could-you-name-the-laptops-that-installed-it.png
+diagram:
+  type: flow
+  steps:
+    - {id: "1", label: Name the laptops that installed it, sub: "Cursor build 2.1.313, live for 11h", test: inventory, state: warn}
+    - {id: "2", label: Updates arrive faster than review, sub: "up to 5,000 users received it, per Cursor", test: change control, state: fail}
+    - {id: "3", label: Know what to rotate, sub: "which secrets sat on those machines", test: credential map, state: warn}
+    - {id: "4", label: "Uninstalling isn't remediation", sub: the svc-telemetry SSH key stays behind, test: rotate, state: fail}
+  caption: "Four control questions after a poisoned IDE update"
 ---
 
 On Wednesday I wrote that in the LiteLLM attack, [deleting the commit didn't revoke the key](/blog/deleting-the-commit-didnt-revoke-the-key/). A day later the same lesson came back from a different direction: uninstalling the extension doesn't remove the backdoor.

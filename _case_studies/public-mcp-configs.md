@@ -12,6 +12,15 @@ numbers:
   - {n: "95%", label: of 1,920 package and image servers have no pinned version, tone: red}
   - {n: "2.8%", label: of configs run an archived reference server, tone: amber}
   - {n: "3.8%", label: of configs contain a real-looking secret, tone: red}
+diagram:
+  type: flow
+  steps:
+    - {id: PIN, label: No pinned version, sub: "1,822 of 1,920 package and image servers", test: "95%", state: fail}
+    - {id: EXF, label: Complete exfiltration path, sub: "one agent reads, ingests outside content, sends out", test: "5.9% of configs", state: fail}
+    - {id: SEC, label: Real-looking secret in plain text, sub: 12 match a known provider format, test: "3.8% of configs", state: fail}
+    - {id: ARC, label: Archived reference server, sub: "79 configs, no security fixes", test: "2.8% of configs", state: warn}
+    - {id: MAL, label: npm malware look-alikes, sub: "mcp-server-fetch, mcp-server-git", test: "0 of 2,830", state: ok}
+  caption: "2,830 public configs: Claude Desktop, Claude Code, VS Code, Cursor"
 ---
 
 ## Why this matters

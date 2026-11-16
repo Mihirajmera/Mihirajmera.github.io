@@ -14,6 +14,15 @@ numbers:
   - {n: "91", label: failed checks across three repos before any fixes, tone: red}
   - {n: "2", label: security Lambdas that couldn't do their job, tone: red}
   - {n: "0", label: findings left without a reviewed decision, tone: green}
+diagram:
+  type: flow
+  steps:
+    - {id: SCAN, label: Checkov on three Terraform repos, sub: mapped to NIST 800-53 and CIS AWS v3.0.0, test: 91 failed checks, state: fail}
+    - {id: S3, label: S3 remediation Lambda, sub: "could terminate instances, lacked s3:DeleteBucketPolicy", test: its fix would fail, state: fail}
+    - {id: GD, label: GuardDuty quarantine Lambda, sub: "lacked ec2:CreateSecurityGroup", test: isolation would fail, state: fail}
+    - {id: FIX, label: Grant exactly the calls the code makes, sub: scoped to the resource types they touch, test: fixed, state: ok}
+    - {id: GATE, label: CI fails on any undecided finding, sub: "exceptions need a reason and an expiry", test: 0 left undecided, state: ok}
+  caption: "Policy-as-code on my own infrastructure"
 ---
 
 ## Why this matters

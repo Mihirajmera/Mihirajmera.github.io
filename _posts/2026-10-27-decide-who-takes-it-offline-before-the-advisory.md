@@ -32,6 +32,13 @@ linkedin: |
 
   #VulnerabilityManagement #IncidentResponse #ThirdPartyRisk #GRC #CyberSecurity
 image: /assets/img/posts/decide-who-takes-it-offline-before-the-advisory.png
+diagram:
+  type: flow
+  steps:
+    - {id: "1", label: Who can take it offline, sub: "or it gets decided in a meeting, under pressure", state: warn, test: decide now}
+    - {id: "2", label: Which vendors embed the runtime, sub: "PHP, OpenSSL, log4j inside appliances", state: warn, test: inventory now}
+    - {id: "3", label: The clock starts at disclosure, sub: "not at patch available: compensating control within hours", state: fail, test: plan for it}
+  caption: "Three decisions to make before the advisory lands"
 ---
 
 Last week I wrote that [your patch SLA was written for a slower attacker](/blog/your-patch-sla-was-written-for-a-slower-attacker/). The replies were better than the post. One reader argued for moving from checkbox compliance to continuous, risk-based exposure management. Answering them made me realise the real gap wasn't the SLA. It was the three decisions nobody had made in advance.

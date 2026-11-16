@@ -94,6 +94,8 @@ def _points(meta):
 def _spec(meta):
     d = meta.get('diagram')
     if d:
+        for s in d.get('steps', []) + d.get('events', []):  # an unquoted comma in {a: x, y} silently adds key y
+            assert set(s) <= {'id', 'label', 'sub', 'test', 'state', 't', 'gap'}, f'quote values with commas: {s}'
         return d
     steps = [{'id': f'P-{i:02d}', 'label': p, 'state': 'warn'} for i, p in enumerate(_points(meta)[:5], 1)]
     return {'type': 'flow', 'caption': 'Key points', 'steps': steps} if steps else {'type': 'flow', 'steps': []}

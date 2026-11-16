@@ -36,6 +36,17 @@ linkedin: |
 
   #AISecurity #SupplyChainSecurity #SecretsManagement #GRC #CyberSecurity
 image: /assets/img/posts/deleting-the-commit-didnt-revoke-the-key.png
+diagram:
+  type: timeline
+  events:
+    - {t: "May 27", label: "Master key committed, force-pushed away, not revoked", state: warn}
+    - {t: "Oct 10 21:27", label: "Key used: returns agent configs, including the owner's GitHub token", state: fail}
+    - {t: "Oct 10 22:11", label: "Workflows exfiltrate maintainer tokens, runs deleted", state: fail}
+    - {t: "Oct 12", label: "Second exfiltration round", state: fail}
+    - {t: "Oct 21 10:08", label: "Push forced through branch protection", state: fail}
+    - {t: "Oct 21 11:11", label: "Stolen token approves the release gate", state: fail}
+    - {t: "Oct 21 11:39", label: "Poisoned wheels live for about 2 hours", state: fail}
+  caption: "Deleting the commit did not revoke the key"
 ---
 
 Last week I wrote about [the LiteLLM release compromise](/blog/the-ai-gateway-is-a-crown-jewel/), when version 1.107.0 shipped a credential stealer through LiteLLM's real release pipeline. At the time, LiteLLM's working theory was that the attacker took GitHub tokens from an internal deployment's logs, and my post repeated that.
