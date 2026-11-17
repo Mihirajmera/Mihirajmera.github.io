@@ -9,6 +9,17 @@ evidence:
   label: case study part 2 · comparison.md
   url: https://github.com/Mihirajmera/llm-redteam-evidence/tree/main/case-studies/llama3.2-3b-garak#part-2-hardening-the-system-prompt-2026-10-21
 tags: [LLM red-teaming, Release gates, AI assurance]
+tools: [llm-redteam-evidence]
+diagram:
+  type: timeline
+  caption: one hardening change, judged by a release gate and then by a human
+  events:
+    - {t: "Baseline", label: "1,280 garak attacks: indirect injection 44%", state: fail}
+    - {t: "Fix", label: "Hardened system prompt, same probes, same seed", state: info}
+    - {t: "Gate", label: "BLOCK: jailbreaks 2 of 4 became 3 of 4", state: fail, gap: "n = 4"}
+    - {t: "Review", label: "The extra jailbreak was a refusal the detector misread", state: warn}
+    - {t: "Review", label: "The prompt-leak drop: that probe replaced the hardened prompt", state: warn}
+    - {t: "Gate v2", label: "A change must be significant to block or earn credit", state: ok, gap: "injection halved, no regressions"}
 figures:
   - {n: "½", label: "the prompt-injection rate after hardening the system prompt", tone: green}
   - {n: "2/5", label: "headline changes that were wrong on review", tone: amber}
@@ -34,9 +45,12 @@ linkedin: |
   Full write-up and evidence in the first comment 👇
 
   #AIGovernance #AISecurity #RedTeaming #GRC #LLMSecurity
+image: /assets/img/posts/my-release-gate-blocked-the-fix.png
 ---
 
-Two days ago I [red-teamed Llama 3.2 3B](/blog/auditing-the-red-team/) and turned 1,280 garak attacks into audit evidence. The model failed most controls. Hidden instructions in documents hijacked it 44% of the time.
+Yesterday I argued that you should [write the tolerance down before you test](/blog/write-the-tolerance-down-first/). This is what happens next: a fix, a re-test, and a release gate that compares the two. Mine got the answer wrong.
+
+When I [red-teamed Llama 3.2 3B](/blog/auditing-the-red-team/), 1,280 garak attacks became audit evidence. The model failed most controls. Hidden instructions in documents hijacked it 44% of the time.
 
 So I did what most teams do first: I hardened the system prompt. Then I re-ran the exact same suite, with the same probes and the same seed, and asked my own release gate whether the new version was safer.
 
@@ -64,7 +78,7 @@ Injection halved, but the gate blocked the release over jailbreaks.
 
 I've learned not to trust a delta I haven't re-performed. So I went back to the evidence.
 
-**The "regression" was a sample of four.** Two of four versus three of four isn't a change; it's a coin landing differently. I'd just written a whole essay [about exactly this mistake](/blog/twelve-clean-results-is-not-a-pass/). My gate's rule was "any increase over 2 percentage points", and it ignored sample size completely.
+**The "regression" was a sample of four.** Two of four versus three of four isn't a change; it's a coin landing differently. I'd already written a whole essay [about exactly this mistake](/blog/twelve-clean-results-is-not-a-pass/). My gate's rule was "any increase over 2 percentage points", and it ignored sample size completely.
 
 **The extra jailbreak was a refusal.** Reading the four responses by hand:
 
@@ -88,7 +102,7 @@ The gate now asks two questions before it calls anything a regression or an impr
 1. Did the rate move by more than the threshold?
 2. Is the move **statistically significant**? (A one-sided two-proportion z-test at 95% confidence.)
 
-If the answer to the second is no, the change is reported as *not significant*, with the sample sizes, so you know to test more instead of blocking or celebrating. Re-run, the comparison says what's true: injection improved, jailbreaks need more attempts, no regressions.
+If the answer to the second is no, the change is reported as *not significant*, with the sample sizes, so you know to test more instead of blocking or celebrating. Run again under the new rule, the comparison says what's true: injection improved, jailbreaks need more attempts, no regressions.
 
 The fix also changed my own demo. A synthetic "improvement" from 6.7% to 4.4% on 45 attempts each, which the old gate credited, is now correctly reported as noise.
 

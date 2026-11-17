@@ -52,4 +52,4 @@ The release gate now requires a change to be **statistically significant** (a on
 - **The detector is part of the system under test.** Changing the model's wording changed the detector's error rate.
 - **Re-perform before you trust a delta.** Statistics fixed one error; reading the evidence fixed the other two.
 
-Full write-ups: [part 1](/blog/auditing-the-red-team/) · the release gate essay is coming next week.
+Full write-ups: [part 1](/blog/auditing-the-red-team/) · [part 2: my release gate blocked the fix](/blog/my-release-gate-blocked-the-fix/).
